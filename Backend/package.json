@@ -1,0 +1,19 @@
+{
+  "name": "salenet",
+  "version": "1.0.0",
+  "description": "A point of sale system for SECJ3104 Team Netzillaa project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edtimer/SaleNet.git"
+  },
+  "author": "Team Netzillaa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edtimer/SaleNet/issues"
+  },
+  "homepage": "https://github.com/edtimer/SaleNet#readme"
+}
