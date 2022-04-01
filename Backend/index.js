@@ -17,7 +17,7 @@ app.get("/register", (req, res) => {
 });
 
 //setting port
-const port = process.env.PORT || 7000;
+const port = process.env.PORT;
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
