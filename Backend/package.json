@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/edtimer/SaleNet/issues"
   },
-  "homepage": "https://github.com/edtimer/SaleNet#readme"
+  "homepage": "https://github.com/edtimer/SaleNet#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "lodash": "^4.17.21"
+  }
 }
