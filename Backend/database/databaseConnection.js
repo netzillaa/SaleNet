@@ -1,15 +1,12 @@
 const mongoose = require("mongoose");
-const URI = process.env.MONGO_URI;
 
-mongoose.connect(URI, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-});
+const startDbConnection = (URI) => {
+  return mongoose.connect(URI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAnyModify: false,
+    useUnifiedTopology: true,
+  });
+};
 
-const connection = mongoose.connection;
-
-connection.once("open", () => {
-  console.log("MongoDB databae is connected ");
-});
-
-module.exports = { connection };
+module.exports = { startDbConnection };
