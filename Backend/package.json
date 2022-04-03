@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/edtimer/SaleNet#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "mongoose": "^6.2.9"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
