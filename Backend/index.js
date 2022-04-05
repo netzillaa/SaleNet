@@ -2,6 +2,7 @@ require("dotenv").config();
 const path = require("path");
 //initalizing express server
 const express = require("express");
+const request = require("request");
 const cors = require("cors");
 const app = express();
 const dataBase = require("./database/databaseConnection");
@@ -28,7 +29,7 @@ const beginApp = async () => {
 };
 
 app.get("/", (req, res) => {
-  res.send("home page");
+  res.send("home page and the users will be shown here");
 });
 app.get("/register", (req, res) => {
   var registrationPath = path.join(__dirname + "/../Frontend/public");
