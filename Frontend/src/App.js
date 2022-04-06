@@ -4,30 +4,21 @@ import Footer from './components/Footer.js'
 import Card from './components/Card.js'
 import RegisterSteps from './components/RegisterSteps.js'
 import Container from '@material-ui/core/Container';
+import Layout from './Layout.js'
 import data from './data'
+import { BrowserRouter as Router, Route,  Routes} from "react-router-dom";
 
 export default function App() {
-  const cards = data.map(ball => {
-    return (
-      <Card
-        key={ball.id}
-        {...ball}
-
-      />
-    )
-  })
-
   return (
     <div>
       <Header />
       <Container >
-        <RegisterSteps />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path={"/asd"} component={RegisterSteps}></Route>
+          </Route>
+        </Routes>
       </Container >
-      {/* <section className="cards-list">
-        <div className="row row-cols-4">
-          {cards}
-        </div>
-      </section> */}
       <Footer />
     </div>
   );

@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <nav className="nav">
       <img src={logo} className="App-logo" alt="logo" />
-      <h2 className="title">Registration</h2>
+      <h2 className="title" >Registration</h2>
     </nav>
   );
 }
