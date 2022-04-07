@@ -2,7 +2,7 @@ require("dotenv").config();
 const path = require("path");
 //initalizing express server
 const express = require("express");
-const request = require("request");
+// const request = require("request");
 const cors = require("cors");
 const app = express();
 const dataBase = require("./database/databaseConnection");
@@ -27,12 +27,16 @@ const beginApp = async () => {
     console.log("something went wrong. Error details: ", error);
   }
 };
-
+app.post("/register", (req, res) => {
+  res.json({ status: "works" });
+  var user = req.body;
+  console.log(user);
+});
 app.get("/", (req, res) => {
   res.send("home page and the users will be shown here");
 });
-app.get("/register", (req, res) => {
-  var registrationPath = path.join(__dirname + "/../Frontend/public");
-  console.log(path.join(__dirname + "/../Frontend/public/index.html"));
-});
+// app.get("/register", (req, res) => {
+//   var registrationPath = path.join(__dirname + "/../Frontend/public");
+//   console.log(path.join(__dirname + "/../Frontend/public/index.html"));
+// });
 beginApp();

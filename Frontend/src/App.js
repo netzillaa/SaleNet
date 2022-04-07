@@ -1,34 +1,37 @@
-import './css/App.css'
-import Header from './components/Header.js'
-import Footer from './components/Footer.js'
-import Card from './components/Card.js'
-import RegisterSteps from './components/RegisterSteps.js'
-import Container from '@material-ui/core/Container';
-import data from './data'
+// import "./App.css";
+import Register from "./components/pages/Register";
+import Home from "./components/pages/Home";
+import SignIn from "./components/pages/SignIn";
+import SignUp from "./components/pages/SignUp";
+// import Section1 from "./components/Section1";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+// import Section3 from "./components/Section3";
 
-export default function App() {
-  const cards = data.map(ball => {
-    return (
-      <Card
-        key={ball.id}
-        {...ball}
-
-      />
-    )
-  })
-
+function App() {
   return (
-    <div>
-      <Header />
-      <Container >
-        <RegisterSteps />
-      </Container >
-      {/* <section className="cards-list">
-        <div className="row row-cols-4">
-          {cards}
+    <Router>
+      <div className="App">
+        <Header />
+        {/* <Navbar />
+      <Section1 /> */}
+        {/* <Section2 />
+      <Section3 /> */}
+        <div className="content">
+          <Switch>
+            <Route path={"/signin"} component={SignIn}></Route>
+            <Route path={"/register"} component={SignUp}></Route>
+            {/* <Route path={"/Register"} component={Register}></Route> */}
+            {/* <Route path={"/ContactUs"} component={Section1}></Route> */}
+            <Route path={"/"} component={Home}></Route>
+          </Switch>
         </div>
-      </section> */}
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
+
+export default App;

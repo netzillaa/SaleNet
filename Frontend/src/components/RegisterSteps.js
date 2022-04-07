@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -69,6 +69,7 @@ function getStepContent(stepIndex) {
         <div class="registerBox">
           <Box mt={2} px={4}>
             <Box my={3}>
+              {/* calling our register user method */}
               <form>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
