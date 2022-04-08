@@ -22,8 +22,8 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://">
+        Netzilla
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -53,9 +53,9 @@ export default function SignIn() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            // backgroundImage: "url(./)",
             //we can get images from a website if we specify url like below
-            // backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage: "url(https://source.unsplash.com/random)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"

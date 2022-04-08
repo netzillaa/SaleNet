@@ -23,13 +23,13 @@ function App() {
           <Switch>
             <Route path={"/signin"} component={SignIn}></Route>
             <Route path={"/register"} component={SignUp}></Route>
-            {/* <Route path={"/Register"} component={Register}></Route> */}
+            <Route path={"/reg"} component={Register}></Route>
             {/* <Route path={"/ContactUs"} component={Section1}></Route> */}
             <Route path={"/"} component={Home}></Route>
           </Switch>
         </div>
-        <Footer />
       </div>
+      <Footer />
     </Router>
   );
 }

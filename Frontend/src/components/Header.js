@@ -84,11 +84,11 @@ export default function Header() {
           onExiting={onCollapseExiting}
           onExited={onCollapseExited}
         >
-          {/* <div className="navbar-collapse-header">
+          <div className="navbar-collapse-header">
             <Row>
               <Col className="collapse-brand" xs="6">
                 <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  BLK•React
+                  add something
                 </a>
               </Col>
               <Col className="collapse-close text-right" xs="6">
@@ -101,7 +101,7 @@ export default function Header() {
                 </button>
               </Col>
             </Row>
-          </div> */}
+          </div>
           <Nav navbar>
             <NavItem className="p-0">
               <NavLink
