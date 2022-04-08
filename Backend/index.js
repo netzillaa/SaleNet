@@ -52,8 +52,4 @@ app.post("/register", async (req, res) => {
 app.get("/", (req, res) => {
   res.send("home page and the users will be shown here");
 });
-// app.get("/register", (req, res) => {
-//   var registrationPath = path.join(__dirname + "/../Frontend/public");
-//   console.log(path.join(__dirname + "/../Frontend/public/index.html"));
-// });
 beginApp();

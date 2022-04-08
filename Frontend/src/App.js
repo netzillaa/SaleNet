@@ -1,3 +1,4 @@
+
 // import "./App.css";
 import Register from "./components/pages/Register";
 import Home from "./components/pages/Home";
@@ -35,3 +36,4 @@ function App() {
 }
 
 export default App;
+

@@ -16,6 +16,11 @@
   "bugs": {
     "url": "https://github.com/edtimer/SaleNet/issues"
   },
+  "proxy": {
+    "/register": {
+      "target": "http://localhost:3000"
+    }
+  },
   "homepage": "https://github.com/edtimer/SaleNet#readme",
   "dependencies": {
     "cors": "^2.8.5",
