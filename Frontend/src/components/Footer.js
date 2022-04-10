@@ -3,7 +3,7 @@ import '../css/Footer.css';
 
 export default function Footer() {
     return (
-        <footer className="Footer">
+        <footer className="footer">
             <small>© 2022 Netzilla. All rights reserved.</small>
         </footer>
     )

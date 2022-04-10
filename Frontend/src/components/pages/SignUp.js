@@ -12,36 +12,41 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https:">
-        Netzilla
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { useState } from "react";
 
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const [fullName, setFullName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [storeName, setStoreName] = useState("");
+  const [storeAddress, setStoreAddress] = useState("");
+  const [businessLicense, setBusinessLicense] = useState("");
+
+  async function registerUser(event) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+    const response = await fetch("http://localhost:4000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName,
+        userName,
+        password,
+        email,
+        phoneNumber,
+        storeName,
+        storeAddress,
+        businessLicense,
+      }),
     });
-  };
+    const sentData = await response.json();
+    console.log(sentData);
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -64,58 +69,86 @@ export default function SignUp() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={registerUser}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} >
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
+                fullWidth
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
                   required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
+                  type="text"
+                  label="Full Name"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
                   required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  type="text"
+                  label="Username"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
                   type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  label="Password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+              <Grid item xs={12} >
+                <TextField
+                  fullWidth
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  type="text"
+                  label="Email"
+                />
+              </Grid>
+              <Grid item xs={12} >
+                <TextField
+                  fullWidth
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                  type="text"
+                  label="Phone Number"
+                />
+              </Grid>
+              <Grid item xs={12} >
+                <TextField
+                  fullWidth
+                  value={storeName}
+                  onChange={(e) => setStoreName(e.target.value)}
+                  required
+                  type="text"
+                  label="Store Name"
+                />
+              </Grid>
+              <Grid item xs={12} >
+                <TextField
+                  fullWidth
+                  value={storeAddress}
+                  onChange={(e) => setStoreAddress(e.target.value)}
+                  required
+                  type="text"
+                  label="Store Address"
+                />
+              </Grid>
+              <Grid item xs={12} >
+                <TextField
+                  fullWidth
+                  value={businessLicense}
+                  onChange={(e) => setBusinessLicense(e.target.value)}
+                  required
+                  type="text"
+                  label="Business License"
                 />
               </Grid>
             </Grid>
@@ -129,14 +162,13 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signin" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

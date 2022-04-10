@@ -16,7 +16,7 @@ app.use(express.static("../../Frontend/public"));
 //setting port
 const port = process.env.PORT;
 //DB URI
-const URI = process.env.MONGO_URI;
+// const URI = process.env.MONGO_URI;
 
 const beginApp = async () => {
   try {
@@ -29,7 +29,8 @@ const beginApp = async () => {
     console.log("something went wrong. Error details: ", error);
   }
 };
-mongoose.connect(URI).then(() => console.log("Database Connected"));
+// mongoose.connect(URI).then(() => console.log("Database Connected"));
+
 app.post("/register", async (req, res) => {
   var user1 = req.body;
   console.log(user1);
