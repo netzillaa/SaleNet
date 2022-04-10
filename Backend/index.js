@@ -6,7 +6,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const startDbConnection = require("./database/databaseConnection");
-const userModel = require("./models/User.model");
+const User = require("./models/User.model");
 const { default: mongoose } = require("mongoose");
 app.use(cors());
 app.use(express.json());
@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("../../Frontend/public"));
 
 //setting port
-const port = process.env.PORT;
+const port = process.env.PORT || 4000;
 //DB URI
 // const URI = process.env.MONGO_URI;
 
@@ -35,19 +35,12 @@ app.post("/register", async (req, res) => {
   var user1 = req.body;
   console.log(user1);
   try {
-    const user = await userModel.create({
-      fullName: req.body.fullName,
-      phoneNumber: 4412452,
-      email: req.body.email,
-      homeAddress: "tata",
-      password: req.body.password,
-      shopName: "wow",
-    });
-    console.log("added user");
+    await User.create(req.body);
+    console.log("added user to database");
   } catch (err) {
-    console.log("something went wrong");
+    console.log("something went wrong while saving user to database");
   }
-  res.json({ status: "data received from front end" });
+  res.json({ status: "user data received" });
 });
 
 app.get("/", (req, res) => {

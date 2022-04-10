@@ -6,30 +6,39 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "you need to enter your full name"],
     },
-    phoneNumber: {
+    userName: {
       type: String,
       required: [true, "you need to enter a phnoe number"],
+    },
+    password: {
+      type: String,
+      required: [true, "you need to enter a password"],
     },
     email: {
       type: String,
       required: [true, "you need to enter an email"],
       unique: true,
     },
-    homeAddress: {
+    phoneNumber: {
       type: String,
-      required: [true, "you need to enter your home address"],
-    },
-    password: {
-      type: String,
-      required: [true, "you need to enter a password"],
+      required: [true, "you need to enter a phnoe number"],
     },
     shopName: {
       type: String,
       required: [true, "you Need a shop Name"],
       unique: true,
     },
+    shopAddress: {
+      type: String,
+      required: [true, "you Need a shop Name"],
+      unique: true,
+    },
+    businessLicense: {
+      type: String,
+      required: [true, "you need to enter your home address"],
+    },
   },
   { collection: "netzilla-user" }
 );
-
-module.exports = mongoose.model("user", userSchema);
+var User = mongoose.model("user", userSchema);
+module.exports = User;

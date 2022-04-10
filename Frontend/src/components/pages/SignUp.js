@@ -22,8 +22,8 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [storeName, setStoreName] = useState("");
-  const [storeAddress, setStoreAddress] = useState("");
+  const [shopName, setshopName] = useState("");
+  const [shopAddress, setShopAddress] = useState("");
   const [businessLicense, setBusinessLicense] = useState("");
 
   async function registerUser(event) {
@@ -39,8 +39,8 @@ export default function SignUp() {
         password,
         email,
         phoneNumber,
-        storeName,
-        storeAddress,
+        shopName,
+        shopAddress,
         businessLicense,
       }),
     });
@@ -73,9 +73,9 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
-                fullWidth
+                  fullWidth
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
@@ -101,7 +101,7 @@ export default function SignUp() {
                   label="Password"
                 />
               </Grid>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   value={email}
@@ -111,7 +111,7 @@ export default function SignUp() {
                   label="Email"
                 />
               </Grid>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   value={phoneNumber}
@@ -121,27 +121,27 @@ export default function SignUp() {
                   label="Phone Number"
                 />
               </Grid>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
-                  value={storeName}
-                  onChange={(e) => setStoreName(e.target.value)}
+                  value={shopName}
+                  onChange={(e) => setshopName(e.target.value)}
                   required
                   type="text"
-                  label="Store Name"
+                  label="shop Name"
                 />
               </Grid>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
-                  value={storeAddress}
-                  onChange={(e) => setStoreAddress(e.target.value)}
+                  value={shopAddress}
+                  onChange={(e) => setShopAddress(e.target.value)}
                   required
                   type="text"
-                  label="Store Address"
+                  label="shop Address"
                 />
               </Grid>
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   value={businessLicense}
