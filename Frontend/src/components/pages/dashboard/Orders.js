@@ -74,7 +74,7 @@ export default function Orders() {
               <TableCell>{row.shipTo}</TableCell>
               <TableCell>{row.paymentMethod}</TableCell>
               <TableCell align="right">{`$${row.amount}`}</TableCell>
-            </TableRow>
+            </TableRow> 
           ))}
         </TableBody>
       </Table>
