@@ -1,8 +1,8 @@
-
 // import "./App.css";
 import Home from "./components/pages/Home";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
+import Dashboard from "./components/pages/Dashboard";
 // import Section1 from "./components/Section1";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -25,6 +25,7 @@ function App() {
           <Switch>
             <Route path={"/signin"} component={SignIn}></Route>
             <Route path={"/register"} component={SignUp}></Route>
+            <Route path={"/dashboard"} component={Dashboard}></Route>
             {/* <Route path={"/ContactUs"} component={Section1}></Route> */}
             <Route path={"/"} component={Home}></Route>
           </Switch>
@@ -36,4 +37,3 @@ function App() {
 }
 
 export default App;
-

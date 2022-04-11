@@ -68,6 +68,10 @@ export default function Header() {
                     <i className="tim-icons icon-image-02" />
                     Sign in
                   </DropdownItem>
+                  <DropdownItem tag={Link} to="/dashboard">
+                    <i className="tim-icons icon-image-02" />
+                    Dashboard
+                  </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
