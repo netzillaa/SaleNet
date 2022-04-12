@@ -23,8 +23,7 @@ export default function ProductCard(product) {
   }
 
   return (
-    <React.Fragment> test
-      {/* <Grid item xs={4} md={3}>
+    <React.Fragment> 
         <Card sx={{ maxWidth: 345 }}>
           <CardActionArea>
             <Card sx={{ maxHeight: 250 }}>
@@ -43,7 +42,6 @@ export default function ProductCard(product) {
             </CardContent>
           </CardActionArea>
         </Card>
-      </Grid> */}
     </React.Fragment>
   );
 }

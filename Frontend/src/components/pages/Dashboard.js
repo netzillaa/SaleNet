@@ -62,9 +62,10 @@ function DashboardContent() {
   const cards = data.map(product => {
     return (
       <div>
-        <Card 
-        key={product.id}
-      /> 
+        <ProductCard
+          key={product.id}
+          {...product}
+        />
       </div>
     )
   })
