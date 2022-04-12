@@ -28,17 +28,11 @@ const userSchema = new mongoose.Schema(
       required: [true, "you Need a shop Name"],
       unique: true,
     },
-    shopAddress: {
-      type: String,
-      required: [true, "you Need a shop Name"],
-      unique: true,
-    },
-    businessLicense: {
-      type: String,
-      required: [true, "you need to enter your home address"],
+    createdAt: {
+      type: Date,
     },
   },
-  { collection: "netzilla-user" }
+  { collection: "netzillatestuser" }
 );
 var User = mongoose.model("user", userSchema);
 module.exports = User;
