@@ -17,7 +17,7 @@ app.use(express.static("../../Frontend/public"));
 //setting port
 const port = process.env.PORT || 4000;
 //DB URI
-// const URI = process.env.MONGO_URI;
+const URI = process.env.MONGO_URI;
 
 const beginApp = async () => {
   try {
@@ -25,7 +25,11 @@ const beginApp = async () => {
     // await dataBase(URI);
     app.listen(port, () => {
       console.log(`listening on port ${port}`);
-      // mongoose.connect(URI).then(() => console.log("Database Connected"));
+      // try {
+      //   mongoose.connect(URI).then(() => console.log("Database Connected"));
+      // } catch (err) {
+      //   console.log("cant connect to database" + err);
+      // }
     });
   } catch (error) {
     console.log("something went wrong. Error details: ", error);
