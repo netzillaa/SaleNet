@@ -6,6 +6,7 @@ export default [
         price: 10,
         coverimg: "milk.jpg",
         available: 30,
+        quantity: 1,
     },
     {
         id: 1,
@@ -14,6 +15,7 @@ export default [
         price: 15,
         coverimg: "cheese.jpg",
         available: 25,
+        quantity: 1,
     },
     {
         id: 2,
@@ -22,6 +24,7 @@ export default [
         price: 12,
         coverimg: "orangejuice.jpg",
         available: 0,
+        quantity: 1,
     },
     {
         id: 3,
@@ -30,6 +33,7 @@ export default [
         price: 3.65,
         coverimg: "potatochip.jpg",
         available: 20,
+        quantity: 1,
     },
     {
         id: 4,
@@ -38,6 +42,7 @@ export default [
         price: 14.90,
         coverimg: "cococrunch.png",
         available: 5,
+        quantity: 1,
     },
     {
         id: 5,
@@ -46,6 +51,7 @@ export default [
         price: 14.29,
         coverimg: "nugget.jpg",
         available: 30,
+        quantity: 1,
     },
     {
         id: 6,
@@ -54,6 +60,7 @@ export default [
         price: 29.99,
         coverimg: "cookies.jpg",
         available: 12,
+        quantity: 1,
     },
     {
         id: 7,
@@ -62,6 +69,7 @@ export default [
         price: 7.50,
         coverimg: "kinderbueno.jpg",
         available: 25,
+        quantity: 1,
     },
     {
         id: 8,
@@ -70,6 +78,7 @@ export default [
         price: 3.50,
         coverimg: "chachos.jpg",
         available: 2,
+        quantity: 1,
     },
     {
         id: 9,
@@ -78,6 +87,7 @@ export default [
         price: 21.00,
         coverimg: "popcorn.jpg",
         available: 18,
+        quantity: 1,
     },
     {
         id: 10,
@@ -86,6 +96,7 @@ export default [
         price: 5.02,
         coverimg: "cadbury.jpg",
         available: 0,
+        quantity: 1,
     },
     {
         id: 11,
@@ -94,6 +105,7 @@ export default [
         price: 1.85,
         coverimg: "sunflowerseed.jpg",
         available: 22,
+        quantity: 1,
     },
     {
         id: 12,
@@ -102,6 +114,7 @@ export default [
         price: 5.45,
         coverimg: "rasberryjam.png",
         available: 13,
+        quantity: 1,
     },
     {
         id: 13,
@@ -110,6 +123,7 @@ export default [
         price: 4.30,
         coverimg: "peperowhite.jpg",
         available: 1,
+        quantity: 1,
     },
     {
         id: 14,
@@ -118,6 +132,7 @@ export default [
         price: 4.50,
         coverimg: "pepsi.jpg",
         available: 3,
+        quantity: 1,
     },
     {
         id: 15,
@@ -126,6 +141,7 @@ export default [
         price: 2.00,
         coverimg: "dynamite.jpg",
         available: 33,
+        quantity: 1,
     }
     
     
