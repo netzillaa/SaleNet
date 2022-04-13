@@ -25,11 +25,11 @@ export default function Itemgrid() {
 
 <Grid item xs={12} md={4} lg={3}>
                   <Paper
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: 230, //height of card
-                    }}
+                    // sx={{
+                    //   display: 'flex',
+                    //   flexDirection: 'column',
+                    //   height: 230, //height of card
+                    // }}
                   >
                     <ProductCard />
                   </Paper>

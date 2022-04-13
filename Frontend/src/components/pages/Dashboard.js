@@ -25,6 +25,7 @@ import Card from '@mui/material/Card';
 import { CardActionArea } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
+import { spacing } from '@mui/system';
 
 const drawerWidth = 200;
 
@@ -112,9 +113,23 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="md" sx={{ mt: 1, mb: 20 }}>
-            <Grid container spacing={2}>
-              {cards}
+          <Container maxWidth="lg" sx={{ mt: 1, mb: 20, mx: 2 }}>
+            <Grid container direction="row" spacing={1} >
+              <Grid container sx={{gap: 2}}>
+                {/* <Grid sx={{gridColumn: '2'}}> */}
+                {/* <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3}}> */}
+                {/* <Grid item sx={{ display: 'flex'}}> */}
+
+                {cards}
+              </Grid>
+              {/* </Grid> */}
+              {/* </Grid> */}
+              {/* <Grid item sx={{ display: 'flex', xs:8}}>  */}
+              {/* <div class="col-12">  */}
+              {/* {cards} */}
+
+              {/* </div>  */}
+              {/* </Grid> */}
             </Grid>
           </Container>
         </Box>

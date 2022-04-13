@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Title from './Title';
 import { CardActionArea } from '@mui/material';
+import { spacing } from '@mui/system';
 
 
 function preventDefault(event) {
@@ -23,25 +24,27 @@ export default function ProductCard(product) {
   }
 
   return (
-    <React.Fragment> 
-        <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <Card sx={{ maxHeight: 250 }}>
-              <CardMedia
-                component="img"
-                height="250"
-                image={`images/${product.coverimg}`}
-                alt="green iguana"
-              />
-            </Card>
-            <CardContent>
-              <Typography gutterBottom variant="h6" component="div">
-                {product.title}
-              </Typography>
-              <p>{product.price} RM </p>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+    <React.Fragment>
+      <Card sx={{
+        maxWidth: 330
+      }}>
+        <CardActionArea>
+          <Card sx={{ maxHeight: 250}}>
+            <CardMedia
+              component="img"
+              height="250"
+              image={`images/${product.coverimg}`}
+              alt="Product's picture"
+            />
+          </Card>
+          <CardContent>
+            <Typography gutterBottom variant="h6" component="div">
+              {product.title}
+            </Typography>
+            <p>RM {product.price}</p>
+          </CardContent>
+        </CardActionArea>
+      </Card>
     </React.Fragment>
   );
 }
