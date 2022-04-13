@@ -1,15 +1,14 @@
 const express = require("express");
 let router = express.Router();
 
+const { getAllProducts } = require("../controllers/products")
 //a middleware to log every request we handle including url and date
 router.use((req, res, next) => {
     console.log(req.url, "@", Date.now());
     next();
 })
 //getting or  all products from a certain shop
-router.route("/allProducts/:shopId").get((req, res) => {
-    res.send("All products will be lsited here for the following shop " + req.params.shopId)
-})
+router.route("/allProducts/:shopId").get(getAllProducts);
 //getting or deleting a certain product from a certain shop
 router.route("/:shopId/:productType/:productId").get((req, res) => {
     res.send("put request for product received " + req.params.productType + " " + req.params.productId);

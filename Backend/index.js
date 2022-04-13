@@ -9,6 +9,8 @@ const startDbConnection = require("./database/databaseConnection");
 const User = require("./models/User.model");
 const Shop = require("./models/Shop.model");
 const productRouter = require("./routes/productRoute");
+// const product = require("./controllers/products");
+const userRouter = require("./routes/userRouter");
 const { default: mongoose } = require("mongoose");
 app.use(cors());
 app.use(express.json());
@@ -44,6 +46,9 @@ app.get("/test", (req, res) => {
   res.send("works")
 })
 app.use("/products", productRouter);
+app.use("/users", userRouter);
+
+
 app.post("/register", async (req, res) => {
   var receiveData = req.body;
   console.log(receiveData);
