@@ -17,12 +17,15 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './dashboard/Listitems';
-import Chart from './dashboard/Chart';
-import Depositsss from './dashboard/Depositsss';
-import Orders from './dashboard/Orders';
+import Card from '@mui/material/Card';
+import { CardActionArea } from '@mui/material';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import ProductCard from './dashboard/ProductCard';
+import data from './dashboard/data'
+import Cart from './dashboard/Cart';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -53,140 +56,55 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-    const [open, setOpen] = React.useState(true);
-    const toggleDrawer = () => {
-      setOpen(!open);
-    };
-  
+  const cards = data.map(product => {
     return (
-      <ThemeProvider theme={mdTheme}>
-        <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
-         
-          <Drawer variant="permanent" open={open}>
-            <Toolbar
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                px: [1],
-              }}
-            >
-              <IconButton onClick={toggleDrawer}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </Toolbar>
-            <Divider />
-            <List component="nav">
-              {mainListItems}
-              <Divider sx={{ my: 1 }} />
-              {secondaryListItems}
-            </List>
-          </Drawer>
-          <Box
-            component="main"
-            sx={{
-              backgroundColor: (theme) =>
-                theme.palette.mode === 'light'
-                  ? theme.palette.grey[100]
-                  : theme.palette.grey[900],
-              flexGrow: 1,
-              height: '100vh',
-              overflow: 'auto',
-            }}
-          >
-            <Toolbar />
-            <Container maxWidth="lg" sx={{ mt: 1, mb: 20}}>
-              <Grid container spacing={2}>
-                
-                {/* Recent Deposits */}
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: 300, //height of card
-                    }}
-                  >
-                    <Depositsss />
-                  </Paper>
-                </Grid>
-                {/* Recent Orders */}
-                <Grid item xs={12} md={0} lg={3}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: 300, //height of card
-                    }}
-                  >
-                    <Depositsss />
-                  </Paper>
-                </Grid>
+      <div>
+        <ProductCard
+          key={product.id}
+          {...product}
+        />
+      </div>
+    )
+  })
+  const [open, setOpen] = React.useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
 
-                <Grid item xs={12} md={0} lg={3}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: 300, //height of card
-                    }}
-                  >
-                    <Depositsss />
-                  </Paper>
-                </Grid>
+  return (
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
 
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: 300, //height of card
-                    }}
-                  >
-                    <Depositsss />
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: 300, //height of card
-                    }}
-                  >
-                    <Depositsss />
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      height: 300, //height of card
-                    }}
-                  >
-                    <Depositsss />
-                  </Paper>
-                </Grid>
-                
-              </Grid>
-            </Container>
-          </Box>
+        <Drawer variant="permanent" open={open}>
+          <Divider />
+          <List component="nav">
+            <Cart />
+          </List>
+        </Drawer>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            overflow: 'auto',
+          }}
+        >
+          <Toolbar />
+          <Grid style={{ padding: 20, paddingBottom: 80}}>
+            <Grid container spacing={1}>
+              {cards}
+            </Grid>
+          </Grid>
         </Box>
-      </ThemeProvider>
-    );
-  }
+      </Box>
+    </ThemeProvider>
+  );
+}
 
-  export default function Dashboard() {
-    return <DashboardContent />;
-  }
-
+export default function Dashboard() {
+  return <DashboardContent />;
+}
