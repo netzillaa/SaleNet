@@ -1,16 +1,17 @@
-let product = require("../models/Product.model");
+let Product = require("../models/Product.model");
 const mongoose = require("mongoose");
 const getAllProducts = async (req, res) => {
-    res.status(200).json({ product: "returning all products in a product" })
-    await product.find({}, (err, data) => {
-        if (err) {
-            console.log("error fetching products.Error details: " + err);
-        }
-        else {
-            console.log(data);
-        }
-    })
-}
+    let data = await Product.find();
+    if (data.length == 0) {
+        console.log("there are no items in the database")
+    }
+    else {
+        console.log("got data");
+    }
+    res.status(200).json({ data });
+
+};
+// res.status(200).json({ product: "returning all products in a product" })
 const addProduct = async (req, res) => {
     var receivedProduct = req.body;
     console.log("received product: " + receivedProduct);

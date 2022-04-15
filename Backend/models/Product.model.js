@@ -26,6 +26,7 @@ const productSchema = mongoose.Schema({
         default: 'OTHER'
     },
 },
+    //collection is missing a t will add it later
     { collection: "netzillaproducttest" }
 );
 var product = mongoose.model("Product", productSchema)
