@@ -1,22 +1,36 @@
-import React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
 
 export default function LandingPage() {
     return (
-        <div className="landingPage">
-        </div>
-    )
-}   
+        <>
+        <Box bgcolor="red"
+        width={200}
+        height={200}
+        style={{ marginTop: 300, marginLeft: 300 }} />
+        <Box>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={0}>
+                    <Grid item xs={4}>
+                        
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Item>xs=8</Item>
+                    </Grid>
+                </Grid>
+            </Box>
+        </Box>
+        </>
+    );
+}
