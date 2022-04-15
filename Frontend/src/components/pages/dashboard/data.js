@@ -100,8 +100,8 @@ export default [
     },
     {
         id: 11,
-        title: "Tong garden sunflower kernel",
-        description: "Honey sunflower kernel",
+        title: "Sunflower kernel",
+        description: "Tong garden honey sunflower kernel",
         price: 1.85,
         coverimg: "sunflowerseed.jpg",
         available: 22,

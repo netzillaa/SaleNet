@@ -19,7 +19,7 @@ const ContextCart = () => {
     return (
         <>
             <section className="main-cart-section">
-                <h1>shopping Cart</h1>
+                <h6>Shopping Cart</h6>
                 <p className="total-items">
                     you have <span className="total-items-count">{totalItem} </span> items
                     in shopping cart
@@ -37,7 +37,7 @@ const ContextCart = () => {
 
                 <div className="card-total">
                     <h3>
-                        Cart Total : <span>{totalAmount}₹</span>
+                        Cart Total : <span>RM {totalAmount}</span>
                     </h3>
                     <button>checkout</button>
                     <button className="clear-cart" onClick={clearCart}>
