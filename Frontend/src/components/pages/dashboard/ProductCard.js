@@ -38,7 +38,7 @@ export default function ProductCard(product) {
               <Typography gutterBottom variant="h6" component="div">
                 {product.title}
               </Typography>
-              <p>{product.price} RM </p>
+              <p>RM {product.price}</p>
             </CardContent>
           </CardActionArea>
         </Card>
