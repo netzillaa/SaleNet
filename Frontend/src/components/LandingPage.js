@@ -15,22 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function LandingPage() {
     return (
         <>
-        <Box bgcolor="red"
-        width={200}
-        height={200}
-        style={{ marginTop: 300, marginLeft: 300 }} />
-        <Box>
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={0}>
-                    <Grid item xs={4}>
-                        
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Item>xs=8</Item>
-                    </Grid>
-                </Grid>
-            </Box>
-        </Box>
+
         </>
     );
 }
