@@ -1,5 +1,15 @@
+let product = require("../models/Product.model");
+const mongoose = require("mongoose");
 const getAllProducts = async (req, res) => {
     res.status(200).json({ product: "returning all products in a product" })
+    await product.find({}, (err, data) => {
+        if (err) {
+            console.log("error fetching products.Error details: " + err);
+        }
+        else {
+            console.log(data);
+        }
+    })
 }
 const addProduct = async (req, res) => {
     var receivedProduct = req.body;
@@ -29,5 +39,6 @@ const addProduct = async (req, res) => {
         console.log("error saving product to database");
     }
 }
+
 
 module.exports = { getAllProducts, addProduct }
