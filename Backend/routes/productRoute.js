@@ -17,6 +17,6 @@ router.route("/:shopId/:productType/:productId").get((req, res) => {
 });
 //getting product type from a certain shop
 router.get("/:shopId/:productType", (req, res) => {
-    res.send("return a product with specific id" + req.params.productId);
+    res.send("return a product with specific id" + req.params.productId + "and the shop it belongs to is " + req.params.shopId);
 })
 module.exports = router;
