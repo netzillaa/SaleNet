@@ -7,11 +7,11 @@ const productSchema = mongoose.Schema({
         unique: true,
     },
     productPrice: {
-        type: Double,
+        type: Number,
         required: [true, "product price not specified"],
     },
     prodcutQuantity: {
-        type: Integer,
+        type: Number,
         required: [true, "item quantity not specified"],
     },
     productImage: {
@@ -21,12 +21,13 @@ const productSchema = mongoose.Schema({
         type: Boolean,
     },
     productCategory: {
+        type: String,
         enum: ['FOOD', 'DRINK', 'OTHER'],
-        default: 'OTHER',
+        default: 'OTHER'
     },
 },
     { collection: "netzillaproducttest" }
 );
 var product = mongoose.model("Product", productSchema)
-module.exports(product);
+module.exports = product;
 
