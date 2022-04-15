@@ -17,23 +17,40 @@ import VisitPage from "./VisitPage";
 
 const useStyles = makeStyles((theme) => ({
     root:{
-        height: '100vh',
         display: 'flex',
         justifyContent: 'center',
-        alignItem: 'center',
+        paddingBottom: '10vw',
+        paddingTop: '3vw',
+        // backgroundColor: '#ECECEC',
+        // backgroundImage: 'url(https://img.freepik.com/free-vector/white-background-with-stripe-texture_105940-672.jpg)',
+        // backgroundSize: '100%',
+        
     },
-
+    
+    wrapper:{
+        display: 'grid',
+        // display: 'flex',
+        justifyContent: 'center',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(5em, 60em))',
+        width: '90%',
+        boxShadow: '-2px 4px 7px 0 grey',
+        padding: '3vw',
+        backgroundColor: 'white',
+    },
+    
     word:{
-        height: '30vh',
-        width: '35vh',
-        elevation: 8,
+        fontFamily: '"Roboto", sans-serif',
+        fontWeight: 400
+        
     },
 
     pageImage:{
-        height: '30vh',
-        width: '50vh',
+        height: '20vw',
+        // width: '40vw',
         elevation: 8,
-        backgroundImngae: 'url(https://cyberseniors.org/wp-content/uploads/2021/05/online-buying-selling-safely.jpeg)'
+        backgroundImage: 'url(https://i.pinimg.com/originals/99/1f/9e/991f9e7a79a5fc945310b8c54f0fb9d2.gif)',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
     },
 }));
 
@@ -42,14 +59,18 @@ export default function LandingPage() {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <div className={classes.word}>
-                <h1>Testing here</h1>
-            </div>
-            <div className={classes.pageImage}>
+        <div style={{backgroundColor: '#ECECEC'}}>
+            <div className={classes.root}>
+                <div className={classes.wrapper}>
+                    <div className={classes.word}>
+                        SaleNet<br></br>
+                        Manage Your Business in the Easiest Way
+                    </div>
+                    <div className={classes.pageImage}>
+                    </div>/
 
+                </div>
             </div>
-
             <VisitPage />
         </div>
     )

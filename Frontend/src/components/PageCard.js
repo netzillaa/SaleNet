@@ -5,13 +5,18 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
+const cardStyle = {
+    width: "30vw",
+    height: '13vw'
+};
+
 export default function PageCard({page}) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card style={cardStyle}>
       <CardActionArea>
         <CardMedia
           component="img"
-          height="140"
+          height="85vw"
           image={page.imageUrl}
         />
         <CardContent>
