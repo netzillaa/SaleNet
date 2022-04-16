@@ -14,17 +14,15 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import VisitPage from "./VisitPage";
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import { Link as Scroll } from 'react-scroll';
 
 const useStyles = makeStyles((theme) => ({
     root:{
         display: 'flex',
         justifyContent: 'center',
-        paddingBottom: '10vw',
-        paddingTop: '3vw',
-        // backgroundColor: '#ECECEC',
-        // backgroundImage: 'url(https://img.freepik.com/free-vector/white-background-with-stripe-texture_105940-672.jpg)',
-        // backgroundSize: '100%',
-        
+        paddingBottom: '5vw',
+        paddingTop: '4vw',
     },
     
     wrapper:{
@@ -39,19 +37,48 @@ const useStyles = makeStyles((theme) => ({
     },
     
     word:{
-        fontFamily: '"Roboto", sans-serif',
-        fontWeight: 400
-        
+        fontWeight: 'bold',
+        fontSize: '2vw',    
+    },
+
+    salenet:{
+        fontFamily: 'Tahoma, sans-serif',
+        fontWeight: 'bolder',
+        fontSize: '3vw',
+        color: '#FF8000'
     },
 
     pageImage:{
         height: '20vw',
-        // width: '40vw',
-        elevation: 8,
         backgroundImage: 'url(https://i.pinimg.com/originals/99/1f/9e/991f9e7a79a5fc945310b8c54f0fb9d2.gif)',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
     },
+
+    startButton:{
+        fontWeight: 'bold',
+        fontSize: '2vw',
+        color: '#FF8000'
+    },
+
+    divider:{
+        width: '100%',
+        height: '15vw',
+        backgroundImage: 'url(https://wallpaperaccess.com/full/656684.jpg)',
+        backgroundPosition: '0 -300px',
+    },
+
+    addOn:{
+        fontSize:'2.5vw', 
+        fontWeight:'bolder', 
+        backgroundColor:'rgb(255,255,255,0.2)', 
+        width:'100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontFamily: 'Courier New, monospace'
+    }
 }));
 
 export default function LandingPage() {
@@ -59,19 +86,38 @@ export default function LandingPage() {
     const classes = useStyles();
 
     return (
-        <div style={{backgroundColor: '#ECECEC'}}>
+        <div style={{backgroundColor: '#ECECEC'}} id='firstDisplay'>
             <div className={classes.root}>
                 <div className={classes.wrapper}>
-                    <div className={classes.word}>
-                        SaleNet<br></br>
-                        Manage Your Business in the Easiest Way
+                    <div>
+                        <div className={classes.salenet}>SaleNet</div>
+                        <div className={classes.word}>Manage Your Business in the <span style={{fontFamily: 'Courier New, monospace'}}>Easiest</span> Way</div>
+                        <br></br>
+                        <div style={{fontSize: '1.5vw', color:'black'}}>Grow More Efficiently</div>
+                        <div style={{outline: '3vw white solid'}}>
+                            <Button style={{fontWeight: 'bold', fontSize: '1vw', color: '#FF8000', border: '2px #FF8000 solid'}}>
+                                        Get Started
+                            </Button>
+                        </div>
                     </div>
-                    <div className={classes.pageImage}>
-                    </div>/
+                    <div>
+                        <div className={classes.pageImage}></div>
+                    </div>
 
                 </div>
             </div>
+            <div className={classes.divider}>
+                <div className={classes.addOn}>
+                    High Efficiency with Fewer Mistakes
+                </div>
+            </div>
+            <div style={{textAlign:'center', paddingBottom:'8vw'}}>
+                <Scroll to="visitPage" smooth={true}>
+                    <KeyboardArrowDownOutlinedIcon style={{fontSize:'5vw', color: '#FF8000', cursor:'pointer'}}/>
+                </Scroll>
+            </div>
             <VisitPage />
+            
         </div>
     )
 }   

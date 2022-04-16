@@ -3,36 +3,48 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import { makeStyles } from "@material-ui/core/styles";
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import Collapse from '@mui/material/Collapse';
 
-const cardStyle = {
-    width: "30vw",
-    height: '13vw'
-};
+const useStyles = makeStyles((theme) => ({
+    cardTitle:{
+        fontFamily: 'Nunito',
+        fontWeight: 'bold',
+        fontSize: '10rem',
+    },
+}));
 
-export default function PageCard({page}) {
-  return (
-    <Card style={cardStyle}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="85vw"
-          image={page.imageUrl}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {page.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {page.desc}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          View
-        </Button>
-      </CardActions>
-    </Card>
-  );
+export default function PageCard({page, opened}) {
+// export default function PageCard({page}) {
+
+    const classes = useStyles();
+
+    return (
+        <Collapse in={opened} { ... (opened ? {timeout:1000} : {})}>
+        {/* <Collapse> */}
+            <Card style={{width: '30vw'}}>
+            <CardActionArea>
+                <CardMedia
+                component="img"
+                height="auto"
+                image={page.imageUrl}
+                />
+                <CardContent>
+                <Typography style={{fontWeight: 'bold', fontSize: '2vw', fontFamily: 'Nunito'}}>
+                    {page.title}
+                </Typography>
+                <Typography color="text.secondary" style={{color: 'black', fontSize: '1vw', fontFamily: 'Nunito'}}>
+                    {page.desc}
+                </Typography>
+                </CardContent>
+            </CardActionArea>
+            <CardActions>
+                <Button size="small" color="primary" style={{fontSize: '1vw'}}>
+                View
+                </Button>
+            </CardActions>
+            </Card>
+        </Collapse>
+    );
 }
