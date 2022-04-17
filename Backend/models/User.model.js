@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
       type: Date,
     },
   },
-  { collection: "netzillatestuser" }
+  { collection: "user" }
 );
 var User = mongoose.model("user", userSchema);
 module.exports = User;

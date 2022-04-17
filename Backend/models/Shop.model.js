@@ -25,7 +25,7 @@ const shopSchema = mongoose.Schema(
       unique: true,
     },
   },
-  { collection: "netzillashoptest" }
+  { collection: "shop" }
 );
 var Shop = mongoose.model("shop", shopSchema);
 module.exports = Shop;

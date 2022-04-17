@@ -21,7 +21,7 @@ const registerUser = async (req, res) => {
         });
         console.log("added " + req.body.shopName + " to data base");
     } catch (err) {
-        console.log("error saving shop to database");
+        console.log("error saving shop to database" + err);
     }
     try {
         await User.create({
@@ -35,7 +35,7 @@ const registerUser = async (req, res) => {
         });
         console.log("added user to database");
     } catch (err) {
-        console.log("something went wrong while saving  user to database");
+        console.log("something went wrong while saving  user to database" + err);
     }
     res.json({ status: "user data received" });
 }
