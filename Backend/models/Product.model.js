@@ -4,7 +4,6 @@ const productSchema = mongoose.Schema({
     productName: {
         type: String,
         required: [true, "Product name not detected"],
-        unique: true,
     },
     productPrice: {
         type: Number,
@@ -26,8 +25,8 @@ const productSchema = mongoose.Schema({
         default: 'OTHER'
     },
 },
-    //collection is missing a t will add it later
-    { collection: "netzillaproducttest" }
+
+    { collection: "product" }
 );
 var product = mongoose.model("Product", productSchema)
 module.exports = product;
