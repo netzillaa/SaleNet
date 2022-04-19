@@ -35,8 +35,33 @@ const registerUser = async (req, res) => {
         });
         console.log("added user to database");
     } catch (err) {
-        console.log("something went wrong while saving  user to database" + err);
+        console.log("cant connect to database or user already exist with the email.Error infor: " + err);
     }
     res.json({ status: "user data received" });
 }
-module.exports = { registerUser }
+const loginUser = async (req, res) => {
+    try {
+        var loginData = req.body;
+        console.log(loginData);
+        var user_email = req.body.email + "\n";
+        var user_password = req.body.password + "\n";
+        //checking passed values
+        console.log("sent:::" + user_email + " and " + user_password);
+        //searching database if a user exist with the passed username and password
+        const user = await User.findOne({ email: req.body.email, password: req.body.password });
+        console.log(user);
+        console.log("db works");
+
+        if (user) {
+            res.json({ status: "works and user is found" + user });
+        }
+        else {
+            res.json({ status: "works but no user is found" });
+        }
+    }
+    catch (err) {
+        console.log("error information: " + err);
+    }
+}
+
+module.exports = { registerUser, loginUser }
