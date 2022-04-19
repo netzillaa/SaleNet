@@ -1,12 +1,11 @@
+//will use this file to refactor database connection in index
 const mongoose = require("mongoose");
 
 const startDbConnection = (URI) => {
   return mongoose.connect(URI, {
     useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAnyModify: false,
     useUnifiedTopology: true,
-  });
+  }).then(() => console.log("Database Connected"));
 };
 
 module.exports = { startDbConnection };
