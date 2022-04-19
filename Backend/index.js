@@ -27,14 +27,14 @@ const beginApp = async () => {
     // await dataBase(URI);
     app.listen(port, () => {
       console.log(`listening on port ${port}`);
-      // try {
-      //   mongoose.connect(URI, {
-      //     useNewUrlParser: true,
-      //     useUnifiedTopology: true,
-      //   }).then(() => console.log("Database Connected"));
-      // } catch (err) {
-      //   console.log("cant connect to database" + err);
-      // }
+      try {
+        mongoose.connect(URI, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        }).then(() => console.log("Database Connected"));
+      } catch (err) {
+        console.log("cant connect to database" + err);
+      }
     });
   } catch (error) {
     console.log("something went wrong. Error details: ", error);
@@ -52,6 +52,6 @@ app.use("/products", productRouter);
 //user route
 app.use("/users", userRouter);
 //registration route
-app.use("/register", authRouter);
+app.use("/auth", authRouter);
 
 beginApp();
