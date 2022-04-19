@@ -76,12 +76,12 @@ function DashboardContent() {
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
 
-        <Drawer variant="permanent" open={open}>
+        {/* <Drawer variant="permanent" open={open}>
           <Divider />
           <List component="nav" style={{ position: "fixed"}}>
             <Cart />
           </List>
-        </Drawer>
+        </Drawer> */}
         <Box
           component="main"
           sx={{
@@ -99,6 +99,14 @@ function DashboardContent() {
               {cards}
             </Grid>
           </Grid>
+        </Box>
+        <Box>
+        <Drawer variant="permanent" open={open}>
+          <Divider />
+          <List component="nav" style={{ position: "fixed"}}>
+            <Cart />
+          </List>
+        </Drawer>
         </Box>
       </Box>
     </ThemeProvider>

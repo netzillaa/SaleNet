@@ -7,7 +7,6 @@ import Dashboard from "./components/pages/Dashboard";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
 // import Section3 from "./components/Section3";
 
@@ -31,7 +30,7 @@ function App() {
           </Switch>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }
