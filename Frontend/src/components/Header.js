@@ -35,8 +35,11 @@ export default function Header() {
         <Container className="headerItems">
           <div className="navbar-translate">
             <NavbarBrand to="/" tag={Link} id="navbar-brand">
-              <span>NETZILLA </span>
+              <Container style={{fontSize: '24px'}}>
+                <span>NETZILLA </span>
               Point Of Sale System
+              </Container>
+              
             </NavbarBrand>
           </div>
           <Collapse

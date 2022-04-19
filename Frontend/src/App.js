@@ -13,9 +13,8 @@ import LandingPage from "./components/LandingPage";
 function App() {
   return (
     <Router>
+      <Header />
       <div className="App">
-        <Header />
-        <LandingPage />
         {/* <Navbar />
       <Section1 /> */}
         {/* <Section2 />
@@ -26,7 +25,8 @@ function App() {
             <Route path={"/register"} component={SignUp}></Route>
             <Route path={"/dashboard"} component={Dashboard}></Route>
             {/* <Route path={"/ContactUs"} component={Section1}></Route> */}
-            <Route path={"/"} component={Home}></Route>
+            <Route path={"/home"} component={Home}></Route>
+            <Route path={"/"} component={LandingPage}></Route>
           </Switch>
         </div>
       </div>
