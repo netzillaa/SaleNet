@@ -6,11 +6,10 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const startDbConnection = require("./database/databaseConnection");
-const User = require("./models/User.model");
-const Shop = require("./models/Shop.model");
+
 const productRouter = require("./routes/productRoute");
-// const product = require("./controllers/products");
 const userRouter = require("./routes/userRouter");
+const authRouter = require("./routes/AuthRoute");
 const { default: mongoose } = require("mongoose");
 app.use(cors());
 app.use(express.json());
@@ -29,7 +28,10 @@ const beginApp = async () => {
     app.listen(port, () => {
       console.log(`listening on port ${port}`);
       // try {
-      //   mongoose.connect(URI).then(() => console.log("Database Connected"));
+      //   mongoose.connect(URI, {
+      //     useNewUrlParser: true,
+      //     useUnifiedTopology: true,
+      //   }).then(() => console.log("Database Connected"));
       // } catch (err) {
       //   console.log("cant connect to database" + err);
       // }
@@ -45,46 +47,11 @@ app.get("/", (req, res) => {
 app.get("/test", (req, res) => {
   res.send("works")
 })
+//products route
 app.use("/products", productRouter);
+//user route
 app.use("/users", userRouter);
-
-
-app.post("/register", async (req, res) => {
-  var receiveData = req.body;
-  console.log(receiveData);
-  var shopInfo = req.body.shopName + "\n";
-  req.body.shopAddress + "\n";
-  req.body.businessLicense + "\n";
-  Date.now() + "\n";
-  req.body.email;
-  console.log(shopInfo);
-  try {
-    await Shop.create({
-      shopName: req.body.shopName,
-      shopAddress: req.body.shopAddress,
-      businessLicense: req.body.businessLicense,
-      createdAt: Date.now(),
-      ownerEmail: req.body.email,
-    });
-  } catch (err) {
-    console.log("error saving shop to database");
-  }
-  try {
-    await User.create({
-      fullName: req.body.fullName,
-      userName: req.body.userName,
-      password: req.body.password,
-      email: req.body.email,
-      phoneNumber: req.body.phoneNumber,
-      createdAt: Date.now(),
-      shopName: req.body.shopName,
-    });
-    console.log("added user to database");
-  } catch (err) {
-    console.log("something went wrong while saving  user to database");
-  }
-  res.json({ status: "user data received" });
-});
-
+//registration route
+app.use("/register", authRouter);
 
 beginApp();

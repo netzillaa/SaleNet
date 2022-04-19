@@ -25,7 +25,7 @@ import ProductCard from './dashboard/ProductCard';
 import data from './dashboard/data'
 import Cart from './dashboard/Cart';
 
-const drawerWidth = 200;
+const drawerWidth = 350;
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -78,7 +78,7 @@ function DashboardContent() {
 
         <Drawer variant="permanent" open={open}>
           <Divider />
-          <List component="nav">
+          <List component="nav" style={{ position: "fixed"}}>
             <Cart />
           </List>
         </Drawer>
