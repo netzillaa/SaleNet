@@ -1,5 +1,6 @@
 const User = require("../models/User.model");
 const Shop = require("../models/Shop.model");
+const { default: mongoose } = require("mongoose");
 const registerUser = async (req, res) => {
     var receiveData = req.body;
     console.log(receiveData);
@@ -19,11 +20,14 @@ const registerUser = async (req, res) => {
             createdAt: Date.now(),
             ownerEmail: req.body.email,
         });
+
         console.log("added " + req.body.shopName + " to data base");
     } catch (err) {
         console.log("error saving shop to database" + err);
     }
     try {
+        const ownedShop = await Shop.findOne({ shopName: req.body.shopName })
+        console.log("the owned sho is: " + ownedShop);
         await User.create({
             fullName: req.body.fullName,
             userName: req.body.userName,
@@ -31,7 +35,7 @@ const registerUser = async (req, res) => {
             email: req.body.email,
             phoneNumber: req.body.phoneNumber,
             createdAt: Date.now(),
-            shopName: req.body.shopName,
+            shop: ownedShop,
         });
         console.log("added user to database");
     } catch (err) {
@@ -49,11 +53,14 @@ const loginUser = async (req, res) => {
         console.log("sent:::" + user_email + " and " + user_password);
         //searching database if a user exist with the passed username and password
         const user = await User.findOne({ email: req.body.email, password: req.body.password });
-        console.log(user);
+        console.log("shop document info " + user.shop);
+        console.log("user document info " + user);
+
         console.log("db works");
 
         if (user) {
             res.json({ status: "works and user is found" + user });
+            var ownedshopUrl = Shop.find({ businessLicense: user.businessLicense })
         }
         else {
             res.json({ status: "works but no user is found" });
