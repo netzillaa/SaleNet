@@ -33,8 +33,8 @@ export default function SignIn() {
       }),
     });
     console.log(email, password);
-    const serverResponse = await response.json();
-    console.log(serverResponse);
+    // const serverResponse = await response.json();
+    // console.log(serverResponse);
   }
 
 

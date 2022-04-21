@@ -1,6 +1,7 @@
 const User = require("../models/User.model");
 const Shop = require("../models/Shop.model");
 const { default: mongoose } = require("mongoose");
+const jwt = require('jsonwebtoken');
 const registerUser = async (req, res) => {
     var receiveData = req.body;
     console.log(receiveData);
@@ -54,13 +55,17 @@ const loginUser = async (req, res) => {
         //searching database if a user exist with the passed username and password
         const user = await User.findOne({ email: req.body.email, password: req.body.password });
         console.log("shop document info " + user.shop);
-        console.log("user document info " + user);
+        // console.log("user document info " + user.shop[0].businessLicense);
 
         console.log("db works");
 
         if (user) {
-            res.json({ status: "works and user is found" + user });
-            var ownedshopUrl = Shop.find({ businessLicense: user.businessLicense })
+            //creating a token when user is found
+            console.log("signed for: " + user.email);
+            const token = jwt.sign({ email: user.email }, process.env.TOKEN);
+            res.header('authentication-token', token).send(token);
+            // var ownedshopUrl = Shop.find({ businessLicense: user.businessLicense })
+            // res.json({ status: "User is found and authentication token sent" + user });
         }
         else {
             res.json({ status: "works but no user is found" });

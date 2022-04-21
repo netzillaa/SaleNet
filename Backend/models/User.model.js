@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
     },
     // user owns a shops
     shop:
-      [Shop],
+      { Shop },
     createdAt: {
       type: Date,
     },
