@@ -12,7 +12,10 @@ const registerUser = async (req, res) => {
     req.body.email;
     console.log(shopInfo);
     try {
-
+        const shopExist = await Shop.findOne({ shopName: req.body.shopName });
+        if (shopExist) {
+            res.status(503).json({ status: "shop exists already" });
+        }
         await Shop.create({
 
             shopName: req.body.shopName,
@@ -28,7 +31,7 @@ const registerUser = async (req, res) => {
     }
     try {
         const ownedShop = await Shop.findOne({ shopName: req.body.shopName })
-        console.log("the owned sho is: " + ownedShop);
+        console.log("the owned shop is: " + ownedShop);
         await User.create({
             fullName: req.body.fullName,
             userName: req.body.userName,
@@ -61,8 +64,8 @@ const loginUser = async (req, res) => {
 
         if (user) {
             //creating a token when user is found
-            console.log("signed for: " + user.email);
-            const token = jwt.sign({ email: user.email }, process.env.TOKEN);
+            console.log("signed for: " + user._id);
+            const token = jwt.sign({ id: user._id }, process.env.TOKEN);
             res.header('authentication-token', token).send(token);
             // var ownedshopUrl = Shop.find({ businessLicense: user.businessLicense })
             // res.json({ status: "User is found and authentication token sent" + user });
