@@ -1,9 +1,9 @@
 export default [
     {
-        id: 1,
-        title: "socor",
+        _id: 1,
+        productName: "socor",
         description: "white with black dots",
-        price: 349,
+        productPrice: 349,
         coverImg: "socor.png",
         stats: {
             rating: 5.0,
@@ -12,10 +12,10 @@ export default [
         available: 5,
     },
     {
-        id: 2,
-        title: "basketball",
+        _id: 2,
+        productName: "basketball",
         description: "orange with black lines",
-        price: 579,
+        productPrice: 579,
         coverImg: "basketball.png",
         stats: {
             rating: 4.2,
@@ -24,10 +24,10 @@ export default [
         available: 0,
     },
     {
-        id: 3,
-        title: "volleyball",
+        _id: 3,
+        productName: "volleyball",
         description: "white with weird design",
-        price: 167,
+        productPrice: 167,
         coverImg: "volleyball.png",
         stats: {
             rating: 1.4,
@@ -36,10 +36,10 @@ export default [
         available: 9,
     },
     {
-        id: 4,
-        title: "tennis",
+        _id: 4,
+        productName: "tennis",
         description: "yellow with weird design",
-        price: 349,
+        productPrice: 349,
         coverImg: "tennis.png",
         stats: {
             rating: 4.8,
@@ -48,10 +48,10 @@ export default [
         available: 3,
     },
     {
-        id: 5,
-        title: "pingpong",
+        _id: 5,
+        productName: "pingpong",
         description: "orange",
-        price: 851,
+        productPrice: 851,
         coverImg: "pingpong.png",
         stats: {
             rating: 4.0,
@@ -60,10 +60,10 @@ export default [
         available: 9,
     },
     {
-        id: 6,
-        title: "handball",
+        _id: 6,
+        productName: "handball",
         description: "yellow with blue dots",
-        price: 976,
+        productPrice: 976,
         coverImg: "handball.png",
         stats: {
             rating: 2.6,
@@ -72,10 +72,10 @@ export default [
         available: 0,
     },
     {
-        id: 7,
-        title: "bowlingball",
+        _id: 7,
+        productName: "bowlingball",
         description: "can be any color with 3 holes",
-        price: 643,
+        productPrice: 643,
         coverImg: "bowlingball.png",
         stats: {
             rating: 5.0,
@@ -84,10 +84,10 @@ export default [
         available: 15,
     },
     {
-        id: 8,
-        title: "billiardbal",
+        _id: 8,
+        productName: "billiardbal",
         description: "can be any color with numbers on it",
-        price: 157,
+        productPrice: 157,
         coverImg: "billiardbal.png",
         stats: {
             rating: 3.6,
@@ -96,10 +96,10 @@ export default [
         available: 8,
     },
     {
-        id: 9,
-        title: "beachball",
+        _id: 9,
+        productName: "beachball",
         description: "light weighted ball with colorful colors",
-        price: 673,
+        productPrice: 673,
         coverImg: "beachball.png",
         stats: {
             rating: 3.0,
@@ -108,10 +108,10 @@ export default [
         available: 5,
     },
     {
-        id: 10,
-        title: "football",
+        _id: 10,
+        productName: "football",
         description: "most weird ball shape with brown color",
-        price: 949,
+        productPrice: 949,
         coverImg: "football.png",
         stats: {
             rating: 4.7,
