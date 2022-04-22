@@ -14,34 +14,47 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "../../components/Footer";
+import axios from "axios";
+import ErrorMessage from "../ErrorMessage";
 
 
 const theme = createTheme();
-export default function SignIn() {
+export default function SignIn({ history }) {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState(false);
 
+  React.useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
+    if (userInfo) {
+      history.push({
+        pathname: `/dashboard`, search: `${email}`
+      });
+    }
+  }, [history]);
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
   async function signIn(event) {
     event.preventDefault();
-    const response = await fetch("http://localhost:4000/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    console.log(email, password);
-    // const serverResponse = await response.json();
-    // console.log(serverResponse);
+
+    try {
+      const { data } = await axios.post("http://localhost:4000/auth/login", { email, password }, config)
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      // const serverResponse = await response.json();
+      // console.log(serverResponse);
+    }
+    catch (err) {
+      setError(err.response.data.message);
+    }
   }
-
-
   return (
     <ThemeProvider theme={theme}>
+      {/* trying to add an error message the imported part is under component  */}
+      {/* {err && <ErrorMessage>{err}</ErrorMessage>} */}
       <Grid container component="main" sx={{ height: "50rem" }}>
         <CssBaseline />
         <Grid
@@ -136,9 +149,8 @@ export default function SignIn() {
           </Box>
         </Grid>
       </Grid>
-    <Footer />
+      <Footer />
     </ThemeProvider>
   );
 }
-
 
