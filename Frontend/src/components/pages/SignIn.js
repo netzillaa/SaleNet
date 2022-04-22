@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -16,16 +17,28 @@ import Footer from "../../components/Footer";
 
 
 const theme = createTheme();
-
 export default function SignIn() {
-  const handleSubmit = (event) => {
+
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  async function signIn(event) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+    const response = await fetch("http://localhost:4000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
     });
-  };
+    console.log(email, password);
+    // const serverResponse = await response.json();
+    // console.log(serverResponse);
+  }
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,7 +81,7 @@ export default function SignIn() {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              onSubmit={signIn}
               sx={{ mt: 1 }}
             >
               <TextField
@@ -77,6 +90,8 @@ export default function SignIn() {
                 fullWidth
                 id="email"
                 label="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -85,6 +100,8 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 name="password"
                 label="Password"
                 type="password"
@@ -123,3 +140,5 @@ export default function SignIn() {
     </ThemeProvider>
   );
 }
+
+

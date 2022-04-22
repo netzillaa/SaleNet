@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const Shop = require("./Shop.model").schema;
 const userSchema = new mongoose.Schema(
   {
     fullName: {
@@ -23,11 +23,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "you need to enter a phnoe number"],
     },
-    shopName: {
-      type: String,
-      required: [true, "you Need a shop Name"],
-      unique: true,
-    },
+    // user owns a shops
+    shop:
+      { Shop },
     createdAt: {
       type: Date,
     },

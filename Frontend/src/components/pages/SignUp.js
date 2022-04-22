@@ -28,7 +28,7 @@ export default function SignUp() {
 
   async function registerUser(event) {
     event.preventDefault();
-    const response = await fetch("http://localhost:4000/register/newUser", {
+    const response = await fetch("http://localhost:4000/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

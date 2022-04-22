@@ -6,11 +6,12 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const startDbConnection = require("./database/databaseConnection");
-
+const jwt = require("jsonwebtoken");
 const productRouter = require("./routes/productRoute");
 const userRouter = require("./routes/userRouter");
 const authRouter = require("./routes/AuthRoute");
 const { default: mongoose } = require("mongoose");
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,18 +41,41 @@ const beginApp = async () => {
     console.log("something went wrong. Error details: ", error);
   }
 };
+//authentication
+authentication_jwt = (req, res, next) => {
+  //we get  the header that has token and its in the format of BEARER TOKEN
+  const auth_header = req.headers['authentication-header'];
+  // so we need to split and get the second half which is the token
+  //we check first if ehader exist
+  const token = auth_header && auth_header.split(' ')[1]
+  if (token == null) {
+    return res.sendStatus(401)
+  }
+  //verification requires the token and the secret we used
+  jwt.verify(token, process.env.TOKEN, (err, user) => {
+    if (err) {
+      console.log("bad token");
+      return res.sendStatus(403);
+    }
+    req.user = user;
+    res.sendStatus(200);
+    next();
+  })
+}
 
 app.get("/", (req, res) => {
   res.send("home page and the users will be shown here");
 });
-app.get("/test", (req, res) => {
-  res.send("works")
+//registration route
+app.use("/auth", authRouter);
+
+app.get("/test", authentication_jwt, (req, res) => {
+  console.log("welcome user");
 })
 //products route
 app.use("/products", productRouter);
 //user route
 app.use("/users", userRouter);
-//registration route
-app.use("/register", authRouter);
 
 beginApp();
+
