@@ -60,7 +60,7 @@ function DashboardContent() {
     return (
       <div>
         <ProductCard
-          key={product.id}
+          key={product._id}
           {...product}
         />
       </div>
