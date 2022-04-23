@@ -7,7 +7,6 @@ import Dashboard from "./components/pages/Dashboard";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
 import Header2 from "./components/Header2";
 // import Section3 from "./components/Section3";

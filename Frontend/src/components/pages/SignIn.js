@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,21 +13,48 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Footer from "../../components/Footer";
+import axios from "axios";
+import ErrorMessage from "../ErrorMessage";
+
 
 const theme = createTheme();
+export default function SignIn({ history }) {
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState(false);
+
+  React.useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
+    if (userInfo) {
+      history.push({
+        pathname: `/dashboard`, search: `${email}`
+      });
+    }
+  }, [history]);
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+  async function signIn(event) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
 
+    try {
+      const { data } = await axios.post("http://localhost:4000/auth/login", { email, password }, config)
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      // const serverResponse = await response.json();
+      // console.log(serverResponse);
+    }
+    catch (err) {
+      setError(err.response.data.message);
+    }
+  }
   return (
     <ThemeProvider theme={theme}>
+      {/* trying to add an error message the imported part is under component  */}
+      {/* {err && <ErrorMessage>{err}</ErrorMessage>} */}
       <Grid container component="main" sx={{ height: "50rem" }}>
         <CssBaseline />
         <Grid
@@ -66,7 +94,7 @@ export default function SignIn() {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              onSubmit={signIn}
               sx={{ mt: 1 }}
             >
               <TextField
@@ -75,6 +103,8 @@ export default function SignIn() {
                 fullWidth
                 id="email"
                 label="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -83,6 +113,8 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 name="password"
                 label="Password"
                 type="password"
@@ -117,6 +149,8 @@ export default function SignIn() {
           </Box>
         </Grid>
       </Grid>
+      <Footer />
     </ThemeProvider>
   );
 }
+

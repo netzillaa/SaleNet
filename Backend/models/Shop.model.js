@@ -15,6 +15,7 @@ const shopSchema = mongoose.Schema(
     businessLicense: {
       type: String,
       required: [true, "you need to enter your home address"],
+      unique: true
     },
     createdAt: {
       type: Date,
