@@ -9,24 +9,21 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
+import Header2 from "./components/Header2";
 // import Section3 from "./components/Section3";
 
 function App() {
   return (
     <Router>
-      <Header />
+      <Header2/>
       <div className="App">
-        {/* <Navbar />
-      <Section1 /> */}
-        {/* <Section2 />
-      <Section3 /> */}
         <div className="content">
           <Switch>
             <Route path={"/signin"} component={SignIn}></Route>
             <Route path={"/register"} component={SignUp}></Route>
             <Route path={"/dashboard"} component={Dashboard}></Route>
-            {/* <Route path={"/ContactUs"} component={Section1}></Route> */}
-            <Route path={"/home"} component={Home}></Route>
+            {/* <Route path={"/follow"} component={FollowUs}></Route> */}
+            <Route path={"/home"} component={LandingPage}></Route>
             <Route path={"/"} component={LandingPage}></Route>
           </Switch>
         </div>
