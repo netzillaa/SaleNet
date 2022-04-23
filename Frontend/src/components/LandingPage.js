@@ -1,23 +1,12 @@
 import React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { makeStyles } from "@material-ui/core/styles";
-import VisitPage from "./VisitPage";
+import VisitPage from "./pageCard/VisitPage";
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import { Link as Scroll } from 'react-scroll';
+import Slider from "./slider/Slider";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root:{
         display: 'flex',
         justifyContent: 'center',
@@ -27,46 +16,64 @@ const useStyles = makeStyles((theme) => ({
     
     wrapper:{
         display: 'grid',
-        // display: 'flex',
         justifyContent: 'center',
         gridTemplateColumns: 'repeat(auto-fit, minmax(5em, 60em))',
         width: '90%',
         boxShadow: '-2px 4px 7px 0 grey',
         padding: '3vw',
         backgroundColor: 'white',
+        borderRadius: '3vw',
+        boxSizing: 'border-box',
+        borderLeft: '3vw #FFDA00 solid'
     },
     
     word:{
         fontWeight: 'bold',
-        fontSize: '2vw',    
+        fontSize: '1.5vw',  
+        marginBottom: '2vw',
+        marginTop: '1vw'
     },
 
     salenet:{
         fontFamily: 'Tahoma, sans-serif',
         fontWeight: 'bolder',
         fontSize: '3vw',
-        color: '#FF8000'
+        // color: '#FF8000',
+        color: '#01027B'
     },
 
     pageImage:{
-        height: '20vw',
+        width: 'auto',
+        height: '22vw',
+        minHeight: '200px',
         backgroundImage: 'url(https://i.pinimg.com/originals/99/1f/9e/991f9e7a79a5fc945310b8c54f0fb9d2.gif)',
         backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
+        backgroundRepeat: 'no-repeat',   
     },
 
     startButton:{
+        fontWeight: '900', 
+        fontSize: '1vw', 
+        // color: '#FF8000', 
+        // border: '2px #FF8000 solid',
+        marginBottom: '3vw',
+        backgroundColor:'#FF8000',
+        borderRadius: '30px',
+        color: 'white',
+        padding: '1vw',
+        paddingRight: '2vw',
+        paddingLeft: '2vw',
+        fontSize: '1vw',
         fontWeight: 'bold',
-        fontSize: '2vw',
-        color: '#FF8000'
+        border: 'none',
     },
 
-    divider:{
-        width: '100%',
-        height: '15vw',
-        backgroundImage: 'url(https://wallpaperaccess.com/full/656684.jpg)',
-        backgroundPosition: '0 -300px',
-    },
+    // divider:{
+    //     width: '100%',
+    //     height: '15vw',
+    //     backgroundImage: 'url(https://wallpaperaccess.com/full/656684.jpg)',
+    //     backgroundPosition: '0 -300px',
+    // },
 
     addOn:{
         fontSize:'2.5vw', 
@@ -77,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: 'Courier New, monospace'
+        fontFamily: 'Courier New, monospace',
     }
 }));
 
@@ -85,20 +92,33 @@ export default function LandingPage() {
 
     const classes = useStyles();
 
+    function mouseOver(event){
+        event.target.style.backgroundColor='#FFB000';
+    }
+  
+    function mouseOut(event){
+        event.target.style.backgroundColor='#FF8000';
+    }
+
     return (
-        <div style={{backgroundColor: '#ECECEC'}} id='firstDisplay'>
+        <div style={{backgroundColor: '#ECECEC', paddingTop:'4vw'}} id='firstDisplay'>
+            <Slider/>
             <div className={classes.root}>
                 <div className={classes.wrapper}>
                     <div>
-                        <div className={classes.salenet}>SaleNet</div>
-                        <div className={classes.word}>Manage Your Business in the <span style={{fontFamily: 'Courier New, monospace'}}>Easiest</span> Way</div>
-                        <br></br>
-                        <div style={{fontSize: '1.5vw', color:'black'}}>Grow More Efficiently</div>
-                        <div style={{outline: '3vw white solid'}}>
-                            <Button style={{fontWeight: 'bold', fontSize: '1vw', color: '#FF8000', border: '2px #FF8000 solid'}}>
-                                        Get Started
-                            </Button>
+                        <div className={classes.salenet}>
+                            SaleNet &nbsp;
+                            <span style={{fontSize: '2vw'}}>POS System</span>
                         </div>
+                        <div style={{fontSize:'2vw', fontWeight:'bold'}}>
+                            Manage Your Business in the <span style={{fontFamily: 'Courier New, monospace'}}>Easiest</span> Way
+                        </div>
+
+                        <p className={classes.word}>Grow More Efficienctly</p>
+
+                        <Button className={classes.startButton}
+                                onMouseOver={mouseOver}
+                                onMouseOut={mouseOut}>Get Started</Button>
                     </div>
                     <div>
                         <div className={classes.pageImage}></div>
@@ -106,18 +126,17 @@ export default function LandingPage() {
 
                 </div>
             </div>
-            <div className={classes.divider}>
+            {/* <div className={classes.divider}>
                 <div className={classes.addOn}>
                     High Efficiency with Fewer Mistakes
                 </div>
-            </div>
+            </div> */}
             <div style={{textAlign:'center', paddingBottom:'8vw'}}>
                 <Scroll to="visitPage" smooth={true}>
                     <KeyboardArrowDownOutlinedIcon style={{fontSize:'5vw', color: '#FF8000', cursor:'pointer'}}/>
                 </Scroll>
             </div>
             <VisitPage />
-            
         </div>
     )
 }   
