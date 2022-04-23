@@ -46,6 +46,7 @@ export default function SignUp() {
     });
     const sentData = await response.json();
     console.log(sentData);
+    window.location.href = "http://localhost:3000/signin";
   }
 
   return (

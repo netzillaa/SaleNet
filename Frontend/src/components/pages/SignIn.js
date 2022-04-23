@@ -44,6 +44,11 @@ export default function SignIn({ history }) {
     try {
       const { data } = await axios.post("http://localhost:4000/auth/login", { email, password }, config)
       localStorage.setItem('userInfo', JSON.stringify(data));
+      
+      
+      
+
+      window.location.href = "http://localhost:3000/dashboard/";
       // const serverResponse = await response.json();
       // console.log(serverResponse);
     }

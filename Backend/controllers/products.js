@@ -6,9 +6,10 @@ const getAllProducts = async (req, res) => {
         console.log("there are no items in the database")
     }
     else {
-        console.log("got data");
+        console.log(data);
+        return res.send(JSON.stringify(data));
     }
-    res.status(200).json({ data });
+    
 
 };
 // res.status(200).json({ product: "returning all products in a product" })

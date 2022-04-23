@@ -8,7 +8,7 @@ router.use((req, res, next) => {
     next();
 })
 //getting or  all products from a certain shop
-router.route("/allProducts/:shopId").get(getAllProducts);
+router.route("/allProducts").get(getAllProducts);
 //getting or deleting a certain product from a certain shop
 router.route("/:shopId/:productType/:productId").get((req, res) => {
     res.send("put request for product received " + req.params.productType + " " + req.params.productId);
