@@ -22,8 +22,7 @@ export default function PageCard({page, opened}) {
 
     return (
         <Collapse in={opened} { ... (opened ? {timeout:1000} : {})}>
-        {/* <Collapse> */}
-            <Card style={{width: '30vw'}}>
+            <Card>
             <CardActionArea>
                 <CardMedia
                 component="img"
@@ -40,7 +39,7 @@ export default function PageCard({page, opened}) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary" style={{fontSize: '1vw'}}>
+                <Button size="small" color="primary" style={{fontSize: '1.2vw'}}>
                 View
                 </Button>
             </CardActions>

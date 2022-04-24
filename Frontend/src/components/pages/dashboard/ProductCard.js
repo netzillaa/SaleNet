@@ -30,16 +30,16 @@ export default function ProductCard(product) {
               <CardMedia
                 component="img"
                 height="250"
-                image={`images/${product.coverimg}`}
+                // image={`images/${product.coverimg}`}
                 alt="green iguana"
               />
             </Card>
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">
-                {product.title}
+                {product.productName}
               </Typography>
-              <p>RM {product.price}</p>
-            </CardContent>
+              <p>RM {product.productPrice}</p>
+            </CardContent>  
           </CardActionArea>
         </Card>
       </Grid >

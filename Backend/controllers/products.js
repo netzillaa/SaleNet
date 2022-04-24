@@ -7,7 +7,7 @@ const getAllProducts = async (req, res) => {
     }
     else {
         console.log(data);
-        return res.send(JSON.stringify(data));
+        res.status(200).json({data});
     }
     
 
