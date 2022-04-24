@@ -174,7 +174,7 @@ const Header2 = () => {
                 onMouseOut={mouseOut} />
             </Button>
             <Button variant="outlined" color="error" onClick={() => {
-              localStorage.removeItem("user-info");
+              localStorage.removeItem("userInfo");
               history.push('/');
             }}>
               Logout
