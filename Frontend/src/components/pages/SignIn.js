@@ -15,15 +15,23 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Footer from "../../components/Footer";
 import axios from "axios";
+import { Alert } from '@mui/material';
+import Stack from '@mui/material/Stack';
 import ErrorMessage from "../ErrorMessage";
 
-
+function alert() {
+  return (
+    <Stack sx={{ width: '100%' }} spacing={2}>
+      <Alert severity="error">wrong username and or password</Alert>
+    </Stack >);
+}
 const theme = createTheme();
 export default function SignIn({ history }) {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   React.useEffect(() => {
     const userInfo = localStorage.getItem("userInfo");
@@ -49,6 +57,13 @@ export default function SignIn({ history }) {
     }
     catch (err) {
       setError(err.response.data.message);
+      alert();
+    }
+    const userInfo = localStorage.getItem("userInfo");
+    if (userInfo) {
+      history.push({
+        pathname: `/dashboard`, search: `${email}`
+      });
     }
   }
   return (
