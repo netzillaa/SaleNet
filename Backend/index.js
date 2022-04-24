@@ -10,6 +10,7 @@ const jwt = require("jsonwebtoken");
 const productRouter = require("./routes/productRoute");
 const userRouter = require("./routes/userRouter");
 const authRouter = require("./routes/AuthRoute");
+// import authRouter from './routes/AuthRoute'; // a better wway to import
 const { default: mongoose } = require("mongoose");
 
 app.use(cors());
@@ -49,7 +50,7 @@ authentication_jwt = (req, res, next) => {
   //we check first if ehader exist
   const token = auth_header && auth_header.split(' ')[1]
   if (token == null) {
-    return res.sendStatus(401)
+    return res.sendStatus(401);
   }
   //verification requires the token and the secret we used
   jwt.verify(token, process.env.TOKEN, (err, user) => {

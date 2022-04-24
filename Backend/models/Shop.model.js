@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const Schema = mongoose.Schema;
 const shopSchema = mongoose.Schema(
   {
     shopName: {
@@ -25,6 +25,8 @@ const shopSchema = mongoose.Schema(
       required: [true, "you need to enter an email"],
       unique: true,
     },
+    products:
+      { type: Schema.Types.ObjectId, ref: 'product' },
   },
   { collection: "shop" }
 );

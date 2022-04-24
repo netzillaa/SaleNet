@@ -13,38 +13,39 @@ import MenuItem from '@mui/material/MenuItem';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import { NavLink } from "react-router-dom";
+import { useHistory, Link } from 'react-router-dom';
 
 const pages = [
-    {
-        name: 'Home',
-        link: '/home'
-    }, 
-    {
-        name: 'Explore',
-        link: '/explore'
-    },
-    {
-        name: 'Follow Us',
-        link: '/follow'
-    }
+  {
+    name: 'Home',
+    link: '/home'
+  },
+  {
+    name: 'Explore',
+    link: '/explore'
+  },
+  {
+    name: 'Follow Us',
+    link: '/follow'
+  }
 ];
 
 const settings = [
-    {
-        name: 'Register',
-        link: '/register'
-    },
-    {
-        name: 'Login',
-        link: '/signin'
-    },
-    {
-        name: 'Dashboard',
-        link: '/dashboard'
-    }
+  {
+    name: 'Register',
+    link: '/register'
+  },
+  {
+    name: 'Login',
+    link: '/signin'
+  },
+  {
+    name: 'Dashboard',
+    link: '/dashboard'
+  }
 ];
-
 const Header2 = () => {
+  const history = useHistory();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -63,25 +64,25 @@ const Header2 = () => {
     setAnchorElUser(null);
   };
 
-  function mouseOver(event){
-      event.target.style.color='dodgerblue';
-      event.target.style.cursor='pointer';
+  function mouseOver(event) {
+    event.target.style.color = 'dodgerblue';
+    event.target.style.cursor = 'pointer';
   }
 
-  function mouseOut(event){
-    event.target.style.color='#000193';
+  function mouseOut(event) {
+    event.target.style.color = '#000193';
   }
 
-  function pageHover(event){
-    event.target.style.borderBottom='4px #454eca solid';
+  function pageHover(event) {
+    event.target.style.borderBottom = '4px #454eca solid';
   }
 
-  function pageOut(event){
-    event.target.style.borderBottom='';
+  function pageOut(event) {
+    event.target.style.borderBottom = '';
   }
 
   return (
-    <AppBar style={{backgroundColor: 'white', position:"sticky", marginBottom:'0px', boxShadow: '0 0 17px 0 rgb(183, 183, 183)', color:'black'}}>
+    <AppBar style={{ backgroundColor: 'white', position: "sticky", marginBottom: '0px', boxShadow: '0 0 17px 0 rgb(183, 183, 183)', color: 'black' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -89,11 +90,11 @@ const Header2 = () => {
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-            style={{color:'#000193', fontWeight:'bolder'}}
+            style={{ color: '#000193', fontWeight: 'bolder' }}
           >
             SALENET
           </Typography>
-          
+
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -124,12 +125,12 @@ const Header2 = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} 
-                          onClick={handleCloseNavMenu} 
-                          style={{color:'black'}}
-                          component={NavLink} to={page.link} exact activeStyle={{color:'blue'}}>
-                  <Typography textAlign="center"  style={{fontSize: '1.7rem'}}>
-                      {page.name}
+                <MenuItem key={page}
+                  onClick={handleCloseNavMenu}
+                  style={{ color: 'black' }}
+                  component={NavLink} to={page.link} exact activeStyle={{ color: 'blue' }}>
+                  <Typography textAlign="center" style={{ fontSize: '1.7rem' }}>
+                    {page.name}
                   </Typography>
                 </MenuItem>
               ))}
@@ -140,7 +141,7 @@ const Header2 = () => {
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-            style={{color:'#000193', fontWeight:'bolder'}}
+            style={{ color: '#000193', fontWeight: 'bolder' }}
           >
             SALENET
           </Typography>
@@ -150,10 +151,10 @@ const Header2 = () => {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 3, color: 'black', display: 'block' }}
-                style={{fontSize: '1.5rem'}}
+                style={{ fontSize: '1.5rem' }}
                 onMouseOver={pageHover}
                 onMouseOut={pageOut}
-                component={NavLink} to={page.link} exact activeStyle={{color:'blue'}}>
+                component={NavLink} to={page.link} exact activeStyle={{ color: 'blue' }}>
                 {page.name}
               </Button>
             ))}
@@ -162,15 +163,21 @@ const Header2 = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Typography style={{fontWeight: 'bold', fontSize: '1.7rem', color:'black'}}>Get Started</Typography>
-                <ArrowDropDownRoundedIcon style={{fontSize: '4rem', color:'black'}}/>
-              </IconButton> 
+                <Typography style={{ fontWeight: 'bold', fontSize: '1.7rem', color: 'black' }}>Get Started</Typography>
+                <ArrowDropDownRoundedIcon style={{ fontSize: '4rem', color: 'black' }} />
+              </IconButton>
             </Tooltip>
             &nbsp;
             <Button component={NavLink} to="/support">
-            <HelpRoundedIcon style={{fontSize: '4rem', color:'#000193', }} 
-                             onMouseOver={mouseOver} 
-                             onMouseOut={mouseOut}/>
+              <HelpRoundedIcon style={{ fontSize: '4rem', color: '#000193', }}
+                onMouseOver={mouseOver}
+                onMouseOut={mouseOut} />
+            </Button>
+            <Button variant="outlined" color="error" onClick={() => {
+              localStorage.removeItem("user-info");
+              history.push('/');
+            }}>
+              Logout
             </Button>
             <Menu
               sx={{ mt: '45px' }}
@@ -189,10 +196,10 @@ const Header2 = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} 
-                          onClick={handleCloseUserMenu}
-                          component={NavLink} to={setting.link}>
-                  <Typography textAlign="center" style={{fontSize: '1.7rem', color:'black'}}>
+                <MenuItem key={setting}
+                  onClick={handleCloseUserMenu}
+                  component={NavLink} to={setting.link}>
+                  <Typography textAlign="center" style={{ fontSize: '1.7rem', color: 'black' }}>
                     {setting.name}
                   </Typography>
                 </MenuItem>

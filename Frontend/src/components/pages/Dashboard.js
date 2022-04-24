@@ -54,7 +54,21 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const mdTheme = createTheme();
+// useEffect(() => {
+//   getproduct();
+// }, []);
 
+// const [product, setProduct] = useState();
+// const getproduct = async () => {
+//   try {
+//     const res = await axios.get("http://localhost:4000/products/allProducts");
+//     setProduct(res.data);
+//     console.log(product);
+//   }
+//   catch (err) {
+//     alert(err.message);
+//   }
+// }
 function DashboardContent() {
   const cards = data.map(product => {
     return (
@@ -94,19 +108,19 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          <Grid style={{ padding: 20, paddingBottom: 80}}>
+          <Grid style={{ padding: 20, paddingBottom: 80 }}>
             <Grid container spacing={1}>
               {cards}
             </Grid>
           </Grid>
         </Box>
         <Box>
-        <Drawer variant="permanent" open={open}>
-          <Divider />
-          <List component="nav" style={{ position: "fixed"}}>
-            <Cart />
-          </List>
-        </Drawer>
+          <Drawer variant="permanent" open={open}>
+            <Divider />
+            <List component="nav" style={{ position: "fixed" }}>
+              <Cart />
+            </List>
+          </Drawer>
         </Box>
       </Box>
     </ThemeProvider>

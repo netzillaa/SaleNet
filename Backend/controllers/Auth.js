@@ -68,7 +68,7 @@ const loginUser = async (req, res) => {
             const token = jwt.sign({ id: user._id }, process.env.TOKEN);
             res.header('authentication-token', token).send(token);
             // var ownedshopUrl = Shop.find({ businessLicense: user.businessLicense })
-            // res.json({ status: "User is found and authentication token sent" + user });
+            res.json({ status: "User is found and authentication token sent" + user });
         }
         else {
             res.json({ status: "works but no user is found" });
