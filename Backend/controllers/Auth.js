@@ -65,7 +65,7 @@ const loginUser = async (req, res) => {
         if (user) {
             //creating a token when user is found
             console.log("signed for: " + user._id);
-            const token = jwt.sign({ id: user._id }, process.env.TOKEN);
+            const token = jwt.sign({ id: user._id, username: user.userName, shop: user.shop }, process.env.TOKEN);
             res.header('authentication-token', token).send(token);
             // var ownedshopUrl = Shop.find({ businessLicense: user.businessLicense })
             res.json({ status: "User is found and authentication token sent" + user });
