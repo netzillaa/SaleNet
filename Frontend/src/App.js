@@ -16,7 +16,7 @@ import Verification from "./components/pages/Verification";
 function App() {
   return (
     <Router>
-      <Header2/>
+
       <div className="App">
         <div className="content">
           <Switch>

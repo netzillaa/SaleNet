@@ -17,6 +17,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Header_SignedIn from "../../Header_SignedIn";
 
 
 const theme = createTheme();
@@ -28,25 +29,26 @@ export default function NewProduct() {
     const [productImage, setProductImage] = useState("");
 
 
-    //   async function registerUser(event) {
-    //     event.preventDefault();
-    //     const response = await fetch("http://localhost:4000/auth/register", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         productName,
-    //         productPrice,
-    //         productCategory
-    //       }),
-    //     });
-    //     const sentData = await response.json();
-    //     console.log(sentData);
-    //   }
+    async function addProduct(event) {
+        event.preventDefault();
+        const response = await fetch("http://localhost:4000/products/addProduct", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                productName,
+                productPrice,
+                productCategory
+            }),
+        });
+        const sentData = await response.json();
+        console.log(sentData);
+    }
 
     return (
         <ThemeProvider theme={theme}>
+            <Header_SignedIn />
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
@@ -78,7 +80,7 @@ export default function NewProduct() {
                                     label="Product Name"
                                 />
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} style={{ marginBottom: "2em" }}>
                                 <TextField
                                     fullWidth
                                     value={productPrice}
@@ -97,17 +99,18 @@ export default function NewProduct() {
                                     id="productCategory"
                                     name="productCategory"
                                     label="productCategory"
+                                    onChange={(e) => setProductCategory(e.target.value)}
                                     value={productCategory}
                                 >
-                                    <MenuItem value={"food"}>FOOD</MenuItem>
-                                    <MenuItem>DRINK</MenuItem>
-                                    <MenuItem>OTHER</MenuItem>
+                                    <MenuItem value={"FOOD"}>FOOD</MenuItem>
+                                    <MenuItem value={"DRINK"}>DRINK</MenuItem>
+                                    <MenuItem value={"OTHER"}>OTHER</MenuItem>
                                 </Select>
                             </FormControl>
                             {/* </Grid> */}
 
 
-                            <Grid item xs={12}>
+                            <Grid item xs={12} style={{ marginBottom: "2em" }}>
                                 <TextField
                                     fullWidth
                                     value={productImage}
