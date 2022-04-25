@@ -38,7 +38,6 @@ const useStyles = makeStyles(() => ({
         fontFamily: 'Tahoma, sans-serif',
         fontWeight: 'bolder',
         fontSize: '3vw',
-        // color: '#FF8000',
         color: '#01027B'
     },
 
@@ -54,8 +53,6 @@ const useStyles = makeStyles(() => ({
     startButton:{
         fontWeight: '900', 
         fontSize: '1vw', 
-        // color: '#FF8000', 
-        // border: '2px #FF8000 solid',
         marginBottom: '3vw',
         backgroundColor:'#FF8000',
         borderRadius: '30px',
@@ -67,13 +64,6 @@ const useStyles = makeStyles(() => ({
         fontWeight: 'bold',
         border: 'none',
     },
-
-    // divider:{
-    //     width: '100%',
-    //     height: '15vw',
-    //     backgroundImage: 'url(https://wallpaperaccess.com/full/656684.jpg)',
-    //     backgroundPosition: '0 -300px',
-    // },
 
     addOn:{
         fontSize:'2.5vw', 
@@ -88,6 +78,8 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
+document.body.style.backgroundColor='#ECECEC';
+
 export default function LandingPage() {
 
     const classes = useStyles();
@@ -101,7 +93,7 @@ export default function LandingPage() {
     }
 
     return (
-        <div style={{backgroundColor: '#ECECEC', paddingTop:'4vw'}} id='firstDisplay'>
+        <div style={{paddingTop:'4vw'}} id='firstDisplay'>
             <Slider/>
             <div className={classes.root}>
                 <div className={classes.wrapper}>
@@ -126,11 +118,7 @@ export default function LandingPage() {
 
                 </div>
             </div>
-            {/* <div className={classes.divider}>
-                <div className={classes.addOn}>
-                    High Efficiency with Fewer Mistakes
-                </div>
-            </div> */}
+            
             <div style={{textAlign:'center', paddingBottom:'8vw'}}>
                 <Scroll to="visitPage" smooth={true}>
                     <KeyboardArrowDownOutlinedIcon style={{fontSize:'5vw', color: '#FF8000', cursor:'pointer'}}/>
