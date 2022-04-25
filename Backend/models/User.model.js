@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Shop = require("./Shop.model").schema;
+const Schema = mongoose.Schema;
 const userSchema = new mongoose.Schema(
   {
     fullName: {
@@ -25,7 +26,7 @@ const userSchema = new mongoose.Schema(
     },
     // user owns a shops
     shop:
-      { Shop },
+      { type: Schema.Types.ObjectId, ref: 'shop' },
     createdAt: {
       type: Date,
     },
