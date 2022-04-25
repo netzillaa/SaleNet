@@ -42,6 +42,10 @@ const settings = [
   {
     name: 'Dashboard',
     link: '/dashboard'
+  },
+  {
+    name: 'NewProduct',
+    link: '/newproduct'
   }
 ];
 const Header2 = () => {

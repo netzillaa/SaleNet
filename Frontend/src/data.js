@@ -1,7 +1,7 @@
 export default [
     {
         _id: 1,
-        productName: "socor",
+        _title: "socor",
         description: "white with black dots",
         productPrice: 349,
         coverImg: "socor.png",
@@ -13,7 +13,7 @@ export default [
     },
     {
         _id: 2,
-        productName: "basketball",
+        _title: "basketball",
         description: "orange with black lines",
         productPrice: 579,
         coverImg: "basketball.png",
@@ -25,7 +25,7 @@ export default [
     },
     {
         _id: 3,
-        productName: "volleyball",
+        _title: "volleyball",
         description: "white with weird design",
         productPrice: 167,
         coverImg: "volleyball.png",
@@ -37,7 +37,7 @@ export default [
     },
     {
         _id: 4,
-        productName: "tennis",
+        _title: "tennis",
         description: "yellow with weird design",
         productPrice: 349,
         coverImg: "tennis.png",
@@ -49,7 +49,7 @@ export default [
     },
     {
         _id: 5,
-        productName: "pingpong",
+        _title: "pingpong",
         description: "orange",
         productPrice: 851,
         coverImg: "pingpong.png",
@@ -61,7 +61,7 @@ export default [
     },
     {
         _id: 6,
-        productName: "handball",
+        _title: "handball",
         description: "yellow with blue dots",
         productPrice: 976,
         coverImg: "handball.png",
@@ -73,7 +73,7 @@ export default [
     },
     {
         _id: 7,
-        productName: "bowlingball",
+        _title: "bowlingball",
         description: "can be any color with 3 holes",
         productPrice: 643,
         coverImg: "bowlingball.png",
@@ -85,7 +85,7 @@ export default [
     },
     {
         _id: 8,
-        productName: "billiardbal",
+        _title: "billiardbal",
         description: "can be any color with numbers on it",
         productPrice: 157,
         coverImg: "billiardbal.png",
@@ -97,7 +97,7 @@ export default [
     },
     {
         _id: 9,
-        productName: "beachball",
+        _title: "beachball",
         description: "light weighted ball with colorful colors",
         productPrice: 673,
         coverImg: "beachball.png",
@@ -109,7 +109,7 @@ export default [
     },
     {
         _id: 10,
-        productName: "football",
+        _title: "football",
         description: "most weird ball shape with brown color",
         productPrice: 949,
         coverImg: "football.png",
