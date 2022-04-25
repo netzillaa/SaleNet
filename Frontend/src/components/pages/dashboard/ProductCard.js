@@ -30,7 +30,7 @@ export default function ProductCard(product) {
               <CardMedia
                 component="img"
                 height="250"
-                // image={`images/${product.coverimg}`}
+                image={`images/${product.coverimg}`}
                 alt="green iguana"
               />
             </Card>
