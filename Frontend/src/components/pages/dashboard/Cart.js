@@ -8,13 +8,14 @@ import { CartManager } from "./CartManager";
 export const CartContext = createContext();
 
 const initialState = {
-    item: data,
+    //if item:data it will start with mapping all items
+    item: [],
     totalAmount: 0,
     totalItem: 0,
 };
 
 const ContextCart = () => {
-    const { item, clearCart, totalItem, totalAmount } = useContext(CartContext);
+    const { item, clearCart, totalItem, totalAmount, addItem } = useContext(CartContext);
 
     return (
         <>
@@ -52,7 +53,12 @@ const ContextCart = () => {
 const Cart = () => {
     // const [item, setItem] = useState(products);
     const [state, dispatch] = useReducer(CartManager, initialState);
-
+    const addItem = (id) => {
+        return dispatch({
+            type: "ADD_ITEM",
+            payload: id,
+        });
+    }
     // to delete the indv. elements from an Item Cart
     const removeItem = (id) => {
         return dispatch({
@@ -90,7 +96,7 @@ const Cart = () => {
 
     return (
         <CartContext.Provider
-            value={{ ...state, removeItem, clearCart, increment, decrement }}>
+            value={{ ...state, removeItem, clearCart, increment, decrement, addItem }}>
             <ContextCart />
         </CartContext.Provider>
     );

@@ -42,6 +42,10 @@ const settings = [
   {
     name: 'Dashboard',
     link: '/dashboard'
+  },
+  {
+    name: 'NewProduct',
+    link: '/newproduct'
   }
 ];
 const Header2 = () => {
@@ -172,12 +176,6 @@ const Header2 = () => {
               <HelpRoundedIcon style={{ fontSize: '4rem', color: '#000193', }}
                 onMouseOver={mouseOver}
                 onMouseOut={mouseOut} />
-            </Button>
-            <Button variant="outlined" color="error" onClick={() => {
-              localStorage.removeItem("userInfo");
-              history.push('/');
-            }}>
-              Logout
             </Button>
             <Menu
               sx={{ mt: '45px' }}
