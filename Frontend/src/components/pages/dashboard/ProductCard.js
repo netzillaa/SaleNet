@@ -39,11 +39,7 @@ export default function ProductCard(product) {
                 {product.productName}
               </Typography>
               <p>RM {product.productPrice}</p>
-<<<<<<< HEAD
-            </CardContent>  
-=======
             </CardContent>
->>>>>>> upstream/main
           </CardActionArea>
         </Card>
       </Grid >

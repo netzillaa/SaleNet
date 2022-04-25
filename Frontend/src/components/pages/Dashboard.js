@@ -20,11 +20,9 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Card from '@mui/material/Card';
 import { CardActionArea } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
-import axios from "axios";
 import CardContent from '@mui/material/CardContent';
-import { useState, useEffect } from "react";
 import ProductCard from './dashboard/ProductCard';
-import data from './dashboard/data';
+import data from './dashboard/data'
 import Cart from './dashboard/Cart';
 
 const drawerWidth = 350;
@@ -55,8 +53,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-<<<<<<< HEAD
-=======
 const mdTheme = createTheme();
 // useEffect(() => {
 //   getproduct();
@@ -73,32 +69,7 @@ const mdTheme = createTheme();
 //     alert(err.message);
 //   }
 // }
->>>>>>> upstream/main
 function DashboardContent() {
-  const mdTheme = createTheme();
-
-  const [userName, setUserName] = useState("");
-  const [products, setProducts] = useState("");
-  const token = localStorage.getItem('userInfo')
-
-  
-  async function getProducts() {
-    const res = await axios.get("http://localhost:4000/products/allProducts")
-
-    setProducts(res.data)
-
-    console.log("asdasdadads"+products+"yyyyyyyyyyyyy");
-  }
-
-
-  useEffect(() => {
-    getProducts()
-    
-    return () => {
-      console.log( "123");
-    }
-  }, [])
-
   const cards = data.map(product => {
     return (
       <div>
