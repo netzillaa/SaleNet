@@ -20,7 +20,6 @@ const addProduct = async (req, res) => {
     req.body.productQuantity + "\n";
     Date.now() + "\n";
     req.body.image + "\n";
-    req.body.isAvailable + "\n";
     req.body.category;
 
     try {

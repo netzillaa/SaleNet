@@ -25,7 +25,9 @@ export default function ProductCard(product) {
     <React.Fragment>
       <Grid style={{ padding: 10 }}>
         <Card sx={{ maxWidth: 400, minWidth: 300 }}>
-          <CardActionArea>
+          {/* //adding something like this to card action area should add it to side cartonClick={() => handleAddToCart(product)} */}
+          <CardActionArea >
+
             <Card sx={{ maxHeight: 250 }}>
               <CardMedia
                 component="img"

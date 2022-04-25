@@ -24,6 +24,7 @@ import CardContent from '@mui/material/CardContent';
 import ProductCard from './dashboard/ProductCard';
 import data from './dashboard/data'
 import Cart from './dashboard/Cart';
+import Header from "../Header_SignedIn";
 
 const drawerWidth = 350;
 
@@ -87,12 +88,13 @@ function DashboardContent() {
 
   return (
     <ThemeProvider theme={mdTheme}>
+      <Header />
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
 
         {/* <Drawer variant="permanent" open={open}>
           <Divider />
-          <List component="nav" style={{ position: "fixed"}}>
+          <List component="nav" style={{ position: "fixed" }}>
             <Cart />
           </List>
         </Drawer> */}
