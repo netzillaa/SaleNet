@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import LandingPage from "./components/LandingPage";
 import Header2 from "./components/Header2";
+import Verification from "./components/pages/Verification";
 // import Section3 from "./components/Section3";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path={"/signin"} component={SignIn}></Route>
             <Route path={"/register"} component={SignUp}></Route>
             <Route path={"/dashboard"} component={Dashboard}></Route>
+            <Route path={"/verify"} component={Verification}></Route>
             {/* <Route path={"/follow"} component={FollowUs}></Route> */}
             <Route path={"/home"} component={LandingPage}></Route>
             <Route path={"/"} component={LandingPage}></Route>
