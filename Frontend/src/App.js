@@ -3,7 +3,7 @@ import Home from "./components/pages/Home";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
 import Dashboard from "./components/pages/Dashboard";
-import NewProduct from "./components/pages/newproduct/NewProduct";
+import NewProduct from "./components/pages/NewProduct";
 // import Section1 from "./components/Section1";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
