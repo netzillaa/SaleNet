@@ -10,6 +10,7 @@ const jwt = require("jsonwebtoken");
 const productRouter = require("./routes/productRoute");
 const userRouter = require("./routes/userRouter");
 const authRouter = require("./routes/AuthRoute");
+
 // import authRouter from './routes/AuthRoute'; // a better wway to import
 const { default: mongoose } = require("mongoose");
 

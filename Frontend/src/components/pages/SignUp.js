@@ -46,7 +46,7 @@ export default function SignUp() {
       }),
     });
     const sentData = await response.json();
-    console.log(sentData);
+    window.location.href = "http://localhost:3000/verify";
   }
 
   return (
@@ -164,7 +164,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/signin" variant="body2">
+                <Link href="/verify" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
