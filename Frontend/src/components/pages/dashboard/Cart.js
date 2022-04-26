@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useContext } from "react";
+import React, { createContext, useReducer, useEffect, useContext, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import "./Cart.css";
 import data from "./data";
@@ -7,6 +7,8 @@ import { CartManager } from "./CartManager";
 
 export const CartContext = createContext();
 
+
+
 const initialState = {
     //if item:data it will start with mapping all items
     item: [],
@@ -14,8 +16,28 @@ const initialState = {
     totalItem: 0,
 };
 
+export const addToCart = (productID) => {
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].id == productID) {
+            console.log(data[i]);
+
+            // addProductToCart(data[i]);
+        }
+    }
+}
+
 const ContextCart = () => {
-    const { item, clearCart, totalItem, totalAmount, addItem } = useContext(CartContext);
+    const { clearCart, totalItem, totalAmount, addItem } = useContext(CartContext);
+    const [item, setItems] = useState([]);
+
+    // const addProductToCart = (itemInfo) => {
+    //     for (var i = 0; i < item.length; i++) {
+    //         if (item[i].id == itemInfo.id) {
+                
+    //         }
+    //         setItems([...item, itemInfo])
+    //     }
+    // }
 
     return (
         <>
