@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
+import Header2 from "../Header2";
 
 const theme = createTheme();
 
@@ -50,6 +51,7 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header2 />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

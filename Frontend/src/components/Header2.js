@@ -177,12 +177,6 @@ const Header2 = () => {
                 onMouseOver={mouseOver}
                 onMouseOut={mouseOut} />
             </Button>
-            <Button variant="outlined" color="error" onClick={() => {
-              localStorage.removeItem("userInfo");
-              history.push('/');
-            }}>
-              Logout
-            </Button>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
