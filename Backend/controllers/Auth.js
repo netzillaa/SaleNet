@@ -2,6 +2,7 @@ const User = require("../models/User.model");
 const Shop = require("../models/Shop.model");
 const { default: mongoose } = require("mongoose");
 const jwt = require('jsonwebtoken');
+const {  sendMail } = require("./emailSender");
 const registerUser = async (req, res) => {
     var receiveData = req.body;
     console.log(receiveData);
@@ -11,6 +12,12 @@ const registerUser = async (req, res) => {
     Date.now() + "\n";
     req.body.email;
     console.log(shopInfo);
+
+    let code = (Math.random() + 1).toString(36).substring(7);
+    sendMail(req.body.email, code)
+    // res.json({"verifyCode": code})
+    console.log(code);
+
     try {
         const shopExist = await Shop.findOne({ shopName: req.body.shopName });
         if (shopExist) {
