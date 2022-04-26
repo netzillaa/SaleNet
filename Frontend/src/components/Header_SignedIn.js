@@ -14,6 +14,7 @@ import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import { NavLink } from "react-router-dom";
 import { useHistory, Link } from 'react-router-dom';
+import DateTime from './DateTime';
 
 const pages = [
     {
@@ -210,6 +211,7 @@ const Header_SignedIn = () => {
                             ))}
                         </Menu>
                     </Box>
+                    <DateTime style={{ marginLeft: '2em', color: '#000193', fontWeight: 'bolder' }} />
                 </Toolbar>
             </Container>
         </AppBar>
