@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import Header2 from "../Header2";
+import PhoneKeys from "./PhoneKeys";
 
 const theme = createTheme();
 
@@ -26,9 +27,47 @@ export default function SignUp() {
   const [shopName, setshopName] = useState("");
   const [shopAddress, setShopAddress] = useState("");
   const [businessLicense, setBusinessLicense] = useState("");
+  const [phoneKey, setPhoneKey] = useState("");
+
 
   async function registerUser(event) {
     event.preventDefault();
+    var emailFormat = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$/;
+
+    if (fullName == null || fullName == "") {
+      alert("Please enter your fullname")
+      return false;
+    }
+    if (userName == null || userName.length < 6) {
+      alert("Please enter your username longer than 6 characters")
+      return false;
+    }
+    if (password == null || password.length < 8) {
+      alert("Please enter password longer than 8 characters")
+      return false;
+    }
+    if (!email.match(emailFormat)) {
+      alert("Please enter the correct email address")
+      return false;
+    }
+    if (phoneNumber) {
+      alert("Please enter the correct phone number")
+      return false;
+    }
+    if (shopName == null || shopName == "") {
+      alert("Please enter your shop name")
+      return false;
+    }
+    if (shopAddress == null || shopAddress == "") {
+      alert("Please enter your shop address")
+      return false;
+    }
+    if (businessLicense == null || businessLicense.length < 6) {
+      alert("Please enter the correct business lisence")
+      return false
+    }
+
+
     const response = await fetch("http://localhost:4000/auth/register", {
       method: "POST",
       headers: {
@@ -113,7 +152,9 @@ export default function SignUp() {
                   label="Email"
                 />
               </Grid>
+
               <Grid item xs={12}>
+                <PhoneKeys />
                 <TextField
                   fullWidth
                   value={phoneNumber}
@@ -123,6 +164,7 @@ export default function SignUp() {
                   label="Phone Number"
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   fullWidth
