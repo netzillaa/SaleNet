@@ -8,6 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { CardActionArea } from '@mui/material';
+import { addToCart } from './Cart'
 
 
 function preventDefault(event) {
@@ -25,7 +26,9 @@ export default function ProductCard(product) {
     <React.Fragment>
       <Grid style={{ padding: 10 }}>
         <Card sx={{ maxWidth: 400, minWidth: 300 }}>
-          <CardActionArea>
+          {/* //adding something like this to card action area should add it to side cartonClick={() => handleAddToCart(product)} */}
+          <CardActionArea onClick={() => addToCart(product.id)}  >
+
             <Card sx={{ maxHeight: 250 }}>
               <CardMedia
                 component="img"
@@ -36,9 +39,9 @@ export default function ProductCard(product) {
             </Card>
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">
-                {product.productName}
+                {product.title}
               </Typography>
-              <p>RM {product.productPrice}</p>
+              <p>RM {product.price}</p>
             </CardContent>
           </CardActionArea>
         </Card>

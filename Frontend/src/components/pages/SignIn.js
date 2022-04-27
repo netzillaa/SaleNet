@@ -18,6 +18,7 @@ import axios from "axios";
 import { Alert } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import ErrorMessage from "../ErrorMessage";
+import Header2 from "../Header2";
 
 function alert() {
   return (
@@ -27,7 +28,6 @@ function alert() {
 }
 const theme = createTheme();
 export default function SignIn({ history }) {
-
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
@@ -49,6 +49,8 @@ export default function SignIn({ history }) {
   async function signIn(event) {
     event.preventDefault();
 
+    
+
     try {
       const { data } = await axios.post("http://localhost:4000/auth/login", { email, password }, config)
       localStorage.setItem('userInfo', JSON.stringify(data));
@@ -68,6 +70,7 @@ export default function SignIn({ history }) {
   }
   return (
     <ThemeProvider theme={theme}>
+      <Header2 />
       {/* trying to add an error message the imported part is under component  */}
       {/* {err && <ErrorMessage>{err}</ErrorMessage>} */}
       <Grid container component="main" sx={{ height: "50rem" }}>

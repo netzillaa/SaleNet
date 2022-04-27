@@ -3,7 +3,7 @@ import Home from "./components/pages/Home";
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
 import Dashboard from "./components/pages/Dashboard";
-import NewProduct from "./components/pages/newproduct/NewProduct";
+import NewProduct from "./components/pages/NewProduct";
 // import Section1 from "./components/Section1";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -17,7 +17,7 @@ import manageProduct from "./components/pages/manageProductPage";
 function App() {
   return (
     <Router>
-      <Header2/>
+
       <div className="App">
         <div className="content">
           <Switch>

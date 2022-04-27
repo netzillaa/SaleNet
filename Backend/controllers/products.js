@@ -8,7 +8,7 @@ const getAllProducts = async (req, res) => {
     else {
         console.log("got data");
     }
-    res.status(200).json({ data });
+    res.status(200).json(data);
 
 };
 // res.status(200).json({ product: "returning all products in a product" })
@@ -20,7 +20,6 @@ const addProduct = async (req, res) => {
     req.body.productQuantity + "\n";
     Date.now() + "\n";
     req.body.image + "\n";
-    req.body.isAvailable + "\n";
     req.body.category;
 
     try {
@@ -40,6 +39,38 @@ const addProduct = async (req, res) => {
         console.log("error saving product to database");
     }
 }
+const findOne = async (req, res) => {
+    try {
+        const result = await Product.findById(req.params.id);
+        res.json({ data: result });
+    }
+    catch (err) {
+        res.status(404).json({ status: "failed book is not found" })
+        console.log("wowwwwwwwwwwwwwwww" + err)
+    }
+};
+
+const updateProduct = async (req, res) => {
+
+    Product.findOneAndUpdate({ id: req.body.id }, { productName: req.body.newName, productPrice: req.body.newPrice }, (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(data);
+        }
+    })
+};
+const deleteProduct = async (req, res) => {
+    Product.findOneAndDelete({ _id: req.params.id }, (err, data) => {
+        if (err) {
+            console.log("couldnt delete" + err);
+        }
+        else {
+            console.log("success, product deleted");
+        }
+    })
+}
 
 
-module.exports = { getAllProducts, addProduct }
+module.exports = { getAllProducts, addProduct, findOne, updateProduct, deleteProduct }
