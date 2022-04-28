@@ -14,7 +14,6 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import Header2 from "../Header2";
-import PhoneKeys from "./PhoneKeys";
 
 const theme = createTheme();
 
@@ -152,9 +151,7 @@ export default function SignUp() {
                   label="Email"
                 />
               </Grid>
-
               <Grid item xs={12}>
-                <PhoneKeys />
                 <TextField
                   fullWidth
                   value={phoneNumber}

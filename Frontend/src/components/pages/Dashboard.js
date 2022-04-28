@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -55,80 +57,82 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const mdTheme = createTheme();
-// useEffect(() => {
-//   getproduct();
-// }, []);
 
-// const [product, setProduct] = useState();
-// const getproduct = async () => {
-//   try {
-//     const res = await axios.get("http://localhost:4000/products/allProducts");
-//     setProduct(res.data);
-//     console.log(product);
-//   }
-//   catch (err) {
-//     alert(err.message);
-//   }
-// }
+
+
 function DashboardContent() {
-  const cards = data.map(product => {
+  useEffect(() => {
+    getproduct();
+  }, []);
+
+  const [products, setProduct] = useState([]);
+
+  const getproduct = async () => {
+      await axios.get("http://localhost:4000/products/allProducts").then(res => {
+        setProduct(res.data.productsData)
+      }).catch(err=>{
+        console.log(err);
+      })
+    }
+
+  const cards = products.map(product => {
+      return (
+        <div>
+          <ProductCard
+            key={product._id}
+            {...product}
+          />
+        </div>
+      )
+    })
+    const [open, setOpen] = React.useState(true);
+    const toggleDrawer = () => {
+      setOpen(!open);
+    };
+
     return (
-      <div>
-        <ProductCard
-          key={product._id}
-          {...product}
-        />
-      </div>
-    )
-  })
-  const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
+      <ThemeProvider theme={mdTheme}>
+        <Header />
+        <Box sx={{ display: 'flex' }}>
+          <CssBaseline />
 
-  return (
-    <ThemeProvider theme={mdTheme}>
-      <Header />
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-
-        {/* <Drawer variant="permanent" open={open}>
+          {/* <Drawer variant="permanent" open={open}>
           <Divider />
           <List component="nav" style={{ position: "fixed" }}>
             <Cart />
           </List>
         </Drawer> */}
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            overflow: 'auto',
-          }}
-        >
-          <Toolbar />
-          <Grid style={{ padding: 20, paddingBottom: 80 }}>
-            <Grid container spacing={1}>
-              {cards}
+          <Box
+            component="main"
+            sx={{
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'light'
+                  ? theme.palette.grey[100]
+                  : theme.palette.grey[900],
+              flexGrow: 1,
+              overflow: 'auto',
+            }}
+          >
+            <Toolbar />
+            <Grid style={{ padding: 20, paddingBottom: 80 }}>
+              <Grid container spacing={1}>
+                {cards}
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
+          <Box>
+            <Drawer variant="permanent" open={open}>
+              <Divider />
+              <List component="nav" style={{ position: "fixed" }}>
+                <Cart />
+              </List>
+            </Drawer>
+          </Box>
         </Box>
-        <Box>
-          <Drawer variant="permanent" open={open}>
-            <Divider />
-            <List component="nav" style={{ position: "fixed" }}>
-              <Cart />
-            </List>
-          </Drawer>
-        </Box>
-      </Box>
-    </ThemeProvider>
-  );
-}
+      </ThemeProvider>
+    );
+  }
 
-export default function Dashboard() {
-  return <DashboardContent />;
-}
+  export default function Dashboard() {
+    return <DashboardContent />;
+  }
