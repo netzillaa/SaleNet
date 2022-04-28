@@ -25,6 +25,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Button from '@mui/material/Button';
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import EditIcon from '@mui/icons-material/Edit';
 
 function createData(image, name, price, stock) {
   return {
@@ -79,12 +80,18 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    {
-        id: 'product',
-        numeric: false,
-        disablePadding: true,
-        label: 'Product',
-    },
+    // {
+    //     id: 'edit',
+    //     numeric: false,
+    //     disablePadding: true,
+    //     label: ' '
+    // },
+    // {
+    //     id: 'product',
+    //     numeric: false,
+    //     disablePadding: true,
+    //     label: 'Product',
+    // },
     {
         id: 'name',
         numeric: true,
@@ -126,6 +133,8 @@ function EnhancedTableHead(props) {
                         }}
                     />
                 </TableCell>
+                <TableCell/>
+                <TableCell style={{fontSize: "180%"}}>Product</TableCell>
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
@@ -415,6 +424,13 @@ export default function manageProductPage() {
                                                         }}
                                                     />
                                                 </TableCell>
+                                                <TableCell style={{width:'2%'}}>
+                                                    <Tooltip title={<span style={{ fontSize: "200%" }}>Edit</span>}>
+                                                        <IconButton href="/editproduct">
+                                                            <EditIcon style={{fontSize:'150%', color:'black'}}/>
+                                                        </IconButton>                                                     
+                                                    </Tooltip>                                                   
+                                                </TableCell>
                                                 <TableCell
                                                     component="th"
                                                     id={labelId}
@@ -422,10 +438,9 @@ export default function manageProductPage() {
                                                     padding="none"
                                                     style={{fontSize: '150%'}}
                                                 >
-                                                    {/* {row.name} */}
                                                     <img src={row.image} className={classes.prodImg}/>
                                                 </TableCell>
-                                                <TableCell align="left" style={{fontSize: '150%'}}>
+                                                <TableCell align="left" style={{fontSize: '150%', width:'30%'}}>
                                                     {row.name}
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%'}}>
