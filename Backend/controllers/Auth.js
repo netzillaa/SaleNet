@@ -14,7 +14,7 @@ const registerUser = async (req, res) => {
     console.log(shopInfo);
 
     let code = (Math.random() + 1).toString(36).substring(7);
-    sendMail(req.body.email, code)
+    // sendMail(req.body.email, code)
     // res.json({"verifyCode": code})
     console.log(code);
 

@@ -25,6 +25,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Button from '@mui/material/Button';
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import EditIcon from '@mui/icons-material/Edit';
+import {useState, useEffect} from "react";
+import axios from 'axios';
 
 function createData(image, name, price, stock) {
   return {
@@ -64,8 +67,6 @@ function getComparator(order, orderBy) {
         : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// This method is created for cross-browser compatibility, if you don't
-// need to support IE11, you can use Array.prototype.sort() directly
 function stableSort(array, comparator) {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
@@ -79,12 +80,6 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    {
-        id: 'product',
-        numeric: false,
-        disablePadding: true,
-        label: 'Product',
-    },
     {
         id: 'name',
         numeric: true,
@@ -126,6 +121,8 @@ function EnhancedTableHead(props) {
                         }}
                     />
                 </TableCell>
+                <TableCell/>
+                <TableCell style={{fontSize: "180%"}}>Product</TableCell>
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
@@ -256,9 +253,24 @@ export default function manageProductPage() {
     const [orderBy, setOrderBy] = React.useState('name');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
-    // const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const classes = useStyles();
+    const [products, setProduct] = useState([]);
+
+
+        useEffect(() => {
+          getproduct();
+        }, []);
+
+
+    const getproduct = async () => {
+        await axios.get("http://localhost:4000/products/allProducts").then(res => {
+            setProduct(res.data.productsData)
+            console.log(res.data.productsData);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -303,7 +315,7 @@ export default function manageProductPage() {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n) => n.name);
+            const newSelecteds = products.map((n) => n._id);
             setSelected(newSelecteds);
             return;
         }
@@ -343,7 +355,7 @@ export default function manageProductPage() {
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
 
     return (
         <Box sx={{ width: '90%', margin: 'auto', paddingTop: '4vw' }}>
@@ -387,13 +399,13 @@ export default function manageProductPage() {
                                 orderBy={orderBy}
                                 onSelectAllClick={handleSelectAllClick}
                                 onRequestSort={handleRequestSort}
-                                rowCount={rows.length}
+                                rowCount={products.length}
                             />
                             <TableBody>
-                                {stableSort(rows, getComparator(order, orderBy))
+                                {stableSort(products, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
-                                        const isItemSelected = isSelected(row.name);
+                                        const isItemSelected = isSelected(row._id);
                                         const labelId = `enhanced-table-checkbox-${index}`;
 
                                         return (
@@ -403,7 +415,7 @@ export default function manageProductPage() {
                                                 role="checkbox"
                                                 aria-checked={isItemSelected}
                                                 tabIndex={-1}
-                                                key={row.name}
+                                                key={row._id}
                                                 selected={isItemSelected}
                                             >
                                                 <TableCell padding="checkbox">
@@ -415,6 +427,13 @@ export default function manageProductPage() {
                                                         }}
                                                     />
                                                 </TableCell>
+                                                <TableCell style={{width:'2%'}}>
+                                                    <Tooltip title={<span style={{ fontSize: "200%" }}>Edit</span>}>
+                                                        <IconButton href="/editproduct">
+                                                            <EditIcon style={{fontSize:'150%', color:'black'}}/>
+                                                        </IconButton>                                                     
+                                                    </Tooltip>                                                   
+                                                </TableCell>
                                                 <TableCell
                                                     component="th"
                                                     id={labelId}
@@ -422,17 +441,16 @@ export default function manageProductPage() {
                                                     padding="none"
                                                     style={{fontSize: '150%'}}
                                                 >
-                                                    {/* {row.name} */}
-                                                    <img src={row.image} className={classes.prodImg}/>
+                                                    <img src={row.productImage} className={classes.prodImg}/>
+                                                </TableCell>
+                                                <TableCell align="left" style={{fontSize: '150%', width:'30%'}}>
+                                                    {row.productName}
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.name}
+                                                    {row.productPrice}
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.price}
-                                                </TableCell>
-                                                <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.stock}
+                                                    {row.productQuantity}
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -448,7 +466,7 @@ export default function manageProductPage() {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={rows.length}
+                        count={products.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
