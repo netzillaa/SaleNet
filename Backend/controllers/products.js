@@ -1,14 +1,14 @@
 let Product = require("../models/Product.model");
 const mongoose = require("mongoose");
 const getAllProducts = async (req, res) => {
-    let data = await Product.find();
-    if (data.length == 0) {
+    let productsData = await Product.find();
+    if (productsData.length == 0) {
         console.log("there are no items in the database")
     }
     else {
         console.log("got data");
     }
-    res.status(200).json(data);
+    res.status(200).json({productsData});
 
 };
 // res.status(200).json({ product: "returning all products in a product" })

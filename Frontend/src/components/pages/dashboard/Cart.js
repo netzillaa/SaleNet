@@ -17,27 +17,27 @@ const initialState = {
 };
 
 export const addToCart = (productID) => {
-    for (var i = 0; i < data.length; i++) {
-        if (data[i].id == productID) {
-            console.log(data[i]);
+    // for (var i = 0; i < data.length; i++) {
+        // if (data[i].id == productID) {
+            console.log("asdasdasda"+productID);
 
             // addProductToCart(data[i]);
-        }
-    }
+        // }
+    // }
 }
 
 const ContextCart = () => {
     const { clearCart, totalItem, totalAmount, addItem } = useContext(CartContext);
     const [item, setItems] = useState([]);
 
-    // const addProductToCart = (itemInfo) => {
-    //     for (var i = 0; i < item.length; i++) {
-    //         if (item[i].id == itemInfo.id) {
+    const addProductToCart = (itemInfo) => {
+        for (var i = 0; i < item.length; i++) {
+            if (item[i].id == itemInfo.id) {
                 
-    //         }
-    //         setItems([...item, itemInfo])
-    //     }
-    // }
+            }
+            setItems([...item, itemInfo])
+        }
+    }
 
     return (
         <>
