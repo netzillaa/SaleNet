@@ -48,14 +48,11 @@ export default function SignIn({ history }) {
   }
   async function signIn(event) {
     event.preventDefault();
-
-    
-
     try {
       const { data } = await axios.post("http://localhost:4000/auth/login", { email, password }, config)
       localStorage.setItem('userInfo', JSON.stringify(data));
       // const serverResponse = await response.json();
-      // console.log(serverResponse);
+      console.log(data);
     }
     catch (err) {
       setError(err.response.data.message);
