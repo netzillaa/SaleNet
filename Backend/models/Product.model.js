@@ -14,7 +14,8 @@ const productSchema = mongoose.Schema({
         required: [true, "item quantity not specified"],
     },
     productImage: {
-        type: Buffer,
+        type: String,
+        default: 'http://stompaudio.com.br/demo/wp-content/uploads/2014/04/placeholder3.png'
     },
     productisAvailable: {
         type: Boolean,

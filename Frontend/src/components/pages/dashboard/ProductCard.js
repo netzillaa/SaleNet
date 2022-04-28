@@ -32,8 +32,8 @@ export default function ProductCard(product) {
                 component="img"
                 height="250"
                 //we will change img later DONT FORGET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                image={`images/${product.coverimg}`}
-                alt="green iguana"
+                image={product.productImage}
+                alt="Product Image"
               />
             </Card>
             <CardContent>
