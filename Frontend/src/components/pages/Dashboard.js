@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -58,7 +60,21 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  const cards = data.map(product => {
+  useEffect(() => {
+    getproduct();
+  }, []);
+
+  const [products, setProduct] = useState([]);
+
+  const getproduct = async () => {
+    await axios.get("http://localhost:4000/products/allProducts").then(res => {
+      setProduct(res.data.productsData)
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  const cards = products.map(product => {
     return (
       <div>
         <ProductCard
@@ -69,8 +85,6 @@ function DashboardContent() {
     )
   })
   const [open, setOpen] = React.useState(true);
-  const [success, setSuccess] = React.useState(true);
-  const [timer, setTimer] = React.useState(true)
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -86,8 +100,8 @@ function DashboardContent() {
           <Divider />
           <List component="nav" style={{ position: "fixed" }}>
             <Cart />
-            </List>
-          </Drawer> */}
+          </List>
+        </Drawer> */}
         <Box
           component="main"
           sx={{
