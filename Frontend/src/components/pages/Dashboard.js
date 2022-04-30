@@ -65,6 +65,7 @@ function DashboardContent() {
   }, []);
 
   const [products, setProduct] = useState([]);
+  const [success, setSuccess] = useState(true);
 
   const getproduct = async () => {
     await axios.get("http://localhost:4000/products/allProducts").then(res => {
