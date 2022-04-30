@@ -25,6 +25,7 @@ import ProductCard from './dashboard/ProductCard';
 import data from './dashboard/data'
 import Cart from './dashboard/Cart';
 import Header from "../Header_SignedIn";
+import Alerto from './Alerto';
 
 const drawerWidth = 350;
 
@@ -55,21 +56,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const mdTheme = createTheme();
-// useEffect(() => {
-//   getproduct();
-// }, []);
 
-// const [product, setProduct] = useState();
-// const getproduct = async () => {
-//   try {
-//     const res = await axios.get("http://localhost:4000/products/allProducts");
-//     setProduct(res.data);
-//     console.log(product);
-//   }
-//   catch (err) {
-//     alert(err.message);
-//   }
-// }
 function DashboardContent() {
   const cards = data.map(product => {
     return (
@@ -82,12 +69,15 @@ function DashboardContent() {
     )
   })
   const [open, setOpen] = React.useState(true);
+  const [success, setSuccess] = React.useState(true);
+  const [timer, setTimer] = React.useState(true)
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
     <ThemeProvider theme={mdTheme}>
+      {success && <Alerto />}
       <Header />
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -96,8 +86,8 @@ function DashboardContent() {
           <Divider />
           <List component="nav" style={{ position: "fixed" }}>
             <Cart />
-          </List>
-        </Drawer> */}
+            </List>
+          </Drawer> */}
         <Box
           component="main"
           sx={{
