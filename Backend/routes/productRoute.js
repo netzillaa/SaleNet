@@ -1,7 +1,7 @@
 const express = require("express");
 let router = express.Router();
 
-const { getAllProducts, findOne, updateProduct, deleteProduct } = require("../controllers/products")
+const { getAllProducts, findOne, updateProduct, deleteProduct, addProduct } = require("../controllers/products")
 //a middleware to log every request we handle including url and date
 router.use((req, res, next) => {
     console.log(req.url, "@", Date.now());
@@ -19,6 +19,7 @@ router.route("/:shopId/:productType/:productId").get((req, res) => {
 router.route("/find/:id").get(findOne);
 router.route("/update/:id").post(updateProduct);
 router.route("/delete/:id").delete(deleteProduct);
+// router.route("/add/:id", upload.single('image')).post(addProduct);
 
 
 
