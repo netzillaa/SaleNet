@@ -16,8 +16,6 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
@@ -155,10 +153,18 @@ EnhancedTableHead.propTypes = {
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired,
     rowCount: PropTypes.number.isRequired,
+}
+
+const deleteProduct = async (id) => {
+    await axios.delete("http://localhost:4000/products/delete/" + id).then(res => {
+        
+    }).catch(err => {
+        console.log(err);
+    })
 };
 
 const EnhancedTableToolbar = (props) => {
-    const { numSelected } = props;
+    const { numSelected, selectedId } = props;
 
     return (
         <Toolbar
@@ -207,7 +213,7 @@ const EnhancedTableToolbar = (props) => {
 
             {numSelected > 0 ? (
                 <Tooltip title={<span style={{ fontSize: "200%" }}>Delete</span>}>
-                    <IconButton>
+                    <IconButton onClick={() => deleteProduct(selectedId)}>
                         <DeleteIcon style={{ fontSize: '200%' }} />
                     </IconButton>
                 </Tooltip>
@@ -257,16 +263,13 @@ export default function manageProductPage() {
     const classes = useStyles();
     const [products, setProduct] = useState([]);
 
-
-        useEffect(() => {
-          getproduct();
-        }, []);
-
+    useEffect(() => {
+        getproduct();
+    }, []);
 
     const getproduct = async () => {
         await axios.get("http://localhost:4000/products/allProducts").then(res => {
             setProduct(res.data.productsData)
-            console.log(res.data.productsData);
         }).catch(err => {
             console.log(err);
         })
@@ -322,12 +325,12 @@ export default function manageProductPage() {
         setSelected([]);
     };
 
-    const handleClick = (event, name) => {
-        const selectedIndex = selected.indexOf(name);
+    const handleClick = (event, id) => {
+        const selectedIndex = selected.indexOf(id);
         let newSelected = [];
 
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, name);
+            newSelected = newSelected.concat(selected, id);
         } else if (selectedIndex === 0) {
             newSelected = newSelected.concat(selected.slice(1));
         } else if (selectedIndex === selected.length - 1) {
@@ -351,7 +354,7 @@ export default function manageProductPage() {
         setPage(0);
     };
 
-    const isSelected = (name) => selected.indexOf(name) !== -1;
+    const isSelected = (id) => selected.indexOf(id) !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
@@ -390,11 +393,12 @@ export default function manageProductPage() {
             </Paper>
             <Paper sx={{ mb: 2 }} elevation={3}>
                 <div style={{ width: '95%', margin: 'auto' }}>
-                    <EnhancedTableToolbar numSelected={selected.length} />
+                    <EnhancedTableToolbar numSelected={selected.length} selectedId={selected}/>
                     <TableContainer>
                         <Table aria-labelledby="tableTitle" >
                             <EnhancedTableHead
                                 numSelected={selected.length}
+                                selectedId={selected._id}
                                 order={order}
                                 orderBy={orderBy}
                                 onSelectAllClick={handleSelectAllClick}
@@ -411,7 +415,7 @@ export default function manageProductPage() {
                                         return (
                                             <TableRow
                                                 hover
-                                                onClick={(event) => handleClick(event, row.name)}
+                                                onClick={(event) => handleClick(event, row._id)}
                                                 role="checkbox"
                                                 aria-checked={isItemSelected}
                                                 tabIndex={-1}
