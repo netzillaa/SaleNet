@@ -27,6 +27,7 @@ import ProductCard from './dashboard/ProductCard';
 import data from './dashboard/data'
 import Cart from './dashboard/Cart';
 import Header from "../Header_SignedIn";
+import Alerto from './Alerto';
 
 const drawerWidth = 350;
 
@@ -64,73 +65,75 @@ function DashboardContent() {
   }, []);
 
   const [products, setProduct] = useState([]);
+  const [success, setSuccess] = useState(true);
 
   const getproduct = async () => {
-      await axios.get("http://localhost:4000/products/allProducts").then(res => {
-        setProduct(res.data.productsData)
-      }).catch(err=>{
-        console.log(err);
-      })
-    }
+    await axios.get("http://localhost:4000/products/allProducts").then(res => {
+      setProduct(res.data.productsData)
+    }).catch(err => {
+      console.log(err);
+    })
+  }
 
   const cards = products.map(product => {
-      return (
-        <div>
-          <ProductCard
-            key={product._id}
-            {...product}
-          />
-        </div>
-      )
-    })
-    const [open, setOpen] = React.useState(true);
-    const toggleDrawer = () => {
-      setOpen(!open);
-    };
-
     return (
-      <ThemeProvider theme={mdTheme}>
-        <Header />
-        <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
+      <div>
+        <ProductCard
+          key={product._id}
+          {...product}
+        />
+      </div>
+    )
+  })
+  const [open, setOpen] = React.useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
 
-          {/* <Drawer variant="permanent" open={open}>
+  return (
+    <ThemeProvider theme={mdTheme}>
+      {success && <Alerto />}
+      <Header />
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+
+        {/* <Drawer variant="permanent" open={open}>
           <Divider />
           <List component="nav" style={{ position: "fixed" }}>
             <Cart />
           </List>
         </Drawer> */}
-          <Box
-            component="main"
-            sx={{
-              backgroundColor: (theme) =>
-                theme.palette.mode === 'light'
-                  ? theme.palette.grey[100]
-                  : theme.palette.grey[900],
-              flexGrow: 1,
-              overflow: 'auto',
-            }}
-          >
-            <Toolbar />
-            <Grid style={{ padding: 20, paddingBottom: 80 }}>
-              <Grid container spacing={1}>
-                {cards}
-              </Grid>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            overflow: 'auto',
+          }}
+        >
+          <Toolbar />
+          <Grid style={{ padding: 20, paddingBottom: 80 }}>
+            <Grid container spacing={1}>
+              {cards}
             </Grid>
-          </Box>
-          <Box>
-            <Drawer variant="permanent" open={open}>
-              <Divider />
-              <List component="nav" style={{ position: "fixed" }}>
-                <Cart />
-              </List>
-            </Drawer>
-          </Box>
+          </Grid>
         </Box>
-      </ThemeProvider>
-    );
-  }
+        <Box>
+          <Drawer variant="permanent" open={open}>
+            <Divider />
+            <List component="nav" style={{ position: "fixed" }}>
+              <Cart />
+            </List>
+          </Drawer>
+        </Box>
+      </Box>
+    </ThemeProvider>
+  );
+}
 
-  export default function Dashboard() {
-    return <DashboardContent />;
-  }
+export default function Dashboard() {
+  return <DashboardContent />;
+}
