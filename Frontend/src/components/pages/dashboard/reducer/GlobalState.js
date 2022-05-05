@@ -24,7 +24,7 @@ export default function GlobalState(props) {
     })
   }
 
-  const products = data;
+  const products = DBProducts;
 
   const [state, dispatch] = useReducer(Reducer, { carts: [] });
 
