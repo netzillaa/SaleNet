@@ -33,22 +33,6 @@ function createData(image, name, price, stock) {
   };
 }
 
-const rows = [
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'Dutch Lady Milk', 8.70, 5.0),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'Atest', 25.0, 10.0),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'Btest', 25.0, 10.2),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'Ctest', 25.0, 10.3),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'Dtest', 25.0, 10.6),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'Etest', 25.0, 10.4),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'RAtest', 25.0, 10.2),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'AYtest', 25.0, 10.4),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'AItest', 25.0, 10.8),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'Ztest', 25.0, 10.6),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'Utest', 25.0, 10),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'Qtest', 25.0, 10),
-  createData('https://cf.shopee.com.my/file/dd99143d5f75962339ee55b3b754a5e8', 'AAtest', 25.0, 10),
-];
-
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
