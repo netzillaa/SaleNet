@@ -12,8 +12,10 @@ class DateTime extends Component {
     render() {
         return (
             <>
-                <h2>Time: </h2>
-                <h3>{this.state.date.toLocaleTimeString()}</h3>
+                <h2 style={{marginBottom:'0px'}}>Time:</h2> &nbsp;
+                <h3 style={{marginBottom:'0px', marginRight:'5px', fontWeight:'bolder'}}>
+                    {this.state.date.toLocaleTimeString()}
+                </h3>
                 {this.getTime()}
             </>
         )
