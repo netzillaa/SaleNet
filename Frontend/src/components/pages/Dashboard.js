@@ -27,7 +27,7 @@ import ProductCard from './dashboard/ProductCard';
 import data from './dashboard/data'
 import Header from "../Header_SignedIn";
 import Alerto from './Alerto';
-
+import Header3 from '../Header3';
 import Cart from "./dashboard/Cart"
 import Context from "./dashboard/reducer/Context";
 
@@ -80,7 +80,8 @@ export default function Dashboard() {
 
   return (
     <ThemeProvider theme={mdTheme}>
-      <Header />
+      {/* <Header /> */}
+      <Header3/>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Box

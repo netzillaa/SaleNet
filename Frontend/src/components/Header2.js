@@ -68,23 +68,6 @@ const Header2 = () => {
     setAnchorElUser(null);
   };
 
-  function mouseOver(event) {
-    event.target.style.color = 'dodgerblue';
-    event.target.style.cursor = 'pointer';
-  }
-
-  function mouseOut(event) {
-    event.target.style.color = '#000193';
-  }
-
-  function pageHover(event) {
-    event.target.style.borderBottom = '4px #454eca solid';
-  }
-
-  function pageOut(event) {
-    event.target.style.borderBottom = '';
-  }
-
   return (
     <AppBar style={{ backgroundColor: 'white', position: "sticky", marginBottom: '0px', boxShadow: '0 0 17px 0 rgb(183, 183, 183)', color: 'black' }}>
       <Container maxWidth="xl">
@@ -154,10 +137,10 @@ const Header2 = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 3, color: 'black', display: 'block' }}
+                sx={{ my: 3, color: 'black', display: 'block', '&:hover':{
+                  borderBottom:'4px #454eca solid'
+                } }}
                 style={{ fontSize: '1.5rem' }}
-                onMouseOver={pageHover}
-                onMouseOut={pageOut}
                 component={NavLink} to={page.link} exact activeStyle={{ color: 'blue' }}>
                 {page.name}
               </Button>
@@ -165,18 +148,19 @@ const Header2 = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Typography style={{ fontWeight: 'bold', fontSize: '1.7rem', color: 'black' }}>Get Started</Typography>
+            <Tooltip title={<span style={{fontSize: "1rem"}}>Open options</span>}>
+              <Button onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Typography style={{ fontWeight: 'bold', fontSize: '1.5rem', color: 'black' }}>Get Started</Typography>
                 <ArrowDropDownRoundedIcon style={{ fontSize: '4rem', color: 'black' }} />
-              </IconButton>
+              </Button>
             </Tooltip>
             &nbsp;
-            <Button component={NavLink} to="/support">
-              <HelpRoundedIcon style={{ fontSize: '4rem', color: '#000193', }}
-                onMouseOver={mouseOver}
-                onMouseOut={mouseOut} />
-            </Button>
+            <Tooltip title={<span style={{fontSize: "1rem"}}>Customer Support</span>}>
+            <IconButton component={NavLink} to="/support">
+              <HelpRoundedIcon sx={{ fontSize: '4rem', color: '#000193', '&:hover': {
+                            color: "dodgerblue"}}}/>
+            </IconButton>
+            </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

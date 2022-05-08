@@ -111,9 +111,9 @@ export default function LandingPage() {
 
                             <p className={classes.word}>Grow More Efficienctly</p>
 
-                            <Button className={classes.startButton}
+                            <button className={classes.startButton}
                                 onMouseOver={mouseOver}
-                                onMouseOut={mouseOut}>Get Started</Button>
+                                onMouseOut={mouseOut}>Get Started</button>
                         </div>
                         <div>
                             <div className={classes.pageImage}></div>
