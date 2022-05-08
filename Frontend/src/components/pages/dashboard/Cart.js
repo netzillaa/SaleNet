@@ -7,8 +7,6 @@ import '../../../css/Cart.css';
 import useOnClickOutside from "./reducer/useOnClickOutside";
 
 export default function Cart({
-    isToggle,
-    setToggle,
     carts,
     removeProductFromCart,
     deleteProductFromCart,
@@ -56,7 +54,7 @@ export default function Cart({
                     </div>
 
                     <div className="price">
-                        <h4>RM{productTotalPrice}</h4>
+                        <h4>RM{product.productPrice * quantity}</h4>
                     </div>
 
                     <div className="remove-item">
@@ -86,6 +84,11 @@ export default function Cart({
         }
     };
 
+    const clearTotal = () => {
+        setTotal(0);
+        clearCart()
+    };
+
     return (
         <>
             <section className="main-cart-section">
@@ -107,7 +110,7 @@ export default function Cart({
                         Cart Total : <span>RM {totalPrice}</span>
                     </h3>
                     <button>checkout</button>
-                    <button className="clear-cart" onClick={() => clearCart()}>
+                    <button className="clear-cart" onClick={() => clearTotal()}>
                         Clear Cart
                     </button>
                 </div>
