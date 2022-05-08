@@ -26,6 +26,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import EditIcon from '@mui/icons-material/Edit';
 import {useState, useEffect} from "react";
 import axios from 'axios';
+import Header3 from '../Header3';
 
 function createData(image, name, price, stock) {
   return {
@@ -139,12 +140,22 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 }
 
+const deleteProcess = (id) => {
+    deleteProduct(id);
+    reload()
+};
+
 const deleteProduct = async (id) => {
     await axios.delete("http://localhost:4000/products/delete/" + id).then(res => {
         
     }).catch(err => {
         console.log(err);
     })
+    
+};
+
+const reload = () => {
+    window.location.reload(false);
 };
 
 const EnhancedTableToolbar = (props) => {
@@ -197,7 +208,7 @@ const EnhancedTableToolbar = (props) => {
 
             {numSelected > 0 ? (
                 <Tooltip title={<span style={{ fontSize: "200%" }}>Delete</span>}>
-                    <IconButton onClick={() => deleteProduct(selectedId)}>
+                    <IconButton onClick={() => deleteProcess(selectedId)}>
                         <DeleteIcon style={{ fontSize: '200%' }} />
                     </IconButton>
                 </Tooltip>
@@ -345,7 +356,9 @@ export default function manageProductPage() {
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
 
     return (
-        <Box sx={{ width: '90%', margin: 'auto', paddingTop: '4vw' }}>
+        <>
+        <Header3/>
+        <Box sx={{ width: '90%', margin: 'auto', paddingTop: '3.5vw' }}>
             <Paper sx={{
                 width: '100%',
                 height: '6vw',
@@ -466,5 +479,6 @@ export default function manageProductPage() {
                 </div>
             </Paper>
         </Box>
+        </>
     );
 }
