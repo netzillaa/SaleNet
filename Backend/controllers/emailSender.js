@@ -6,8 +6,8 @@ const sendMail = (email, code) => {
         service: "Gmail",
         secure: false,
         auth: {
-            // user: process.env.EMAIL,
-            // pass: process.env.PASS,
+            user: process.env.EMAIL,
+            pass: process.env.PASS,
         },
         tls: {
             rejectUnauthorized: false,
