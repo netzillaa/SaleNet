@@ -140,12 +140,22 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 }
 
+const deleteProcess = (id) => {
+    deleteProduct(id);
+    reload()
+};
+
 const deleteProduct = async (id) => {
     await axios.delete("http://localhost:4000/products/delete/" + id).then(res => {
         
     }).catch(err => {
         console.log(err);
     })
+    
+};
+
+const reload = () => {
+    window.location.reload(false);
 };
 
 const EnhancedTableToolbar = (props) => {
@@ -198,7 +208,7 @@ const EnhancedTableToolbar = (props) => {
 
             {numSelected > 0 ? (
                 <Tooltip title={<span style={{ fontSize: "200%" }}>Delete</span>}>
-                    <IconButton onClick={() => deleteProduct(selectedId)}>
+                    <IconButton onClick={() => deleteProcess(selectedId)}>
                         <DeleteIcon style={{ fontSize: '200%' }} />
                     </IconButton>
                 </Tooltip>
