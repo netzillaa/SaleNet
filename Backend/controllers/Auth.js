@@ -3,6 +3,9 @@ const Shop = require("../models/Shop.model");
 const { default: mongoose } = require("mongoose");
 const jwt = require('jsonwebtoken');
 const {  sendMail } = require("./emailSender");
+
+let code = (Math.random() + 1).toString(36).substring(7);
+
 const registerUser = async (req, res) => {
     var receiveData = req.body;
     console.log(receiveData);
@@ -12,16 +15,16 @@ const registerUser = async (req, res) => {
     Date.now() + "\n";
     req.body.email;
     console.log(shopInfo);
-
-    let code = (Math.random() + 1).toString(36).substring(7);
+    
     sendMail(req.body.email, code)
-    // res.json({"verifyCode": code})
     console.log(code);
+
+    res.json({"verifyCode": code})
 
     try {
         const shopExist = await Shop.findOne({ shopName: req.body.shopName });
         if (shopExist) {
-            res.status(503).json({ status: "shop exists already" });
+            console.log("shop exists already");
         }
         await Shop.create({
 
@@ -52,7 +55,7 @@ const registerUser = async (req, res) => {
     } catch (err) {
         console.log("cant connect to database or user already exist with the email.Error infor: " + err);
     }
-    res.json({ status: "user data received" });
+    console.log("user data received");
 }
 const loginUser = async (req, res) => {
     try {
