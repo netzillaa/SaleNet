@@ -108,7 +108,7 @@ export default function Cart({
         setOrder(carts)
         console.log(order);
         postOrder()
-        // window.location.href = "http://localhost:3000/checkOut";
+        window.location.href = "http://localhost:3000/checkOut";
     }
 
     const [order, setOrder] = useState([]);
