@@ -2,6 +2,7 @@ import { getTableSortLabelUtilityClass } from "@mui/material";
 import React, { useRef } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import '../../../css/Cart.css';
 
 import useOnClickOutside from "./reducer/useOnClickOutside";
@@ -15,24 +16,24 @@ export default function Cart({
 }) {
 
     const boughtProducts = carts.map(({ product, quantity }) => {
-    
+
         let productTotalPrice;
-    
+
         const getProductTotal = () => {
             productTotalPrice = product.productPrice * quantity;
         };
-        
+
         const productFunctions = (action) => {
-            if(action === "add"){
+            if (action === "add") {
                 addProductToCart(product)
-                
-            }else if (action === "remove"){
+
+            } else if (action === "remove") {
                 removeProductFromCart(product.id)
             }
-            else if (action === "delete"){
+            else if (action === "delete") {
                 deleteProductFromCart(product.id)
             }
-            
+
             getProductTotal()
             getTotal(action, product, productTotalPrice)
         };
@@ -69,25 +70,48 @@ export default function Cart({
 
     useEffect(() => {
         setTotal(0);
-      }, []);
+    }, []);
 
     const [totalPrice, setTotal] = useState()
-    
+
     const getTotal = (action, product, productTotalPrice) => {
-        if(action === "add"){
+        if (action === "add") {
             setTotal(totalPrice + product.productPrice);
-        }else if (action === "remove"){
+        } else if (action === "remove") {
             setTotal(totalPrice - product.productPrice);
         }
-        else if (action === "delete"){
+        else if (action === "delete") {
             setTotal(totalPrice - productTotalPrice);
         }
     };
 
     const clearTotal = () => {
         setTotal(0);
-        clearCart()
     };
+
+    const config = {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+
+    const postOrder = async () => {
+        const completeOrder = JSON.stringify(order)
+        await axios.post("http://localhost:4000/products/createOrder", {order, totalPrice}, config).then(res => {
+            console.log(res.data);
+        }).catch(err => {
+            console.log(err);
+        })
+      }
+
+    function checkOut() {
+        setOrder(carts)
+        console.log(order);
+        postOrder()
+        window.location.href = "http://localhost:3000/checkOut";
+    }
+
+    const [order, setOrder] = useState([]);
 
     return (
         <>
@@ -109,7 +133,7 @@ export default function Cart({
                     <h3>
                         Cart Total : <span>RM {totalPrice}</span>
                     </h3>
-                    <button>checkout</button>
+                    <button onClick={() => checkOut()} >checkout</button>
                     <button className="clear-cart" onClick={() => clearTotal()}>
                         Clear Cart
                     </button>

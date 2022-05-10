@@ -62,7 +62,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-export default function Dashboard() {
+export default function Dashboard({}) {
   const context = useContext(Context);
 
 

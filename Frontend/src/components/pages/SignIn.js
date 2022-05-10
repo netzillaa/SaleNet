@@ -13,7 +13,6 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Footer from "../../components/Footer";
 import axios from "axios";
 import { Alert } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -22,12 +21,6 @@ import Header2 from "../Header2";
 import Alerto from "./Alerto";
 import AlertoError from "./AlertoError";
 
-function alert() {
-  return (
-    <Stack sx={{ width: '100%' }} spacing={2}>
-      <Alert severity="error">wrong username and or password</Alert>
-    </Stack >);
-}
 const theme = createTheme();
 export default function SignIn({ history }) {
   const [password, setPassword] = useState("");
@@ -74,8 +67,8 @@ export default function SignIn({ history }) {
   }
   return (
     <>
-      {!success}(
-      <AlertoError />
+      {/* {!success}(
+      <AlertoError /> */}
       <ThemeProvider theme={theme}>
         <Header2 />
         <Grid container component="main" sx={{ height: "50rem" }}>
@@ -172,8 +165,7 @@ export default function SignIn({ history }) {
             </Box>
           </Grid>
         </Grid>
-        <Footer />
       </ThemeProvider>
-      )
+      {/* ) */}
     </>);
 }

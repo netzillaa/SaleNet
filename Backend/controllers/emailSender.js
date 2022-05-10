@@ -18,7 +18,7 @@ const sendMail = (email, code) => {
     let mailOpt = {
         from: "netzilla178@gmail.com",
         to: email,
-        subject: "test",
+        subject: "SaleNet verification code",
         text: code
     }
 
