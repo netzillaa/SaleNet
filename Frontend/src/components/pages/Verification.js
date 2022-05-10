@@ -4,7 +4,13 @@ import { Grid, Paper, Box, Avatar, TextField, Link as Nv } from '@material-ui/co
 import EmailIcon from '@mui/icons-material/Email';
 import { useState } from 'react';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { useEffect, useContext } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { Alert } from '@mui/material';
+import Alerto from "./Alerto";
+import Stack from '@mui/material/Stack';
+import AlertoError from "./AlertoError";
 
 const useStyles = makeStyles(() => ({
 
@@ -37,42 +43,39 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function Verification() {
+export default function Verification({ history }) {
 
     const classes = useStyles();
 
-    const [code, setUser] = useState({
-        code: "",
-
-    });
-
-    const { fname, lname, email, phone } = code;
-
-    const handleChange = e => {
-        setUser({ ...code, [e.target.name]: e.target.value });
-    };
+    const [authCode, setAuthCode] = useState();
+    const [userCode, setUserCode] = useState();
 
     const handleSubmit = () => {
-        // try {
-        //     const { data } = await axios.get("http://localhost:4000/auth/code", { email }, config)
-        //     localStorage.setItem('userInfo', JSON.stringify(data));
-        //     // const serverResponse = await response.json();
-        //     // console.log(serverResponse);
-        // }
-        // catch (err) {
-        //     setError(err.response.data.message);
-        //     alert();
-        // }
+        if (authCode == userCode) {
+            history.push({
+                pathname: `/signIn`
+            });
+        } else {
+            alert("Wrong Code")
+              return false;
+        }
     }
 
-    // Timer 
 
     const [counter, setCounter] = useState(15);
-    React.useEffect(() => {
-        const timer =
-            counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-        return () => clearInterval(timer);
-    }, [counter]);
+
+    const getAuthCode = async () => {
+        await axios.post("http://localhost:4000/auth/register").then(res => {
+            setAuthCode(res.data.verifyCode)
+            console.log(res.data.verifyCode);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    useEffect(() => {
+        getAuthCode();
+    }, []);
 
     document.body.style.backgroundColor = '#ECECEC';
 
@@ -95,16 +98,13 @@ export default function Verification() {
                     onSubmit={handleSubmit}>
                     <TextValidator
                         label="Enter Verification Code"
-                        onChange={handleChange}
+                        onChange={(e) => setUserCode(e.target.value)}
                         variant="outlined"
                         inputProps={{ maxLength: 5 }}
                         name="code"
                         size="medium"
                         type="text"
                         fullWidth
-                        validators={['required']}
-                        errorMessages={['Verification code is required']}
-                        value={code.fname}
                     />
 
                     <button type='submit' className={classes.btnstyle}>VERIFY</button>

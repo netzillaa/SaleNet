@@ -1,5 +1,6 @@
 let Product = require("../models/Product.model");
 const mongoose = require("mongoose");
+const order = require("../models/Order.model");
 const getAllProducts = async (req, res) => {
     let productsData = await Product.find();
     if (productsData.length == 0) {
@@ -11,6 +12,33 @@ const getAllProducts = async (req, res) => {
     res.status(200).json({productsData});
 
 };
+
+const createOrder = async (req, res) => {
+    res.json({
+        params : req.body
+    })
+    var receivedOrders = req.body.order;
+    var orderTotalPrice = req.body.totalPrice;
+
+    let orderName = [];
+    
+    try {
+        for (let i = 0; i < receivedOrders.length; i++) {
+            orderName[i] = JSON.stringify(receivedOrders[i].product.productName);
+        }
+
+        await order.create({
+
+            items: orderName,      
+            totalPrice: orderTotalPrice,
+
+        });
+        console.log("added " + orderName + " to data base");
+    } catch (err) {
+        console.log("error saving product to database", err);
+    }
+}
+
 // res.status(200).json({ product: "returning all products in a product" })
 const addProduct = async (req, res) => {
     var receivedProduct = req.body;
@@ -73,4 +101,4 @@ const deleteProduct = async (req, res) => {
 }
 
 
-module.exports = { getAllProducts, addProduct, findOne, updateProduct, deleteProduct }
+module.exports = { getAllProducts, addProduct, findOne, updateProduct, deleteProduct, createOrder}
