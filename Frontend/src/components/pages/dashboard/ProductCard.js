@@ -10,13 +10,18 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { CardActionArea } from '@mui/material';
 
-export default function ProductCard({ addProductToCart, ...props }) {
+export default function ProductCard({ addProductToCart, calcTotalPrice, ...props }) {
+
+  const addProductAndGetTotalPrice = (...props) => {
+    addProductToCart(...props)
+    calcTotalPrice()
+  };
 
   return (
     <React.Fragment>
       <Grid style={{ padding: 10 }}>
         <Card sx={{ maxWidth: 400, minWidth: 300 }}>
-          <CardActionArea onClick={() => addProductToCart({ ...props })}>
+          <CardActionArea onClick={() => addProductAndGetTotalPrice({ ...props })}>
             <Card sx={{ maxHeight: 250 }}>
               <CardMedia
                 component="img"
