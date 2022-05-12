@@ -9,20 +9,15 @@ import useOnClickOutside from "./reducer/useOnClickOutside";
 
 export default function Cart({
     carts,
+    newTotal,
     removeProductFromCart,
     deleteProductFromCart,
     addProductToCart,
+    calcTotalPrice,
     clearCart,
 }) {
 
     const boughtProducts = carts.map(({ product, quantity }) => {
-
-        let productTotalPrice;
-
-        const getProductTotal = () => {
-            productTotalPrice = product.productPrice * quantity;
-        };
-
         const productFunctions = (action) => {
             if (action === "add") {
                 addProductToCart(product)
@@ -34,8 +29,7 @@ export default function Cart({
                 deleteProductFromCart(product.id)
             }
 
-            getProductTotal()
-            getTotal(action, product, productTotalPrice)
+            calcTotalPrice()
         };
 
         return (
@@ -69,25 +63,8 @@ export default function Cart({
     })
 
     useEffect(() => {
-        setTotal(0);
+        calcTotalPrice();
     }, []);
-
-    const [totalPrice, setTotal] = useState()
-
-    const getTotal = (action, product, productTotalPrice) => {
-        if (action === "add") {
-            setTotal(totalPrice + product.productPrice);
-        } else if (action === "remove") {
-            setTotal(totalPrice - product.productPrice);
-        }
-        else if (action === "delete") {
-            setTotal(totalPrice - productTotalPrice);
-        }
-    };
-
-    const clearTotal = () => {
-        setTotal(0);
-    };
 
     const config = {
         headers: {
@@ -97,7 +74,7 @@ export default function Cart({
 
     const postOrder = async () => {
         const completeOrder = JSON.stringify(order)
-        await axios.post("http://localhost:4000/products/createOrder", {order, totalPrice}, config).then(res => {
+        await axios.post("http://localhost:4000/products/createOrder", {order, newTotal}, config).then(res => {
             console.log(res.data);
         }).catch(err => {
             console.log(err);
@@ -112,6 +89,11 @@ export default function Cart({
     }
 
     const [order, setOrder] = useState([]);
+
+    const clearCartAndTotalPrice = () => {
+        clearCart()
+        calcTotalPrice()
+      };
 
     return (
         <>
@@ -131,10 +113,10 @@ export default function Cart({
 
                 <div className="card-total">
                     <h3>
-                        Cart Total : <span>RM {totalPrice}</span>
+                        Cart Total : <span>RM {newTotal}</span>
                     </h3>
                     <button onClick={() => checkOut()} >checkout</button>
-                    <button className="clear-cart" onClick={() => clearTotal()}>
+                    <button className="clear-cart" onClick={() => clearCartAndTotalPrice()}>
                         Clear Cart
                     </button>
                 </div>

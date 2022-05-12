@@ -5,7 +5,7 @@ import data from "../data";
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
-import { ADD_TO_CART, REMOVE_FROM_CART, DELETE_FROM_CART, CLEAR_ALL_FROM_CART } from "./types";
+import { ADD_TO_CART, REMOVE_FROM_CART, DELETE_FROM_CART, CLEAR_ALL_FROM_CART, CALC_TOTAL_PRICE } from "./types";
 import Context from "./Context";
 import Reducer from "./Reducer";
 
@@ -25,6 +25,7 @@ export default function GlobalState(props) {
   }
 
   const products = DBProducts;
+  const newTotal = 0;
 
   const [state, dispatch] = useReducer(Reducer, { carts: [] });
 
@@ -51,6 +52,13 @@ export default function GlobalState(props) {
     });
   };
 
+  const calcTotalPrice = (productID) => {
+    dispatch({
+      type: CALC_TOTAL_PRICE,
+      payload: productID,
+    });
+  };
+
   // # clear all product from cart
   const clearCart = () => {
     dispatch({
@@ -62,9 +70,11 @@ export default function GlobalState(props) {
     <Context.Provider
       value={{
         products: products,
+        newTotal: state.newTotal,
         addProductToCart: addProductToCart,
         removeProductFromCart: removeProductFromCart,
         deleteProductFromCart: deleteProductFromCart,
+        calcTotalPrice: calcTotalPrice,
         clearCart: clearCart,
         carts: state.carts,
       }}
