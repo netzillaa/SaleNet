@@ -9,5 +9,6 @@ export default createContext({
   addProductToCart: (product) => {},
   removeProductFromCart: (productID) => {},
   deleteProductFromCart: (productID) => {},
+  calcTotalPrice: () => {},
   clearCart: () => {},
 });

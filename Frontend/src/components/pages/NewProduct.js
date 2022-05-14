@@ -19,24 +19,46 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Header_SignedIn from "../Header_SignedIn";
-
-
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+import { Input } from "@mui/material";
+import axios from "axios";
 const theme = createTheme();
 
 export default function NewProduct() {
     const [productName, setProductName] = useState("");
     const [productPrice, setProductPrice] = useState("");
     const [productCategory, setProductCategory] = useState("");
-    const [productImage, setProductImage] = useState("");
+    const [productQuantity, setproductQuantity] = useState("");
+    const [productImage, setProductImage] = useState(null);
+    // const config = {
+    //     headers: {
+    //         "Content-Type": "multipart/form-data"
+    //         // "Content-Type": "undefined"
 
-    const addProduct = (event) => {
+    //     }
+    // }
+    const addProduct = async (event) => {
         event.preventDefault();
+        var formData = new FormData(); 
+        formData.append('productName', productName);
+        formData.append('productPrice', productPrice);
+        formData.append('productCategory', productCategory);
+        formData.append('productImage', productImage);
+        formData.append('productQuantity', productQuantity);
+        console.log(formData);
+        console.log(productImage);
+        const { data } = await axios.post("http://localhost:4000/products/add", formData).catch(err => {
+            console.log(err);
+        }
+        );
+
         console.log(
             "Product Name: " + productName +
             "   Product Price: " + productPrice +
             "   Product Category: " + productCategory +
             "   Product Image: " + productImage
-            );
+        );
     };
 
     return (
@@ -86,6 +108,16 @@ export default function NewProduct() {
                                     />
                                 </Grid>
                                 <Grid item xs={12} style={{ marginBottom: "1em" }}>
+                                    <TextField
+                                        fullWidth
+                                        value={productQuantity}
+                                        onChange={(e) => setproductQuantity(e.target.value)}
+                                        required
+                                        type="text"
+                                        label="Product Quantity"
+                                    />
+                                </Grid>
+                                <Grid item xs={12} style={{ marginBottom: "1em" }}>
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select-label">Product Category</InputLabel>
                                         <Select
@@ -102,10 +134,9 @@ export default function NewProduct() {
                                     </FormControl>
                                 </Grid>
                                 <Grid item xs={12} style={{ marginBottom: "2em" }}>
-                                    <TextField
+                                    <Input
                                         fullWidth
-                                        value={productImage}
-                                        onChange={(e) => setProductImage(e.target.value)}
+                                        onChange={(e) => setProductImage(e.target.files[0], "productImage")}
                                         required
                                         type="file"
                                     />

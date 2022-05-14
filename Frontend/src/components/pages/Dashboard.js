@@ -72,6 +72,7 @@ export default function Dashboard({}) {
         <ProductCard
           key={product.id}
           addProductToCart={context.addProductToCart}
+          calcTotalPrice={context.calcTotalPrice}
           {...product}
         />
       </div>
@@ -108,9 +109,11 @@ export default function Dashboard({}) {
             <List component="nav" style={{ position: "fixed" }}>
               <Cart
                 carts={context.carts}
+                newTotal={context.newTotal}
                 addProductToCart={context.addProductToCart}
                 removeProductFromCart={context.removeProductFromCart}
                 deleteProductFromCart={context.deleteProductFromCart}
+                calcTotalPrice={context.calcTotalPrice}
                 clearCart={context.clearCart}
               />
             </List>
