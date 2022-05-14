@@ -13,6 +13,13 @@ const getAllProducts = async (req, res) => {
 
 };
 
+const getOrder = async (req, res) => {
+    const orderCart = await order.find().sort({ _id: -1 }).limit(1);
+    
+    res.status(200).json({orderCart});
+
+};
+
 const createOrder = async (req, res) => {
     res.json({
         params : req.body
@@ -28,10 +35,8 @@ const createOrder = async (req, res) => {
         }
 
         await order.create({
-
             items: orderName,      
             totalPrice: orderTotalPrice,
-
         });
         console.log("added " + orderName + " to data base");
     } catch (err) {
@@ -43,28 +48,29 @@ const createOrder = async (req, res) => {
 const addProduct = async (req, res) => {
     var receivedProduct = req.body;
     console.log("received product: " + receivedProduct);
-    var product = req.body.productName + "\n";
-    req.body.productPrice + "\n";
-    req.body.productQuantity + "\n";
+    var product = receivedProduct.productName + "\n";
+    receivedProduct.productPrice + "\n";
+    receivedProduct.productQuantity + "\n";
     Date.now() + "\n";
-    req.body.image + "\n";
-    req.body.category;
+    receivedProduct.image + "\n";
+    receivedProduct.category;
+
+    console.log("received product: " + receivedProduct);
+    console.log("name product: " + receivedProduct.productName);
 
     try {
-
-        await product.create({
-
+        await Product.create({
             productName: req.body.productName,
             productPrice: req.body.productPrice,
             productQuantity: req.body.productQuantity,
             addedAt: Date.now(),
-            productImage: req.body.image,
-            productisAvailable: req.body.isAvailable,
+            productImage: req.body.productImage,
+            // productisAvailable: req.body.isAvailable,
 
         });
         console.log("added " + req.body.productName + " to data base");
     } catch (err) {
-        console.log("error saving product to database");
+        console.log("error saving product to database: " + err);
     }
 }
 const findOne = async (req, res) => {
@@ -101,4 +107,4 @@ const deleteProduct = async (req, res) => {
 }
 
 
-module.exports = { getAllProducts, addProduct, findOne, updateProduct, deleteProduct, createOrder}
+module.exports = { getAllProducts, addProduct, findOne, updateProduct, deleteProduct, createOrder, getOrder}
