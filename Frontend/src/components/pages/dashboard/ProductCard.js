@@ -20,16 +20,14 @@ export default function ProductCard({ addProductToCart, calcTotalPrice, ...props
   return (
     <React.Fragment>
       <Grid style={{ padding: 10 }}>
-        <Card sx={{ maxWidth: 400, minWidth: 300 }}>
-          <CardActionArea onClick={() => addProductAndGetTotalPrice({ ...props })}>
-            <Card sx={{ maxHeight: 250 }}>
-              <CardMedia
-                component="img"
-                height="250"
-                image={props.productImage}
-                alt="Product Image"
-              />
-            </Card>
+        <CardActionArea onClick={() => addProductAndGetTotalPrice({ ...props })}>
+          <Card sx={{ maxWidth: 400, minWidth: 300 }}>
+            <CardMedia
+              component="img"
+              height="250"
+              image={props.productImage}
+              alt="Product Image"
+            />
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">
                 {props.productName}
@@ -38,8 +36,8 @@ export default function ProductCard({ addProductToCart, calcTotalPrice, ...props
               </Typography>
               <p>RM {props.productPrice}</p>
             </CardContent>
-          </CardActionArea>
-        </Card>
+          </Card>
+        </CardActionArea>
       </Grid >
     </React.Fragment>
   );
