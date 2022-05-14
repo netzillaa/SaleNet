@@ -26,7 +26,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import EditIcon from '@mui/icons-material/Edit';
 import {useState, useEffect} from "react";
 import axios from 'axios';
-import Header3 from '../Header3';
 
 function createData(image, name, price, stock) {
   return {
@@ -64,22 +63,34 @@ function stableSort(array, comparator) {
 
 const headCells = [
     {
-        id: 'name',
-        numeric: true,
+        id: 'email',
+        numeric: false,
         disablePadding: false,
-        label: 'Name',
+        label: 'Email Address',
     },
     {
-        id: 'price',
-        numeric: true,
+        id: 'shopname',
+        numeric: false,
         disablePadding: false,
-        label: 'Price (RM)',
+        label: 'Shop Name',
     },
     {
-        id: 'stock',
-        numeric: true,
+        id: 'username',
+        numeric: false,
         disablePadding: false,
-        label: 'Stock',
+        label: 'Owner Name',
+    },
+    {
+        id: 'license',
+        numeric: false,
+        disablePadding: false,
+        label: 'Business License',
+    },
+    {
+        id: 'registerDate',
+        numeric: false,
+        disablePadding: false,
+        label: 'Registered Since',
     },
 ];
 
@@ -105,7 +116,6 @@ function EnhancedTableHead(props) {
                     />
                 </TableCell>
                 <TableCell/>
-                <TableCell style={{fontSize: "180%"}}>Product</TableCell>
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
@@ -191,11 +201,11 @@ const EnhancedTableToolbar = (props) => {
                     fontSize="300%"
                     color="#000193"
                 >
-                    Products
+                    Users
                 </Typography>
             )}
 
-            <Button variant="contained" href="/newproduct"
+            {/* <Button variant="contained" href="/newproduct"
                 sx={{
                     marginRight: '1.5vw', height:'2.5vw', minHeight:'30px', width: '12vw', minWidth: '120px',
                     backgroundColor: '#FF8000', color: "white", fontSize: '110%',
@@ -204,7 +214,7 @@ const EnhancedTableToolbar = (props) => {
                     }
                 }}>
                 Add New Product
-            </Button>
+            </Button> */}
 
             {numSelected > 0 ? (
                 <Tooltip title={<span style={{ fontSize: "200%" }}>Delete</span>}>
@@ -213,7 +223,7 @@ const EnhancedTableToolbar = (props) => {
                     </IconButton>
                 </Tooltip>
             ) : (
-                <Tooltip title={<span style={{ fontSize: "200%" }}>Filter Category</span>}>
+                <Tooltip title={<span style={{ fontSize: "200%" }}>Filter by year</span>}>
                     <IconButton>
                         <FilterListIcon sx={{ fontSize: '200%'}} />
                     </IconButton>
@@ -249,7 +259,7 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-export default function manageProductPage() {
+export default function manageUserPage() {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('name');
     const [selected, setSelected] = React.useState([]);
@@ -357,7 +367,6 @@ export default function manageProductPage() {
 
     return (
         <>
-        <Header3/>
         <Box sx={{ width: '90%', margin: 'auto', paddingTop: '3.5vw' }}>
             <Paper sx={{
                 width: '100%',
@@ -374,7 +383,7 @@ export default function manageProductPage() {
                         <SearchIcon style={{ height: '20px', width: 'auto' }} />
                     </SearchIconWrapper>
                     <StyledInputBase
-                        placeholder="Search for product…"
+                        placeholder="Search for user…"
                         inputProps={{ 'aria-label': 'Search', style: { fontSize: '150%' } }}
                     />
                 </Search>
@@ -430,7 +439,7 @@ export default function manageProductPage() {
                                                 </TableCell>
                                                 <TableCell style={{width:'2%'}}>
                                                     <Tooltip title={<span style={{ fontSize: "200%" }}>Edit</span>}>
-                                                        <IconButton href={'/editProduct?id='+ row._id} >
+                                                        <IconButton href="/editproduct">
                                                             <EditIcon style={{fontSize:'150%', color:'black'}}/>
                                                         </IconButton>                                                     
                                                     </Tooltip>                                                   
