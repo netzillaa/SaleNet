@@ -18,7 +18,8 @@ router.route("/:shopId/:productType/:productId").get((req, res) => {
     res.send("deleted something");
 });
 //getting a single product
-router.route("/find/:id").get(findOne);
+// router.route("/find/:id").get(findOne);
+router.route("/editProduct/:id").get(findOne);
 router.route("/update/:id").post(updateProduct);
 router.route("/delete/:id").delete(deleteProduct);
 router.route("/createOrder").post(createOrder);
