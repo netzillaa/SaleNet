@@ -16,6 +16,7 @@ import AdminDashboard from "./components/pages/Admin/AdminDashBoard";
 import CheckOut from "./components/pages/dashboard/CheckOut";
 import editProduct from "./components/pages/editProduct";
 import manageUser from "./components/pages/Admin/manageUserPage";
+import OrderDetails from "./components/pages/dashboard/OrderDetails";
 // import Section3 from "./components/Section3";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path={"/admin"} component={AdminDashboard}></Route>
             <Route path={"/manageUser"} component={manageUser}></Route>
             <Route path={"/checkOut"} component={CheckOut}></Route>
+            <Route path={"/orderDetails"} component={OrderDetails}></Route>
             {/* <Route path={"/follow"} component={FollowUs}></Route> */}
             <Route path={"/home"} component={LandingPage}></Route>
             <Route path={"/"} component={LandingPage}></Route>

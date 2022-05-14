@@ -21,7 +21,7 @@ const ColoredLine = ({ color }) => (
     />
 );
 
-function CheckOut(){
+function Payment(){
     return(
         <ThemeProvider theme={theme}>
             <Header3/>
@@ -37,9 +37,9 @@ function CheckOut(){
                     }}
                 >
                     <Card sx={{ minHeight: 500, minWidth: 600, padding: 3, paddingTop: 3, marginBottom: 10 }}>
-                        <div className="checkout" style={{ justifyContent: 'center', alignItems: "center", textAlign: "center" }}>
+                        <div className="orderDetails" style={{ justifyContent: 'center', alignItems: "center", textAlign: "center" }}>
                             <Typography component="h1" variant="h3">
-                                Checkout
+                                OrderDetails
                             </Typography>
                             <ColoredLine color="black" />
                             <div className="order-success">
@@ -68,4 +68,4 @@ function CheckOut(){
     )
 }
 
-export default CheckOut;
+export default Payment;
