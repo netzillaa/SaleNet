@@ -14,6 +14,8 @@ import Verification from "./components/pages/Verification";
 import manageProduct from "./components/pages/manageProductPage";
 import AdminDashboard from "./components/pages/Admin/AdminDashBoard";
 import CheckOut from "./components/pages/dashboard/CheckOut";
+import editProduct from "./components/pages/editProduct";
+import manageUser from "./components/pages/Admin/manageUserPage";
 // import Section3 from "./components/Section3";
 
 function App() {
@@ -29,7 +31,9 @@ function App() {
             <Route path={"/verify"} component={Verification}></Route>
             <Route path={"/newproduct"} component={NewProduct}></Route>
             <Route path={"/manageProduct"} component={manageProduct}></Route>
+            <Route path={"/editProduct"} component={editProduct}></Route>
             <Route path={"/admin"} component={AdminDashboard}></Route>
+            <Route path={"/manageUser"} component={manageUser}></Route>
             <Route path={"/checkOut"} component={CheckOut}></Route>
             {/* <Route path={"/follow"} component={FollowUs}></Route> */}
             <Route path={"/home"} component={LandingPage}></Route>
