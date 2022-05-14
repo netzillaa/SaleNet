@@ -70,7 +70,13 @@ const addProduct = async (req, res) => {
 const findOne = async (req, res) => {
     try {
         const result = await Product.findById(req.params.id);
-        res.json({ data: result });
+        if (result.length == 0) {
+            console.log("its empty")
+        }
+        else{
+        console.log('paramid: '+req.params.id);
+        res.status(200).json({result});
+    }
     }
     catch (err) {
         res.status(404).json({ status: "failed book is not found" })
