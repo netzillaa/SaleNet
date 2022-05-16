@@ -28,12 +28,6 @@ import {useState, useEffect} from "react";
 import axios from 'axios';
 import Header3 from '../Header3';
 
-function createData(image, name, price, stock) {
-  return {
-    image, name, price, stock
-  };
-}
-
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
