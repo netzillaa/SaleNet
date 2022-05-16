@@ -1,8 +1,8 @@
 const express = require("express");
 var multer = require('multer')
 let router = express.Router();
-
-const { getAllProducts, findOne, updateProduct, deleteProduct, addProduct, createOrder, getOrder} = require("../controllers/products")
+const path = require("path");
+const { getAllProducts, findOne, updateProduct, deleteProduct, addProduct, createOrder, getOrder } = require("../controllers/products")
 //a middleware to log every request we handle including url and date
 router.use((req, res, next) => {
     console.log(req.url, "@", Date.now());
@@ -39,7 +39,7 @@ const upload = multer({ storage: storage })
 //     console.log("image and form uploaded" + req + " " + req.body.productName);
 // })  
 
-router.route("/add", upload.single('image')).post(addProduct);
+router.route("/add").post(upload.single('productImage'), addProduct);
 
 
 

@@ -9,33 +9,33 @@ const getAllProducts = async (req, res) => {
     else {
         console.log("got data");
     }
-    res.status(200).json({productsData});
+    res.status(200).json({ productsData });
 
 };
 
 const getOrder = async (req, res) => {
     const orderCart = await order.find().sort({ _id: -1 }).limit(1);
-    
-    res.status(200).json({orderCart});
+
+    res.status(200).json({ orderCart });
 
 };
 
 const createOrder = async (req, res) => {
     res.json({
-        params : req.body
+        params: req.body
     })
     var receivedOrders = req.body.order;
     var orderTotalPrice = req.body.totalPrice;
 
     let orderName = [];
-    
+
     try {
         for (let i = 0; i < receivedOrders.length; i++) {
             orderName[i] = JSON.stringify(receivedOrders[i].product.productName);
         }
 
         await order.create({
-            items: orderName,      
+            items: orderName,
             totalPrice: orderTotalPrice,
         });
         console.log("added " + orderName + " to data base");
@@ -47,7 +47,7 @@ const createOrder = async (req, res) => {
 // res.status(200).json({ product: "returning all products in a product" })
 const addProduct = async (req, res) => {
     var receivedProduct = req.body;
-    console.log("received product: " + receivedProduct);
+    console.log("received product: ");
     var product = receivedProduct.productName + "\n";
     receivedProduct.productPrice + "\n";
     receivedProduct.productQuantity + "\n";
@@ -55,7 +55,7 @@ const addProduct = async (req, res) => {
     receivedProduct.image + "\n";
     receivedProduct.category;
 
-    console.log("received product: " + receivedProduct);
+
     console.log("name product: " + receivedProduct.productName);
 
     try {
@@ -79,10 +79,10 @@ const findOne = async (req, res) => {
         if (result.length == 0) {
             console.log("its empty")
         }
-        else{
-        console.log('paramid: '+req.params.id);
-        res.status(200).json({result});
-    }
+        else {
+            console.log('paramid: ' + req.params.id);
+            res.status(200).json({ result });
+        }
     }
     catch (err) {
         res.status(404).json({ status: "failed book is not found" })
@@ -91,8 +91,8 @@ const findOne = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-console.log('new name: ', req.params.id, req.body.productName, req.body.productPrice);
-    let x = Product.findOneAndUpdate({ _id: req.params.id }, { productName: req.body.productName, productPrice: req.body.productPrice, productQuantity: req.body.productQuantity, productCategory: req.body.productCategory }, function(err, data){
+    console.log('new name: ', req.params.id, req.body.productName, req.body.productPrice);
+    let x = Product.findOneAndUpdate({ _id: req.params.id }, { productName: req.body.productName, productPrice: req.body.productPrice, productQuantity: req.body.productQuantity, productCategory: req.body.productCategory }, function (err, data) {
         if (err) {
             console.log(err);
             console.log(x.productName);
@@ -116,4 +116,4 @@ const deleteProduct = async (req, res) => {
 }
 
 
-module.exports = { getAllProducts, addProduct, findOne, updateProduct, deleteProduct, createOrder, getOrder}
+module.exports = { getAllProducts, addProduct, findOne, updateProduct, deleteProduct, createOrder, getOrder }
