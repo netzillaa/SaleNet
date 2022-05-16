@@ -91,13 +91,16 @@ const findOne = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-
-    Product.findOneAndUpdate({ id: req.body.id }, { productName: req.body.newName, productPrice: req.body.newPrice }, (err, data) => {
+console.log('new name: ', req.params.id, req.body.productName, req.body.productPrice);
+    let x = Product.findOneAndUpdate({ _id: req.params.id }, { productName: req.body.productName, productPrice: req.body.productPrice, productQuantity: req.body.productQuantity, productCategory: req.body.productCategory }, function(err, data){
         if (err) {
             console.log(err);
+            console.log(x.productName);
         }
         else {
             console.log(data);
+            console.log(x.productName);
+            console.log('updated in backend: ');
         }
     })
 };

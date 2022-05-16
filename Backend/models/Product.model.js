@@ -9,7 +9,7 @@ const productSchema = mongoose.Schema({
         type: Number,
         required: [true, "product price not specified"],
     },
-    prodcutQuantity: {
+    productQuantity: {
         type: Number,
         required: [true, "item quantity not specified"],
     },
