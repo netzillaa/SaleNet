@@ -64,7 +64,8 @@ const addProduct = async (req, res) => {
             productPrice: req.body.productPrice,
             productQuantity: req.body.productQuantity,
             addedAt: Date.now(),
-            productImage: req.body.productImage,
+            // productImage: req.body.productImage,
+            productImage: req.file.filename,
             // productisAvailable: req.body.isAvailable,
 
         });

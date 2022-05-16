@@ -29,10 +29,11 @@ const useStyles = makeStyles(() => ({
         width: '100%',
         height: '4vw',
         minHeight: '40px',
-        backgroundColor: '#b8d0d5',
+        backgroundColor: '#000193',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        color: 'white'
     },
 }));
 
@@ -60,7 +61,7 @@ export default function editProduct() {
             setProductPrice(res.data.result.productPrice)
             setProductCategory(res.data.result.productCategory)
             setProductQuantity(res.data.result.productQuantity)
-            setProductImage(res.data.result.productImage)
+            setProductImage('images/productImages/'+res.data.result.productImage)
             console.log('Get product: ', res.data.result);
         }).catch(err => {
             console.log(err);
