@@ -1,43 +1,57 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Card from '@mui/material/Card';
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
-import InputLabel from '@mui/material/InputLabel';
+import React from 'react';
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Paper, Box, Card, Typography} from '@material-ui/core';
+import { Link } from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
+import Button from "@mui/material/Button";
+import { useState } from 'react';
+import { useEffect, useContext } from 'react';
+import axios from 'axios';
+import Header3 from '../Header3';
 import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
-import Header_SignedIn from "../Header_SignedIn";
-import IconButton from '@mui/material/IconButton';
-import Stack from '@mui/material/Stack';
+import TextField from "@mui/material/TextField";
+import EditImageModal from '../EditImageModal';
+import { useLocation } from "react-router-dom";
 import { Input } from "@mui/material";
-import axios from "axios";
-const theme = createTheme();
+
+const useStyles = makeStyles(() => ({
+
+    cardStyle: {
+        height: '60%',
+        width: '50%',
+        minWidth: '380px',
+        minHeight: '300px',
+        margin: 'auto',
+    },
+
+    pageTitle: {
+        width: '100%',
+        height: '4vw',
+        minHeight: '40px',
+        backgroundColor: '#000193',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white'
+    },
+}));
 
 export default function NewProduct() {
+
+    const [product, setProduct] = useState([]);
     const [productName, setProductName] = useState("");
     const [productPrice, setProductPrice] = useState("");
     const [productCategory, setProductCategory] = useState("");
-    const [productQuantity, setproductQuantity] = useState("");
-    const [productImage, setProductImage] = useState(null);
-    // const config = {
-    //     headers: {
-    //         "Content-Type": "multipart/form-data"
-    //         // "Content-Type": "undefined"
+    const [productImage, setProductImage] = useState("");
+    const [productQuantity, setProductQuantity] = useState("");
 
-    //     }
-    // }
+    const search = useLocation().search;
+    const id = new URLSearchParams(search).get('id');
+    console.log('id here:' + id);
+    const classes = useStyles();
+
     const addProduct = async (event) => {
         event.preventDefault();
         var formData = new FormData(); 
@@ -61,79 +75,96 @@ export default function NewProduct() {
         );
     };
 
+    document.body.style.backgroundColor = '#ECECEC';
+
     return (
-        <ThemeProvider theme={theme}>
-            <Header_SignedIn />
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
+        <>
+            <Header3 />
+            <div style={{ paddingTop: '40px' }}>
+                <Card className={classes.cardStyle}>
+                    <Box className={classes.pageTitle}>
+                        <h1>Add New Product</h1>
+                    </Box>
+                    <Box height='2vw' minHeight='16px' />
+                    <EditImageModal image={productImage} />
+                    <Box
+                        component="form"
+                        noValidate
+                        sx={{ mt: 3 }}
+                        padding="1vw 8vw 3vw 8vw"
+                    >
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}
+                                style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center' }}>
+                                <Typography style={{ alignItems: 'center', width: '22%', fontSize: '150%' }}>
+                                    Product Name:
+                                </Typography>
+                                <TextField
+                                    fullWidth
+                                    onChange={(e) => setProductName(e.target.value)}
+                                    InputProps={{ style: { fontSize: "150%" } }}
+                                    InputLabelProps={{ style: { fontSize: "150%" } }}
+                                    required
+                                    type="text"
+                                    label="Product Name"
+                                />
+                            </Grid>
+                            <Grid item xs={12}
+                                style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center' }}>
+                                <Typography style={{ alignItems: 'center', width: '22%', fontSize: '150%' }}>
+                                    Product Price:
+                                </Typography>
 
-                    }}
-                >
-
-                    <Card sx={{ minHeight: 500, minWidth: 600, padding: 3, paddingTop: 6, marginBottom: 10 }}>
-                        <Typography component="h1" variant="h3" sx={{ textAlign: "center" }}>
-                            New Product Information
-                        </Typography>
-                        <Box
-                            component="form"
-                            noValidate
-                            onSubmit={addProduct}
-                            sx={{ mt: 3 }}
-                        >
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} style={{ marginBottom: "1em" }}>
-                                    <TextField
-                                        fullWidth
-                                        value={productName}
-                                        onChange={(e) => setProductName(e.target.value)}
-                                        required
-                                        type="text"
-                                        label="Product Name"
-                                    />
-                                </Grid>
-                                <Grid item xs={12} style={{ marginBottom: "1em" }}>
-                                    <TextField
-                                        fullWidth
-                                        value={productPrice}
-                                        onChange={(e) => setProductPrice(e.target.value)}
-                                        required
-                                        type="text"
-                                        label="Product Price"
-                                    />
-                                </Grid>
-                                <Grid item xs={12} style={{ marginBottom: "1em" }}>
-                                    <TextField
-                                        fullWidth
-                                        value={productQuantity}
-                                        onChange={(e) => setproductQuantity(e.target.value)}
-                                        required
-                                        type="text"
-                                        label="Product Quantity"
-                                    />
-                                </Grid>
-                                <Grid item xs={12} style={{ marginBottom: "1em" }}>
-                                    <FormControl fullWidth>
-                                        <InputLabel id="demo-simple-select-label">Product Category</InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="productCategory"
-                                            name="productCategory"
-                                            label="productCategory"
-                                            onChange={(e) => setProductCategory(e.target.value)}
-                                        >
-                                            <MenuItem value={"FOOD"}>FOOD</MenuItem>
-                                            <MenuItem value={"DRINK"}>DRINK</MenuItem>
-                                            <MenuItem value={"OTHER"}>OTHER</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item xs={12} style={{ marginBottom: "2em" }}>
+                                <TextField
+                                    fullWidth
+                                    onChange={(e) => setProductPrice(e.target.value)}
+                                    InputProps={{ style: { fontSize: "150%" } }}
+                                    InputLabelProps={{ style: { fontSize: "150%" } }}
+                                    required
+                                    type="text"
+                                    label="Product Price"
+                                />
+                            </Grid>
+                            <Grid item xs={12}
+                                style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center' }}>
+                                <Typography style={{ alignItems: 'center', width: '22%', fontSize: '150%' }}>
+                                    Product Category:
+                                </Typography>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label"
+                                        style={{ fontSize: '150%' }}>
+                                        Product Category
+                                    </InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="productCategory"
+                                        name="productCategory"
+                                        label="productCategory"
+                                        style={{fontSize:'150%'}}
+                                        onChange={(e) => setProductCategory(e.target.value)}
+                                    >
+                                        <MenuItem value={"FOOD"} style={{ fontSize: '150%' }}>FOOD</MenuItem>
+                                        <MenuItem value={"DRINK"} style={{ fontSize: '150%' }}>DRINK</MenuItem>
+                                        <MenuItem value={"OTHER"} style={{ fontSize: '150%' }}>OTHER</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12}
+                                style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center' }}>
+                                <Typography style={{ alignItems: 'center', width: '22%', fontSize: '150%' }}>
+                                    Stock:
+                                </Typography>
+                                <TextField
+                                    fullWidth
+                                    onChange={(e) => setProductQuantity(e.target.value)}
+                                    InputProps={{ inputProps: { min: 0, max: 150 }, style: { fontSize: "150%" } }}
+                                    InputLabelProps={{ style: { fontSize: "150%" } }}
+                                    required
+                                    type="number"
+                                    label="Quantity"
+                                />
+                            </Grid>
+                            <Grid item xs={12} style={{ marginBottom: "2em" }}>
                                     <Input
                                         fullWidth
                                         onChange={(e) => setProductImage(e.target.files[0], "productImage")}
@@ -141,20 +172,41 @@ export default function NewProduct() {
                                         type="file"
                                     />
                                 </Grid>
-                            </Grid>
+                            <Grid item xs={12}
+                                style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center' }}>
+                                <Button
+                                    onClick={addProduct}
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{
+                                        fontSize: '130%', backgroundColor: '#01027B', color: 'white',
+                                        '&:hover': {
+                                            backgroundColor: "#000193", color: "white"
+                                        }
+                                    }}
+                                >
+                                    Add Product
+                                </Button>
+                                <Button
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{
+                                        fontSize: '130%',
+                                        backgroundColor: '#bbbbbb',
+                                        color: 'black',
+                                        '&:hover': { backgroundColor: '#9b9b9b', color:'black' }
+                                    }}
+                                    component={Link} to='/manageProduct'
+                                >
+                                    Cancel
+                                </Button>
 
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Add Product
-                            </Button>
-                        </Box>
-                    </Card>
-                </Box>
-            </Container>
-        </ThemeProvider >
-    );
+                            </Grid>
+                        </Grid>
+                    </Box>
+
+                </Card>
+            </div>
+        </>
+    )
 }

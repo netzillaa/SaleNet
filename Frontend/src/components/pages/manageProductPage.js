@@ -436,7 +436,7 @@ export default function manageProductPage() {
                                                     padding="none"
                                                     style={{fontSize: '150%'}}
                                                 >
-                                                    <img src={row.productImage} className={classes.prodImg}/>
+                                                    <img src={'images/productImages/'+ row.productImage} className={classes.prodImg}/>
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%', width:'30%'}}>
                                                     {row.productName}
