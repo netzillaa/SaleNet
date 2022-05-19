@@ -1,0 +1,51 @@
+.order-details Button {
+    background-color: #2681dc;
+    color: white;
+    height: 40px;
+    width: 110px;
+    text-align: center;
+    font-size: 12px;
+    padding: 3px;
+    border-radius: 5px;
+    margin: 10px 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.order-details p {
+    font-size: 16px;
+    padding-top: 10px;
+}
+
+.order-details {
+    padding: 10px;
+}
+
+.box-x {
+    background-color: #ffffff;
+    color: black;
+    margin: auto;
+    position: relative;
+    /* padding: 3px; */
+    height: 150px;
+    justify-content: center;
+    position: relative;
+}
+
+.checkout {
+    padding: 10px;
+}
+
+.CardMedia {
+    align-items: center;
+}
+
+.image {
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.Card {
+    align-items: center;
+}
