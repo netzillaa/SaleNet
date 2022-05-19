@@ -13,7 +13,7 @@ import Header2 from "./components/Header2";
 import Verification from "./components/pages/Verification";
 import manageProduct from "./components/pages/manageProductPage";
 import AdminDashboard from "./components/pages/Admin/AdminDashBoard";
-// import CheckOut from "./components/pages/dashboard/CheckOut";
+import CheckOut from "./components/pages/dashboard/CheckOut";
 import editProduct from "./components/pages/editProduct";
 import manageUser from "./components/pages/Admin/manageUserPage";
 import OrderDetails from "./components/pages/dashboard/OrderDetails";
@@ -35,7 +35,7 @@ function App() {
             <Route path={"/editProduct"} component={editProduct}></Route>
             <Route path={"/admin"} component={AdminDashboard}></Route>
             <Route path={"/manageUser"} component={manageUser}></Route>
-            {/* <Route path={"/checkOut"} component={CheckOut}></Route> */}
+            <Route path={"/checkOut"} component={CheckOut}></Route>
             <Route path={"/orderDetails"} component={OrderDetails}></Route>
             {/* <Route path={"/follow"} component={FollowUs}></Route> */}
             <Route path={"/home"} component={LandingPage}></Route>
