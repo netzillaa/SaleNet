@@ -135,7 +135,9 @@ EnhancedTableHead.propTypes = {
 }
 
 const deleteProcess = (id) => {
-    deleteProduct(id);
+    for(var i = 0; i<id.length; i++){
+       deleteProduct(id[i]); 
+    }
     reload()
 };
 
@@ -202,7 +204,8 @@ const EnhancedTableToolbar = (props) => {
 
             {numSelected > 0 ? (
                 <Tooltip title={<span style={{ fontSize: "200%" }}>Delete</span>}>
-                    <IconButton onClick={() => deleteProcess(selectedId)}>
+                    {/* <IconButton onClick={() => deleteProcess(selectedId)}> */}
+                    <IconButton onClick={() => deleteProcess({selectedId})}>
                         <DeleteIcon style={{ fontSize: '200%' }} />
                     </IconButton>
                 </Tooltip>
@@ -389,7 +392,7 @@ export default function manageProductPage() {
                         <Table aria-labelledby="tableTitle" >
                             <EnhancedTableHead
                                 numSelected={selected.length}
-                                selectedId={selected._id}
+                                // selectedId={selected._id}
                                 order={order}
                                 orderBy={orderBy}
                                 onSelectAllClick={handleSelectAllClick}
@@ -436,7 +439,8 @@ export default function manageProductPage() {
                                                     padding="none"
                                                     style={{fontSize: '150%'}}
                                                 >
-                                                    <img src={'images/productImages/'+ row.productImage} className={classes.prodImg}/>
+                                                    <img src={row.productImage != null ? 'images/productImages/'+ row.productImage : 'images/productImages/default_image.png'} 
+                                                         className={classes.prodImg}/>
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%', width:'30%'}}>
                                                     {row.productName}

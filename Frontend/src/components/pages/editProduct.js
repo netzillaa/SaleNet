@@ -86,6 +86,10 @@ export default function editProduct() {
         window.location.reload(false);
     };
 
+    const handleImage = (data) => {
+        setProductImage(data)
+    }
+
     document.body.style.backgroundColor = '#ECECEC';
 
     return (
@@ -97,7 +101,9 @@ export default function editProduct() {
                         <h1>Edit Product</h1>
                     </Box>
                     <Box height='2vw' minHeight='16px' />
-                    <EditImageModal image={productImage} />
+                    {/* <EditImageModal image={productImage} setProductImage={setProductImage}/> */}
+                    <EditImageModal image={productImage} chnageImage={productImage => setProductImage(productImage)}/>
+                    {/* <EditImageModal image={productImage} handleImage={handleImage}/> */}
                     <Box
                         component="form"
                         noValidate
@@ -205,7 +211,7 @@ export default function editProduct() {
                                     }}
                                     component={Link} to='/manageProduct'
                                 >
-                                    Cancel
+                                    Close
                                 </Button>
 
                             </Grid>

@@ -36,6 +36,27 @@ const useStyles = makeStyles(() => ({
         alignItems: 'center',
         color: 'white'
     },
+
+    holder: {
+        height: '12vw',
+        width: '12vw',
+        minHeight: '80px',
+        minWidth: '80px',
+        margin: 'auto',
+        position: 'relative',
+      },
+    
+      imgStyle: {
+        outline: '0.15vw black solid',
+        borderRadius: '0.3vw',
+        height: '12vw',
+        width: '12vw',
+        minHeight: '80px',
+        minWidth: '80px',
+        objectFit: 'cover',
+        boxShadow: '0.2vw 0.3vw 0.5vw 0.2vw #dadadc',
+      },
+    
 }));
 
 export default function NewProduct() {
@@ -46,11 +67,31 @@ export default function NewProduct() {
     const [productCategory, setProductCategory] = useState("");
     const [productImage, setProductImage] = useState("");
     const [productQuantity, setProductQuantity] = useState("");
+    const [isUploaded, setIsUploaded] = useState(false);
 
     const search = useLocation().search;
     const id = new URLSearchParams(search).get('id');
     console.log('id here:' + id);
     const classes = useStyles();
+
+    function handleImage(e) {
+      if (e.target.files && e.target.files[0]) {
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+          setProductImage(e.target.result);
+          setIsUploaded(true);
+        };
+  
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    }
+  
+    function resetImage(e){
+        e.target.value = null;
+        setProductImage("");
+        setIsUploaded(false);
+    }
 
     const addProduct = async (event) => {
         event.preventDefault();
@@ -86,7 +127,19 @@ export default function NewProduct() {
                         <h1>Add New Product</h1>
                     </Box>
                     <Box height='2vw' minHeight='16px' />
-                    <EditImageModal image={productImage} />
+                    {/* <EditImageModal image={productImage} /> */}
+
+                    <Box align='center' className={classes.holder}>
+                    {!isUploaded ? (
+                        <img src='images/productImages/default_image.png'
+                             className={classes.imgStyle} />
+                    ):(
+                        <img src = { productImage }
+                             className = {classes.imgStyle} />
+ 
+                    )}
+                    </Box>
+
                     <Box
                         component="form"
                         noValidate
@@ -164,14 +217,36 @@ export default function NewProduct() {
                                     label="Quantity"
                                 />
                             </Grid>
-                            <Grid item xs={12} style={{ marginBottom: "2em" }}>
+                            <Grid item xs={12} style={{ marginBottom: "2em", display: 'flex', gap: '1em', alignItems: 'center'}}>
+                                {/* {isUploaded ? ( */}
                                     <Input
                                         fullWidth
-                                        onChange={(e) => setProductImage(e.target.files[0], "productImage")}
+                                        // onChange={(e) => setProductImage(e.target.files[0], "productImage")}
+                                        onChange={handleImage}
+                                        type="file"
+                                        accept="image/*"
+                                        style={{ fontSize: '160%' }} />
+                                {/* ):( */}
+                                    {/* <Input
+                                        fullWidth
+                                        onChange={()=>console.log('not working')}
                                         required
                                         type="file"
-                                    />
-                                </Grid>
+                                        accept="image/*"
+                                        style={{ fontSize: '150%' }} /> */}
+                                {/* )} */}
+
+                                <Button
+                                    onClick={resetImage}
+                                    variant="contained"
+                                    sx={{
+                                        fontSize: '120%', backgroundColor: 'red', color: 'white',
+                                        '&:hover': {
+                                            backgroundColor: "#d0021b", color: "white"
+                                        }
+                                    }}
+                                >reset</Button>
+                            </Grid>
                             <Grid item xs={12}
                                 style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center' }}>
                                 <Button
@@ -184,6 +259,7 @@ export default function NewProduct() {
                                             backgroundColor: "#000193", color: "white"
                                         }
                                     }}
+                                    component={Link} to='/manageProduct'
                                 >
                                     Add Product
                                 </Button>
