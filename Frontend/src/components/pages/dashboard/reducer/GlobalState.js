@@ -1,7 +1,5 @@
 import React, { useReducer } from "react";
 
-import data from "../data";
-
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 

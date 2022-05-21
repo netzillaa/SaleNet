@@ -7,8 +7,8 @@ import Card from '@mui/material/Card';
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import Header3 from '../../Header3';
-import '../../../css/CheckOut.css';
+import Header3 from '../../../Header3';
+import '../../../../css/CheckOut.css';
 import CardMedia from '@mui/material/CardMedia';
 
 const theme = createTheme();
