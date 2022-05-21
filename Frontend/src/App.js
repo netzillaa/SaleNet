@@ -13,10 +13,10 @@ import Header2 from "./components/Header2";
 import Verification from "./components/pages/Verification";
 import manageProduct from "./components/pages/manageProductPage";
 import AdminDashboard from "./components/pages/Admin/AdminDashBoard";
-import CheckOut from "./components/pages/dashboard/CheckOut";
+import CheckOut from "./components/pages/dashboard/checkout/CheckOut";
 import editProduct from "./components/pages/editProduct";
 import manageUser from "./components/pages/Admin/manageUserPage";
-import OrderDetails from "./components/pages/dashboard/OrderDetails";
+import OrderDetails from "./components/pages/dashboard/checkout/OrderDetails";
 // import Section3 from "./components/Section3";
 
 function App() {
