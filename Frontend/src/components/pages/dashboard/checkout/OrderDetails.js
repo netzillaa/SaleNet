@@ -37,6 +37,8 @@ const ColoredLine = ({ color }) => (
     />
 );
 
+
+
 function OrderDetails() {
     const [DBcartItems, setCartItems] = useState([]);
     const [DBcartTotalPrice, setCartTotalPrice] = useState(0);
