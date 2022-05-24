@@ -11,7 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Header3 from '../../Header3';
-
+import ManageUserPage from './manageUserPage';
 import Paper from '@mui/material/Paper';
 // import { LatestOrders } from '../components/dashboard/latest-orders';
 // import { LatestProducts } from '../components/dashboard/latest-products';
@@ -28,20 +28,20 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 
 const theme = createTheme();
 
-const headCells = [
-    {
-        id: 'username',
-        numeric: true,
-        disablePadding: false,
-        label: 'Username',
-    },
-    {
-        id: 'shopname',
-        numeric: true,
-        disablePadding: false,
-        label: 'Shopname',
-    },
-];
+// const headCells = [
+//     {
+//         id: 'username',
+//         numeric: true,
+//         disablePadding: false,
+//         label: 'Username',
+//     },
+//     {
+//         id: 'shopname',
+//         numeric: true,
+//         disablePadding: false,
+//         label: 'Shopname',
+//     },
+// ];
 
 const AdminDashboard = () => {
     return (
@@ -93,18 +93,20 @@ const AdminDashboard = () => {
                                         p: 2,
                                         display: 'flex',
                                         flexDirection: 'column',
-                                        height: 240,
+                                        height: 520,
                                     }}>
 
-                                    <TableCell style={{ fontSize: "180%" }}>Users</TableCell>
+                                    {/* <TableCell style={{ fontSize: "180%" }}>Users</TableCell>
                                     {headCells.map((headCell) => (
                                         <TableCell
                                             key={headCell.id}
                                             padding={headCell.disablePadding ? 'none' : 'normal'}
                                             style={{ fontSize: "180%", fontWeight: "bold" }}
-                                        >
+                                        > */}
+                                        <ManageUserPage/>
+                                        
 
-                                        </TableCell>))}
+                                        {/* </TableCell>))} */}
                                 </Paper>
                             </Grid>
                         </Grid>

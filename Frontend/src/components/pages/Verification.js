@@ -43,6 +43,36 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+
+    const addUser = async () => {
+ let fullName = localStorage.getItem("fullName")
+ let userName = localStorage.getItem("userName")
+ let password = localStorage.getItem("password")
+ let email = localStorage.getItem("email")
+ let phoneNumber = localStorage.getItem("phoneNumber")
+ let shopName = localStorage.getItem("shopName")
+ let shopAddress = localStorage.getItem("shopAddress")
+ let businessLicense = localStorage.getItem("businessLicense")
+
+const response = await fetch("http://localhost:4000/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName,
+        userName,
+        password,
+        email,
+        phoneNumber,
+        shopName,
+        shopAddress,
+        businessLicense,
+      }),
+    });
+    const sentData = await response.json();
+    }
+
 export default function Verification({ history }) {
 
     const classes = useStyles();
@@ -52,9 +82,7 @@ export default function Verification({ history }) {
 
     const handleSubmit = () => {
         if (authCode == userCode) {
-            history.push({
-                pathname: `/signIn`
-            });
+           addUser();
         } else {
             alert("Wrong Code")
               return false;
@@ -87,7 +115,7 @@ export default function Verification({ history }) {
                         <EmailIcon style={{ fontSize: '25px' }} />
                     </Avatar>
                     <br />
-                    <h1>Verfiy Your Email Address</h1> <br />
+                    <h1>Verify Your Email Address</h1> <br />
                     <h3>
                         We've sent you an email to <b>example@example.com</b> to verify your
                         email address and activate your account.

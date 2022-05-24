@@ -12,7 +12,7 @@ import LandingPage from "./components/LandingPage";
 import Header2 from "./components/Header2";
 import Verification from "./components/pages/Verification";
 import manageProduct from "./components/pages/manageProductPage";
-import AdminDashboard from "./components/pages/Admin/AdminDashBoard";
+import AdminDashBoard from "./components/pages/Admin/AdminDashBoard";
 import CheckOut from "./components/pages/dashboard/checkout/CheckOut";
 import editProduct from "./components/pages/editProduct";
 import manageUser from "./components/pages/Admin/manageUserPage";

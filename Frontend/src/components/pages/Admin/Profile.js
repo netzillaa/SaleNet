@@ -32,7 +32,7 @@ const ColoredLine = ({ color }) => (
         }}
     />
 );
-
+ 
 function userProfile() {
     return (
         <ThemeProvider theme={theme}>
