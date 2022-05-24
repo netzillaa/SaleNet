@@ -24,7 +24,6 @@ import { CardActionArea } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import ProductCard from './dashboard/ProductCard';
-import data from './dashboard/data'
 import Header from "../Header_SignedIn";
 import Alerto from './Alerto';
 import Header3 from '../Header3';

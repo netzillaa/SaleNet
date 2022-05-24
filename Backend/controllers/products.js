@@ -1,4 +1,5 @@
 let Product = require("../models/Product.model");
+let pdfGenerator = require('./pdfGenerator');
 const mongoose = require("mongoose");
 const order = require("../models/Order.model");
 const getAllProducts = async (req, res) => {
@@ -14,8 +15,8 @@ const getAllProducts = async (req, res) => {
 };
 
 const getOrder = async (req, res) => {
-    const orderCart = await order.find().sort({ _id: -1 }).limit(1);
-
+    const orderCart = await order.find().sort({ _id: -1 }).limit(1).populate('shop');
+    await pdfGenerator(orderCart);
     res.status(200).json({ orderCart });
 
 };
@@ -25,8 +26,9 @@ const createOrder = async (req, res) => {
         params: req.body
     })
     var receivedOrders = req.body.order;
-    var orderTotalPrice = req.body.totalPrice;
 
+    var orderTotalPrice = req.body.newTotal;
+    var orderShopInfo = req.body.shopData;
     let orderName = [];
 
     try {
@@ -37,6 +39,7 @@ const createOrder = async (req, res) => {
         await order.create({
             items: orderName,
             totalPrice: orderTotalPrice,
+            shop: orderShopInfo,
         });
         console.log("added " + orderName + " to data base");
     } catch (err) {
