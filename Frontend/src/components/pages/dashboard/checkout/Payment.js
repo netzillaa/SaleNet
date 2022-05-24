@@ -7,7 +7,7 @@ import Card from '@mui/material/Card';
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import Header3 from '../../Header3';
+import Header3 from '../../../Header3';
 
 const theme = createTheme();
 

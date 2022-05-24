@@ -135,7 +135,10 @@ EnhancedTableHead.propTypes = {
 }
 
 const deleteProcess = (id) => {
-    deleteProduct(id);
+    // for(var i = 0; i<id.length; i++){
+    //    deleteProduct(id[i]); 
+    // }
+    deleteProduct(id); 
     reload()
 };
 
@@ -202,7 +205,8 @@ const EnhancedTableToolbar = (props) => {
 
             {numSelected > 0 ? (
                 <Tooltip title={<span style={{ fontSize: "200%" }}>Delete</span>}>
-                    <IconButton onClick={() => deleteProcess(selectedId)}>
+                    {/* <IconButton onClick={() => deleteProcess(selectedId)}> */}
+                    <IconButton onClick={() => deleteProcess({selectedId})}>
                         <DeleteIcon style={{ fontSize: '200%' }} />
                     </IconButton>
                 </Tooltip>
@@ -251,6 +255,7 @@ export default function manageProductPage() {
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const classes = useStyles();
     const [products, setProduct] = useState([]);
+    const [row, setRow] = useState(products);
 
     useEffect(() => {
         getproduct();
@@ -343,6 +348,13 @@ export default function manageProductPage() {
         setPage(0);
     };
 
+    // const requestSearch = (val) => {
+    //     const filtered = products.filter((row) => {
+    //       return row.productName.toLowerCase().includes(val.toLowerCase());
+    //     });
+    //     setRow(filtered);
+    //   };
+
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
@@ -370,6 +382,7 @@ export default function manageProductPage() {
                     <StyledInputBase
                         placeholder="Search for product…"
                         inputProps={{ 'aria-label': 'Search', style: { fontSize: '150%' } }}
+                        // onChange={(val) => requestSearch(val)}
                     />
                 </Search>
                 <Button variant="contained" href="/"
@@ -389,7 +402,7 @@ export default function manageProductPage() {
                         <Table aria-labelledby="tableTitle" >
                             <EnhancedTableHead
                                 numSelected={selected.length}
-                                selectedId={selected._id}
+                                // selectedId={selected._id}
                                 order={order}
                                 orderBy={orderBy}
                                 onSelectAllClick={handleSelectAllClick}
@@ -410,7 +423,7 @@ export default function manageProductPage() {
                                                 role="checkbox"
                                                 aria-checked={isItemSelected}
                                                 tabIndex={-1}
-                                                key={row._id}
+                                                key={row.productName}
                                                 selected={isItemSelected}
                                             >
                                                 <TableCell padding="checkbox">
@@ -436,7 +449,8 @@ export default function manageProductPage() {
                                                     padding="none"
                                                     style={{fontSize: '150%'}}
                                                 >
-                                                    <img src={'images/productImages/'+ row.productImage} className={classes.prodImg}/>
+                                                    <img src={row.productImage != null ? 'images/productImages/'+ row.productImage : 'images/productImages/default_image.png'} 
+                                                         className={classes.prodImg}/>
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%', width:'30%'}}>
                                                     {row.productName}
