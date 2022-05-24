@@ -86,15 +86,32 @@ export default function EditImageModal({ image }, props){
       let reader = new FileReader();
 
       reader.onload = function (e) {
-        setImage(e.target.result);
+        // setImage(e.target.result);
         setIsUploaded(true);
+        const preview = document.querySelector('#modal img')
+        preview.src = e.target.result;
+        console.log("Preview Result: ", e.target.result)
       };
 
       reader.readAsDataURL(e.target.files[0]);
+      // setImage(e.target.files[0])
     }
   }
 
-  function resetImage(e){
+  function handleImage(e) {
+      handleImageChange(e)
+      setImage(e.target.files[0], "productImage")
+  }
+
+  const updateImage = (e) => {
+    e.preventDefault();
+    // setImage(e.target.files[0]);
+    console.log("set product image: ", productImage)
+    // setImage(URL.createObjectURL(e.target.files[0]))
+    props.changeImage(productImage);
+  }
+
+  const resetImage = (e) => {
     e.target.value = null;
     setImage("");
     setIsUploaded(false);
@@ -130,7 +147,7 @@ export default function EditImageModal({ image }, props){
           </Typography>
           <Box height='2vw' minHeight='16px' />
 
-          <Box style={{ display: 'flex', justifyContent: 'center' }}>
+          <Box style={{ display: 'flex', justifyContent: 'center' }} id='modal'>
             {!isUploaded ? (
               <img src={image}
               className={classes.inModalImg}
@@ -149,7 +166,7 @@ export default function EditImageModal({ image }, props){
                          gap: '1em', alignItems: 'center',  padding: '3vw'}}>
             <Input
               fullWidth
-              onChange={handleImageChange}
+              onChange={handleImage}
               required
               type="file"
               accept="image/*"
@@ -173,6 +190,7 @@ export default function EditImageModal({ image }, props){
             <Button
               // onClick={() => setProductImage(productImage)}
               onClick={() => props.changeImage(productImage)}
+              // onClick={updateImage}
               // onClick={() => handleImage(productImage)}
               fullWidth
               variant="contained"

@@ -79,14 +79,21 @@ export default function NewProduct() {
         let reader = new FileReader();
 
         reader.onload = function (e) {
-          setProductImage(e.target.result);
+        //   setProductImage(e.target.result);
           setIsUploaded(true);
+          const preview = document.querySelector('img')
+          preview.src = e.target.result;
         };
   
         reader.readAsDataURL(e.target.files[0]);
       }
     }
-  
+
+    function changeImage(e) {
+        handleImage(e)
+        setProductImage(e.target.files[0], "productImage")
+    }
+
     function resetImage(e){
         e.target.value = null;
         setProductImage("");
@@ -136,7 +143,6 @@ export default function NewProduct() {
                     ):(
                         <img src = { productImage }
                              className = {classes.imgStyle} />
- 
                     )}
                     </Box>
 
@@ -222,7 +228,7 @@ export default function NewProduct() {
                                     <Input
                                         fullWidth
                                         // onChange={(e) => setProductImage(e.target.files[0], "productImage")}
-                                        onChange={handleImage}
+                                        onChange={changeImage}
                                         type="file"
                                         accept="image/*"
                                         style={{ fontSize: '160%' }} />

@@ -48,7 +48,6 @@ export default function editProduct() {
 
     const search = useLocation().search;
     const id = new URLSearchParams(search).get('id');
-    console.log('id here:' + id);
     const classes = useStyles();
 
     useEffect(() => {
@@ -102,8 +101,8 @@ export default function editProduct() {
                     </Box>
                     <Box height='2vw' minHeight='16px' />
                     {/* <EditImageModal image={productImage} setProductImage={setProductImage}/> */}
-                    <EditImageModal image={productImage} chnageImage={productImage => setProductImage(productImage)}/>
-                    {/* <EditImageModal image={productImage} handleImage={handleImage}/> */}
+                    {/* <EditImageModal image={productImage} changeImage={productImage => setProductImage(productImage)}/> */}
+                    <EditImageModal image={productImage} changeImage={handleImage}/>
                     <Box
                         component="form"
                         noValidate
