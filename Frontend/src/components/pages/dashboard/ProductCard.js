@@ -17,6 +17,8 @@ export default function ProductCard({ addProductToCart, calcTotalPrice, ...props
     calcTotalPrice()
   };
 
+  let productIMG = "images/productImages/"+props.productImage;
+
   return (
     <React.Fragment>
       <Grid style={{ padding: 10 }}>
@@ -25,7 +27,7 @@ export default function ProductCard({ addProductToCart, calcTotalPrice, ...props
             <CardMedia
               component="img"
               height="250"
-              image={props.productImage}
+              image={productIMG}
               alt="Product Image"
             />
             <CardContent>

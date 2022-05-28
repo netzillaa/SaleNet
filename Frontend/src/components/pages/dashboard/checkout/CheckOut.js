@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import Header3 from '../../../Header3';
 import '../../../../css/CheckOut.css';
 import CardMedia from '@mui/material/CardMedia';
+import MyPDF from '../../../../pdfDocuments/output.pdf';
 
 const theme = createTheme();
 
@@ -71,9 +72,9 @@ function CheckOut() {
                                         </p>
 
                                         {/* <button href="/Dashboard">Okay</button> */}
-                                        <button href="#">Email Receipt</button>
-                                        <button href="#">Download PDF</button>
+                                        <button >Email Receipt</button>
                                         
+                                         <a href={MyPDF} download="output.pdf"> Download Here </a>
                                     </section>
                                 </div>
                             </div>

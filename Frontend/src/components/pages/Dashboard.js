@@ -69,7 +69,7 @@ export default function Dashboard({}) {
     return (
       <div>
         <ProductCard
-          key={product.id}
+          key={product.productID}
           addProductToCart={context.addProductToCart}
           calcTotalPrice={context.calcTotalPrice}
           {...product}

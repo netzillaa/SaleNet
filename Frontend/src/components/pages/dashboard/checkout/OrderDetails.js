@@ -79,7 +79,7 @@ function OrderDetails() {
     })  
 
     const moveToCheckOut = () => {
-        console.log("bbbbbbbbbbbbbbbbbbbbbb" + context.products.length);
+        window.location.href = "http://localhost:3000/checkOut";
     };
 
     return (

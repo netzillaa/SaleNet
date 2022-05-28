@@ -3,7 +3,7 @@ import { ADD_TO_CART, REMOVE_FROM_CART, DELETE_FROM_CART, CLEAR_ALL_FROM_CART, C
 
 const addProductToCart = (state, product) => {
   const copy = [...state.carts];
-  const curItemIndex = copy.findIndex((i) => i.product.id === product.id);
+  const curItemIndex = copy.findIndex((i) => i.product.productID === product.productID);
 
   if (curItemIndex < 0) {
     copy.push({ product, quantity: 1 });
@@ -20,7 +20,7 @@ const addProductToCart = (state, product) => {
 
 const removeProductFromCart = (state, productID) => {
   const copy = [...state.carts];
-  const curItemIndex = copy.findIndex((i) => i.product.id === productID);
+  const curItemIndex = copy.findIndex((i) => i.product.productID === productID);
 
   const curItem = { ...copy[curItemIndex] };
   curItem.quantity--;
@@ -36,7 +36,7 @@ const removeProductFromCart = (state, productID) => {
 
 const deleteProductFromCart = (state, productID) => {
   const copy = [...state.carts];
-  const curItemIndex = copy.findIndex((i) => i.product.id === productID);
+  const curItemIndex = copy.findIndex((i) => i.product.productID === productID);
 
   const curItem = { ...copy[curItemIndex] };
   curItem.quantity = 0;
