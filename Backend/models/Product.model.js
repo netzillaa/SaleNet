@@ -20,6 +20,9 @@ const productSchema = mongoose.Schema({
     productisAvailable: {
         type: Boolean,
     },
+    productID: {
+        type: Number,
+    },
     productCategory: {
         type: String,
         enum: ['FOOD', 'DRINK', 'OTHER'],

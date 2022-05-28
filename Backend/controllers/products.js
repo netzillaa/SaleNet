@@ -67,6 +67,22 @@ const addProduct = async (req, res) => {
     receivedProduct.image + "\n";
     receivedProduct.category;
 
+    let allProducts = await Product.find();
+    let exict = false;
+    let randomID;
+
+    for (let i = 0; i < (allProducts.length + 1); i++) {
+        randomID = Math.floor((Math.random() * 9999999999) + 1)
+        for (let i = 0; i < allProducts.length; i++) {
+            if (randomID == allProducts.productID){
+                exict = true;
+                break;
+            }    
+        }
+        if (!exict) {
+            break;
+        }
+    }
 
     console.log("name product: " + receivedProduct.productName);
 
@@ -78,6 +94,7 @@ const addProduct = async (req, res) => {
             addedAt: Date.now(),
             // productImage: req.body.productImage,
             productImage: req.file.filename,
+            productID: randomID,
             // productisAvailable: req.body.isAvailable,
 
         });

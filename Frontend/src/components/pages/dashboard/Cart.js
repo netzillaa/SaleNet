@@ -23,10 +23,10 @@ export default function Cart({
                 addProductToCart(product)
 
             } else if (action === "remove") {
-                removeProductFromCart(product.id)
+                removeProductFromCart(product.productID)
             }
             else if (action === "delete") {
-                deleteProductFromCart(product.id)
+                deleteProductFromCart(product.productID)
             }
 
             calcTotalPrice()
@@ -35,7 +35,7 @@ export default function Cart({
         return (
             <div>
                 <div
-                    key={product.id}
+                    key={product.productID}
                 />
                 <div className="items-info">
                     <div className="title">
