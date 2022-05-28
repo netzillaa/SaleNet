@@ -1,0 +1,190 @@
+table td {
+    vertical-align: top;
+}
+
+/* -------------------------------------
+    BODY & CONTAINER
+------------------------------------- */
+
+
+.aabody-wrap {
+    background-color: #f6f6f6;
+    width: 100%;
+}
+
+.aacontainerr {
+    display: block !important;
+    max-width: 600px !important;
+    margin: 0 auto !important;
+    /* makes it centered */
+    clear: both !important;
+}
+
+.aacontent {
+    max-width: 600px;
+    margin: 0 auto;
+    display: block;
+    padding: 20px;
+}
+
+/* -------------------------------------
+    HEADER, FOOTER, MAIN
+------------------------------------- */
+.aamain {
+    background: #fff;
+    border: 1px solid #e9e9e9;
+    border-radius: 3px;
+}
+
+.aacontent-wrap {
+    padding: 20px;
+}
+
+.aacontent-block {
+    padding: 0 0 20px;
+}
+
+.aaheader {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* -------------------------------------
+    TYPOGRAPHY
+------------------------------------- */
+h1, h2, h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #000;
+    margin: 40px 0 0;
+    line-height: 1.aa2;
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+p, ul, ol {
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+p li, ul li, ol li {
+    margin-left: 5px;
+    list-style-position: inside;
+}
+
+/* -------------------------------------
+    LINKS & BUTTONS
+------------------------------------- */
+a {
+    color: #1ab394;
+    text-decoration: underline;
+}
+
+.aabtn-primary {
+    text-decoration: none;
+    color: #FFF;
+    background-color: #1ab394;
+    border: solid #1ab394;
+    border-width: 5px 10px;
+    line-height: 2;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+/* -------------------------------------
+    OTHER STYLES THAT MIGHT BE USEFUL
+------------------------------------- */
+.aalast {
+    margin-bottom: 0;
+}
+
+.aafirst {
+    margin-top: 0;
+}
+
+.aaaligncenter {
+    text-align: center;
+}
+
+.aaalignright {
+    text-align: right;
+}
+
+.aaalignleft {
+    text-align: left;
+}
+
+.aaclear {
+    clear: both;
+}
+
+/* -------------------------------------
+    ALERTS
+    Change the class depending on warning email, good email or bad email
+------------------------------------- */
+.aaalert {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    padding: 20px;
+    text-align: center;
+    border-radius: 3px 3px 0 0;
+}
+.aaalert a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+}
+.aaalert.aaalert-warning {
+    background: #f8ac59;
+}
+.aaalert.aaalert-bad {
+    background: #ed5565;
+}
+.aaalert.aaalert-good {
+    background: #1ab394;
+}
+
+/* -------------------------------------
+    INVOICE
+    Styles for the billing table
+------------------------------------- */
+.aainvoice {
+    margin: 40px auto;
+    text-align: left;
+    width: 80%;
+}
+.aainvoice td {
+    padding: 5px 0;
+}
+.aainvoice .aainvoice-items {
+    width: 100%;
+}
+.aainvoice .aainvoice-items td {
+    border-top: #eee 1px solid;
+}
+.aainvoice .aainvoice-items .aatotal td {
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    font-weight: 700;
+}

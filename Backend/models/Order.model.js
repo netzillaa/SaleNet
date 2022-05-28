@@ -8,6 +8,16 @@ const orderSchema = mongoose.Schema({
         required: [true, "Order items not detected"],
         }
     ],
+    itemPrice: [{
+        type: Number,
+        required: [true, "Order items price not detected"],
+        }
+    ],
+    itemQuantity: [{
+        type: Number,
+        required: [true, "Order items quantity not detected"],
+        }
+    ],
     totalPrice: {
         type: Number,
         required: [true, "Order total price not specified"],

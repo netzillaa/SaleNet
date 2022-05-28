@@ -18,6 +18,7 @@ import editProduct from "./components/pages/editProduct";
 import manageUser from "./components/pages/Admin/manageUserPage";
 import editUser from "./components/pages/Admin/editUser";
 import OrderDetails from "./components/pages/dashboard/checkout/OrderDetails";
+import QRUploader from "./components/pages/dashboard/checkout/QRUploader";
 // import Section3 from "./components/Section3";
 
 function App() {
@@ -40,8 +41,8 @@ function App() {
             <Route path={"/orderDetails"} component={OrderDetails}></Route>
             <Route path={"/editUser"} component={editUser}></Route>
             {/* <Route path={"/follow"} component={FollowUs}></Route> */}
-            <Route path={"/home"} component={LandingPage}></Route>            
-            {/* <Route path={"/profile"} component={Profile}></Route> */}
+            <Route path={"/qrUploader"} component={QRUploader}></Route>
+            <Route path={"/home"} component={LandingPage}></Route>
             <Route path={"/"} component={LandingPage}></Route>
           </Switch>
         </div>
