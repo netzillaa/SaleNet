@@ -122,6 +122,7 @@ const updateProduct = async (req, res) => {
     })
 };
 const deleteProduct = async (req, res) => {
+    console.log("kalam"+req.params.id);
     Product.findOneAndDelete({ _id: req.params.id }, (err, data) => {
         if (err) {
             console.log("couldnt delete" + err);

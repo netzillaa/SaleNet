@@ -143,8 +143,9 @@ const deleteProcess = (id) => {
 };
 
 const deleteProduct = async (id) => {
-    await axios.delete("http://localhost:4000/products/delete/" + id).then(res => {
-        
+    console.log(id);
+    await axios.delete("http://localhost:4000/products/delete/" + id.selectedId).then(res => {
+        console.log("kalam"+res.params.id);
     }).catch(err => {
         console.log(err);
     })
