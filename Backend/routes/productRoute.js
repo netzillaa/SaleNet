@@ -25,6 +25,7 @@ router.route("/delete/:id").delete(deleteProduct);
 router.route("/createOrder").post(createOrder);
 
 
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, '../Frontend/public/images/productImages/')
@@ -40,6 +41,7 @@ const upload = multer({ storage: storage })
 // })  
 
 router.route("/add").post(upload.single('productImage'), addProduct);
+
 
 
 

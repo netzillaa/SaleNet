@@ -87,8 +87,7 @@ export default function Cart({
     const shopData = parseJwt(userInfo);
 
     const postOrder = async () => {
-        const completeOrder = JSON.stringify(order)
-        await axios.post("http://localhost:4000/products/createOrder", { order, newTotal, shopData }, config).then(res => {
+        await axios.post("http://localhost:4000/products/createOrder", { carts, newTotal, shopData }, config).then(res => {
             console.log(res.data);
         }).catch(err => {
             console.log(err);
@@ -96,13 +95,10 @@ export default function Cart({
     }
 
     function checkOut() {
-        setOrder(carts)
-        console.log(order);
-        // postOrder()
+        postOrder()
         window.location.href = "http://localhost:3000/orderDetails";
     }
 
-    const [order, setOrder] = useState([]);
 
     const clearCartAndTotalPrice = () => {
         clearCart()
