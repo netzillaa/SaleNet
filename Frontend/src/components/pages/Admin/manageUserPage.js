@@ -75,22 +75,22 @@ const headCells = [
         label: 'Shop Name',
     },
     {
-        id: 'username',
+        id: 'fullname',
         numeric: false,
         disablePadding: false,
         label: 'Owner Name',
     },
     {
-        id: 'license',
+        id: 'phonenum',
         numeric: false,
         disablePadding: false,
-        label: 'Business License',
+        label: 'Phone Number',
     },
     {
-        id: 'registerDate',
+        id: 'username',
         numeric: false,
         disablePadding: false,
-        label: 'Registered Since',
+        label: 'Username',
     },
 ];
 
@@ -151,12 +151,12 @@ EnhancedTableHead.propTypes = {
 }
 
 const deleteProcess = (id) => {
-    deleteProduct(id);
+    deleteUser(id);
     reload()
 };
 
-const deleteProduct = async (id) => {
-    await axios.delete("http://localhost:4000/products/delete/" + id).then(res => {
+const deleteUser = async (id) => {
+    await axios.delete("http://localhost:4000/users/delete/" + id).then(res => {
         
     }).catch(err => {
         console.log(err);
@@ -259,24 +259,26 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-export default function manageUserPage() {
+export default function ManageUserPage() {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('name');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const classes = useStyles();
-    const [products, setProduct] = useState([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        getproduct();
+        getUsers();
     }, []);
 
-    const getproduct = async () => {
-        await axios.get("http://localhost:4000/products/allProducts").then(res => {
-            setProduct(res.data.productsData)
+    const getUsers = async () => {
+        await axios.get("http://localhost:4000/users/allUsers").then(res => {
+            setUsers(res.data.usersData)
+
+            console.log("Get user: ", users)
         }).catch(err => {
-            console.log(err);
+            console.log("Error: ", err);
         })
     }
 
@@ -323,7 +325,7 @@ export default function manageUserPage() {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = products.map((n) => n._id);
+            const newSelecteds = users.map((n) => n._id);
             setSelected(newSelecteds);
             return;
         }
@@ -363,7 +365,7 @@ export default function manageUserPage() {
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
 
     return (
         <>
@@ -409,10 +411,10 @@ export default function manageUserPage() {
                                 orderBy={orderBy}
                                 onSelectAllClick={handleSelectAllClick}
                                 onRequestSort={handleRequestSort}
-                                rowCount={products.length}
+                                rowCount={users.length}
                             />
                             <TableBody>
-                                {stableSort(products, getComparator(order, orderBy))
+                                {stableSort(users, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
                                         const isItemSelected = isSelected(row._id);
@@ -439,28 +441,25 @@ export default function manageUserPage() {
                                                 </TableCell>
                                                 <TableCell style={{width:'2%'}}>
                                                     <Tooltip title={<span style={{ fontSize: "200%" }}>Edit</span>}>
-                                                        <IconButton href="/editproduct">
+                                                        <IconButton href={'/edituser?id=' + row._id}>
                                                             <EditIcon style={{fontSize:'150%', color:'black'}}/>
                                                         </IconButton>                                                     
                                                     </Tooltip>                                                   
                                                 </TableCell>
-                                                <TableCell
-                                                    component="th"
-                                                    id={labelId}
-                                                    scope="row"
-                                                    padding="none"
-                                                    style={{fontSize: '150%'}}
-                                                >
-                                                    <img src={row.productImage} className={classes.prodImg}/>
-                                                </TableCell>
-                                                <TableCell align="left" style={{fontSize: '150%', width:'30%'}}>
-                                                    {row.productName}
+                                                <TableCell align="left" style={{fontSize: '150%'}}>
+                                                    {row.email}
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.productPrice}
+                                                    {row.shop.shopName}
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.productQuantity}
+                                                    {row.fullName}
+                                                </TableCell>
+                                                <TableCell align="left" style={{fontSize: '150%'}}>
+                                                    {row.phoneNumber}
+                                                </TableCell>
+                                                <TableCell align="left" style={{fontSize: '150%'}}>
+                                                    {row.userName}
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -476,7 +475,7 @@ export default function manageUserPage() {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={products.length}
+                        count={users.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}

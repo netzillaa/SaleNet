@@ -1,0 +1,59 @@
+.user-left {
+    border: 1px solid black;
+    padding-top: 10;
+    margin-top: 10;
+}
+
+.user-right h4 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+.user-left img{
+    align-items: center;
+    
+}
+
+.user-left Button {
+    background-color: #042a49;
+    color: white;
+    height: 35px;
+    width: 130px;
+    text-align: center;
+    font-size: 12px;
+    padding: 3px;
+    border-radius: 5px;
+    margin: 10px 10px;
+    cursor: pointer;
+    border: none;
+    margin-top: 160px;
+}
+
+.user-button Button {
+    background-color: #042a49;
+    color: white;
+    height: 30px;
+    width: 140px;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 5px;
+    margin: 15px 10px;
+    cursor: pointer;
+    border: none;
+
+}
+
+.user-details{
+    padding: 20px;
+}
+
+.username {
+    width: '90%';
+    margin-left: auto;
+ margin-right: auto;
+    color: white;
+    padding-bottom: 0;
+    margin-top: 0;
+    font-weight: 500;
+   
+}

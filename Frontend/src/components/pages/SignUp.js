@@ -62,27 +62,18 @@ export default function SignUp() {
     //   return false
     // }
 
+      
+    localStorage.setItem("fullName",fullName)
+    localStorage.setItem("userName",userName)
+    localStorage.setItem("password",password)
+    localStorage.setItem("email",email)
+    localStorage.setItem("phoneNumber",phoneNumber)
+    localStorage.setItem("shopName",shopName)
+    localStorage.setItem("shopAddress",shopAddress)
+    localStorage.setItem("businessLicense",businessLicense)
 
-    const response = await fetch("http://localhost:4000/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fullName,
-        userName,
-        password,
-        email,
-        phoneNumber,
-        shopName,
-        shopAddress,
-        businessLicense,
-      }),
-    });
-    const sentData = await response.json();
     window.location.href = "http://localhost:3000/verify";
   }
-
   return (
     <ThemeProvider theme={theme}>
       <Header2 />
@@ -210,3 +201,4 @@ export default function SignUp() {
     </ThemeProvider>
   );
 }
+

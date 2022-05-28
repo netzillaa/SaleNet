@@ -67,18 +67,66 @@ const style = {
   p: 4,
 };
 
-export default function EditImageModal({ image }) {
+// export default function EditImageModal({ image }, {setProductImage}){
+// export default function EditImageModal({ image }, {handleImage}){
+export default function EditImageModal({ image }, props){
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [productImage, setProductImage] = useState("");
+  const [productImage, setImage] = useState("");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [previewImage, setPreviewImage] = useState("");
+  const [isUploaded, setIsUploaded] = useState(false);
+  const [typeFile, setTypeFile] = useState("");
+
+  function handleImageChange(e) {
+    if (e.target.files && e.target.files[0]) {
+      // setTypeFile(e.target.files[0].type);
+      let reader = new FileReader();
+
+      reader.onload = function (e) {
+        // setImage(e.target.result);
+        setIsUploaded(true);
+        const preview = document.querySelector('#modal img')
+        preview.src = e.target.result;
+        console.log("Preview Result: ", e.target.result)
+      };
+
+      reader.readAsDataURL(e.target.files[0]);
+      // setImage(e.target.files[0])
+    }
+  }
+
+  function handleImage(e) {
+      handleImageChange(e)
+      setImage(e.target.files[0], "productImage")
+  }
+
+  const updateImage = (e) => {
+    e.preventDefault();
+    // setImage(e.target.files[0]);
+    console.log("set product image: ", productImage)
+    // setImage(URL.createObjectURL(e.target.files[0]))
+    props.changeImage(productImage);
+  }
+
+  const resetImage = (e) => {
+    e.target.value = null;
+    setImage("");
+    setIsUploaded(false);
+}
+ 
   return (
     <>
       <Box align='center' className={classes.holder}>
-        <img src={image}
-          className={classes.imgStyle} />
+        {!isUploaded ? (
+          <img src={image}
+            className={classes.imgStyle} />
+        ):(
+          <img src={productImage}
+            className={classes.imgStyle} />
+        )}
         <button className={classes.editImgBtn} onClick={handleOpen}>
           Tap to Edit Image
         </button>
@@ -99,27 +147,51 @@ export default function EditImageModal({ image }) {
           </Typography>
           <Box height='2vw' minHeight='16px' />
 
-          <Box style={{ display: 'flex', justifyContent: 'center' }}>
-            <img src={image}
+          <Box style={{ display: 'flex', justifyContent: 'center' }} id='modal'>
+            {!isUploaded ? (
+              <img src={image}
               className={classes.inModalImg}
               style={{ outline: '0.15vw #9b9b9b solid' }} />
+            ):(
+              <img src={productImage}
+              className={classes.inModalImg}
+              style={{ outline: '0.15vw #9b9b9b solid' }} />
+            )
+          }
           </Box>
           <Box height='2vw' minHeight='16px' />
 
-          <Box style={{ padding: '3vw' }}>
+          <Grid item xs={12} 
+                style={{ marginBottom: "2em", display: 'flex', 
+                         gap: '1em', alignItems: 'center',  padding: '3vw'}}>
             <Input
               fullWidth
-              onChange={(e) => setProductImage(e.target.files[0], "productImage")}
+              onChange={handleImage}
               required
               type="file"
+              accept="image/*"
               style={{ fontSize: '160%' }}
             />
-          </Box>
+
+            <Button
+              onClick={resetImage}
+              variant="contained"
+              sx={{
+                fontSize: '120%', backgroundColor: 'red', color: 'white',
+                '&:hover': {
+                  backgroundColor: "#d0021b", color: "white"
+                }
+              }}
+            >reset</Button>
+          </Grid>
 
           <Grid item xs={12}
             style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center', padding:'1vw 3vw' }}>
             <Button
-              type="submit"
+              // onClick={() => setProductImage(productImage)}
+              onClick={() => props.changeImage(productImage)}
+              // onClick={updateImage}
+              // onClick={() => handleImage(productImage)}
               fullWidth
               variant="contained"
               sx={{
