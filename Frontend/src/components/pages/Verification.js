@@ -44,34 +44,34 @@ const useStyles = makeStyles(() => ({
 }));
 
 
-    const addUser = async () => {
- let fullName = localStorage.getItem("fullName")
- let userName = localStorage.getItem("userName")
- let password = localStorage.getItem("password")
- let email = localStorage.getItem("email")
- let phoneNumber = localStorage.getItem("phoneNumber")
- let shopName = localStorage.getItem("shopName")
- let shopAddress = localStorage.getItem("shopAddress")
- let businessLicense = localStorage.getItem("businessLicense")
+const addUser = async () => {
+    let fullName = localStorage.getItem("fullName")
+    let userName = localStorage.getItem("userName")
+    let password = localStorage.getItem("password")
+    let email = localStorage.getItem("email")
+    let phoneNumber = localStorage.getItem("phoneNumber")
+    let shopName = localStorage.getItem("shopName")
+    let shopAddress = localStorage.getItem("shopAddress")
+    let businessLicense = localStorage.getItem("businessLicense")
 
-const response = await fetch("http://localhost:4000/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fullName,
-        userName,
-        password,
-        email,
-        phoneNumber,
-        shopName,
-        shopAddress,
-        businessLicense,
-      }),
+    const response = await fetch("http://localhost:4000/auth/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            fullName,
+            userName,
+            password,
+            email,
+            phoneNumber,
+            shopName,
+            shopAddress,
+            businessLicense,
+        }),
     });
     const sentData = await response.json();
-    }
+}
 
 export default function Verification({ history }) {
 
@@ -82,10 +82,11 @@ export default function Verification({ history }) {
 
     const handleSubmit = () => {
         if (authCode == userCode) {
-           addUser();
+            addUser();
+            window.location.href = "http://localhost:3000/signin";
         } else {
             alert("Wrong Code")
-              return false;
+            return false;
         }
     }
 
@@ -93,7 +94,8 @@ export default function Verification({ history }) {
     const [counter, setCounter] = useState(15);
 
     const getAuthCode = async () => {
-        await axios.post("http://localhost:4000/auth/register").then(res => {
+        let email = localStorage.getItem("email")
+        await axios.post("http://localhost:4000/auth/emailVerify", {email}).then(res => {
             setAuthCode(res.data.verifyCode)
             console.log(res.data.verifyCode);
         }).catch(err => {
@@ -128,7 +130,6 @@ export default function Verification({ history }) {
                         label="Enter Verification Code"
                         onChange={(e) => setUserCode(e.target.value)}
                         variant="outlined"
-                        inputProps={{ maxLength: 5 }}
                         name="code"
                         size="medium"
                         type="text"

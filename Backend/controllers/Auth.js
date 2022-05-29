@@ -6,6 +6,16 @@ const {  sendMail } = require("./emailSender");
 
 let code = (Math.random() + 1).toString(36).substring(7);
 
+const emailVerify = async (req, res) => {
+    try {
+            sendMail(req.body.email, code)
+            res.json({"verifyCode": code})
+    }
+    catch (err) {
+        console.log("error information: " + err);
+    }
+}
+
 const registerUser = async (req, res) => {
     var receiveData = req.body;
     console.log(receiveData);
@@ -15,11 +25,6 @@ const registerUser = async (req, res) => {
     Date.now() + "\n";
     req.body.email;
     console.log(shopInfo);
-    
-    sendMail(req.body.email, code)
-    console.log(code);
-
-    res.json({"verifyCode": code})
 
     try {
         const shopExist = await Shop.findOne({ shopName: req.body.shopName });
@@ -89,4 +94,4 @@ const loginUser = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser }
+module.exports = { registerUser, loginUser, emailVerify }

@@ -19,6 +19,7 @@ import manageUser from "./components/pages/Admin/manageUserPage";
 import editUser from "./components/pages/Admin/editUser";
 import OrderDetails from "./components/pages/dashboard/checkout/OrderDetails";
 import QRUploader from "./components/pages/dashboard/checkout/QRUploader";
+import Error from "./components/pages/Error"
 // import Section3 from "./components/Section3";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <Route path={"/checkOut"} component={CheckOut}></Route>
             <Route path={"/orderDetails"} component={OrderDetails}></Route>
             <Route path={"/editUser"} component={editUser}></Route>
+            <Route path={"/403"} component={Error}></Route>
             {/* <Route path={"/follow"} component={FollowUs}></Route> */}
             <Route path={"/qrUploader"} component={QRUploader}></Route>
             <Route path={"/home"} component={LandingPage}></Route>
