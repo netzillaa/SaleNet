@@ -9,7 +9,7 @@ router.use((req, res, next) => {
     next();
 })
 //getting or  all products from a certain shop
-router.route("/allProducts").get(getAllProducts);
+router.route("/allProducts/:id").get(getAllProducts);
 router.route("/getOrder").get(getOrder);
 //getting or deleting a certain product from a certain shop
 router.route("/:shopId/:productType/:productId").get((req, res) => {

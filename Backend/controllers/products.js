@@ -3,8 +3,11 @@ let pdfGenerator = require('./pdfGenerator');
 const mongoose = require("mongoose");
 const order = require("../models/Order.model");
 const User = require("../models/User.model");
+const Shop = require("../models/Shop.model");
+
 const getAllProducts = async (req, res) => {
-    let productsData = await Product.find();
+    let shopProductsID = req.params.id;
+    let productsData = await Product.find({owner: req.params.id});
     if (productsData.length == 0) {
         console.log("there are no items in the database")
     }
@@ -95,6 +98,7 @@ const addProduct = async (req, res) => {
             // productImage: req.body.productImage,
             productImage: req.file.filename,
             productID: randomID,
+            owner: req.body.owner,
             // productisAvailable: req.body.isAvailable,
 
         });

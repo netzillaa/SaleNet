@@ -107,6 +107,7 @@ export default function NewProduct() {
         formData.append('productCategory', productCategory);
         formData.append('productImage', productImage);
         formData.append('productQuantity', productQuantity);
+        formData.append('owner', owner);
         console.log(formData);
         console.log(productImage);
         const { data } = await axios.post("http://localhost:4000/products/add", formData).then(res => {
@@ -142,8 +143,10 @@ export default function NewProduct() {
         return JSON.parse(jsonPayload).shop;
     }
 
+    const owner = parseJwt(userInfo);
+
     useEffect(() => {
-        const shopData = parseJwt(userInfo);
+
     }, []);
 
     document.body.style.backgroundColor = '#ECECEC';

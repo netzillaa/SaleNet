@@ -28,6 +28,10 @@ const productSchema = mongoose.Schema({
         enum: ['FOOD', 'DRINK', 'OTHER'],
         default: 'OTHER'
     },
+    owner:{
+        type: String,
+        required: [true, "owner not specified"],
+    }
 },
 
     { collection: "product" }
