@@ -78,12 +78,8 @@ export default function editProduct() {
     const updateProduct = () => {
         update();
         console.log('updated product info!');
-        reload();
+        window.location.href = "http://localhost:3000/manageProduct";
     }
-
-    const reload = () => {
-        window.location.reload(false);
-    };
 
     const handleImage = (data) => {
         setProductImage(data)

@@ -41,7 +41,7 @@ function App() {
             <Route path={"/checkOut"} component={CheckOut}></Route>
             <Route path={"/orderDetails"} component={OrderDetails}></Route>
             <Route path={"/editUser"} component={editUser}></Route>
-            <Route path={"/403"} component={Error}></Route>
+            {/* <Route path={"/403"} component={Error}></Route> */}
             {/* <Route path={"/follow"} component={FollowUs}></Route> */}
             <Route path={"/qrUploader"} component={QRUploader}></Route>
             <Route path={"/home"} component={LandingPage}></Route>
