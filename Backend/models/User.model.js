@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema(
       required: [true, "you need to enter an email"],
       unique: true,
     },
+    QRImage: {
+      type: String,
+      default: 'https://www.unitedvoice.com.my/wp-content/uploads/2019/12/Maybank-QR-Code.jpg'
+    },
     phoneNumber: {
       type: String,
       required: [true, "you need to enter a phnoe number"],

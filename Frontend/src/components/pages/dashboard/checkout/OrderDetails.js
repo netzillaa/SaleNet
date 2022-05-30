@@ -24,6 +24,7 @@ import Context from "../reducer/Context";
 import { useState, useEffect, useContext } from 'react';
 import PaymentTaps from "./PaymentTaps";
 import axios from 'axios';
+import '../../../../css/OrderDetails.css';
 
 const theme = createTheme();
 
@@ -40,9 +41,11 @@ const ColoredLine = ({ color }) => (
 
 
 function OrderDetails() {
-    const [DBcartItems, setCartItems] = useState([]);
     const [DBcartTotalPrice, setCartTotalPrice] = useState(0);
     const [DBcartId, setCartId] = useState(0);
+    const [DBItems, setDBItems] = useState([]);
+
+    const context = useContext(Context);
 
     useEffect(() => {
         getCart();
@@ -50,7 +53,14 @@ function OrderDetails() {
 
     const getCart = async () => {
         await axios.get("http://localhost:4000/products/getOrder").then(res => {
-            setCartItems(res.data.orderCart[0].items)
+
+            let itemNameQuantity = [];
+
+            for (let i = 0; i < res.data.orderCart[0].items.length; i++) {
+                itemNameQuantity[i] = [res.data.orderCart[0].items[i], res.data.orderCart[0].itemQuantity[i], (res.data.orderCart[0].itemPrice[i] * res.data.orderCart[0].itemQuantity[i])];
+            }
+
+            setDBItems(itemNameQuantity)
             setCartTotalPrice(res.data.orderCart[0].totalPrice)
             setCartId(res.data.orderCart[0]._id)
         }).catch(err => {
@@ -59,32 +69,25 @@ function OrderDetails() {
     }
 
 
-    const items = DBcartItems.map(item => {
+    const items = DBItems.map(item => {
         return (
-            <div>
-                <div
-                    key={item}
-                />
-                <div className="items-info">
-                    <div className="title">
-                        <h4>{item.slice(1, -1)}</h4>
-                    </div>
-                </div>
-            </div>
+            <tr>
+                <td>{item[0]}</td>
+                <td class="aaalignright">{item[2]}</td>
+            </tr>
         )
-    })
+    })  
 
     const moveToCheckOut = () => {
-        // clearCart()
-        // calcTotalPrice()
+        window.location.href = "http://localhost:3000/checkOut";
     };
 
     return (
         <ThemeProvider theme={theme}>
             <Header3 />
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+            <div style={{  display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
                 <Paper variant="outlined" >
-                    <Typography component="h1" variant="h4" align="center" style={{ padding: '3rem 1rem', border: '2px solid black' }}>
+                    <Typography component="h1" variant="h4" align="center" style={{backgroundColor:"rgb(0, 1, 147)", color:"white",padding: '3rem 1rem' }}>
                         Order Details
                     </Typography>
                     <Grid >
@@ -92,24 +95,53 @@ function OrderDetails() {
                             <PaymentTaps
                                 DBcartTotalPrice={DBcartTotalPrice}
                             />
-                            <div spacing={2} style={{ backgroundColor: 'lightblue', width: 350, height: 400, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <section className="main-cart-section">
-                                    <h6 align="center">Order</h6>
-                                    <div className="cart-items" style={{ height: 350, paddingTop: '20px' }}>
-                                        <div className="cart-items-container">
-                                            <Scrollbars>
-                                                {items}
-                                            </Scrollbars>
-                                        </div>
-                                    </div>
-                                </section>
-                            </div>
+                            <table class="body-wrap">
+                                <tbody><tr>
+                                    <td></td>
+                                    <td class="aacontainerr" width="600">
+                                        <div class="aacontent">
+                                            <table class="aamain" width="100%" cellpadding="0" cellspacing="0">
+                                                <tbody><tr>
+                                                    <td class="aacontent-wrap aligncenter">
+                                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                                            <tbody><tr>
+                                                                <td class="aacontent-block" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                                    <h2>Order</h2>
+                                                                </td>
+                                                            </tr>
+                                                                <tr>
+                                                                    <td class="aacontent-block">
+                                                                        <table class="aainvoice">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <table class="aainvoice-items" cellpadding="0" cellspacing="0">
+                                                                                            <tbody>
+                                                                                                {items}
+                                                                                                <tr class="aatotal">
+                                                                                                    <td class="aaalignright" width="80%">Total</td>
+                                                                                                    <td class="aaalignright">RM {DBcartTotalPrice}</td>
+                                                                                                </tr>
+                                                                                            </tbody></table>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody></table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody></table>
+                                                    </td>
+                                                </tr>
+                                                </tbody></table></div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                </tbody></table>
                         </Grid>
                     </Grid>
                     <Typography component="h1" variant="h4" align="center">
-                    <Button style={{ margin: '1rem', fontSize: '2rem', padding: '1rem 6rem', color: '#fff', backgroundColor: '#349bf3', borderRadius: '0.5rem' }} onClick={() => moveToCheckOut()}>
-                        Check Out
-                    </Button>
+                        <Button style={{ margin: '1rem', fontSize: '2rem', padding: '1rem 6rem', backgroundColor:"rgb(0, 1, 147)", color:"white", borderRadius: '0.5rem' }} onClick={() => moveToCheckOut()}>
+                            Check Out
+                        </Button>
                     </Typography>
                 </Paper>
             </div>

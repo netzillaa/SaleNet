@@ -2,6 +2,7 @@ let Product = require("../models/Product.model");
 let pdfGenerator = require('./pdfGenerator');
 const mongoose = require("mongoose");
 const order = require("../models/Order.model");
+const User = require("../models/User.model");
 const getAllProducts = async (req, res) => {
     let productsData = await Product.find();
     if (productsData.length == 0) {
@@ -25,19 +26,26 @@ const createOrder = async (req, res) => {
     res.json({
         params: req.body
     })
-    var receivedOrders = req.body.order;
+
+    var receivedOrders = req.body.carts;
 
     var orderTotalPrice = req.body.newTotal;
     var orderShopInfo = req.body.shopData;
     let orderName = [];
+    let orderNamePrice = [];
+    let orderQuantity = [];
 
     try {
         for (let i = 0; i < receivedOrders.length; i++) {
-            orderName[i] = JSON.stringify(receivedOrders[i].product.productName);
+            orderName[i] = JSON.stringify(receivedOrders[i].product.productName).slice(1, -1);
+            orderNamePrice[i] = receivedOrders[i].product.productPrice;
+            orderQuantity[i] = receivedOrders[i].quantity;
         }
 
         await order.create({
             items: orderName,
+            itemPrice: orderNamePrice,
+            itemQuantity: orderQuantity,
             totalPrice: orderTotalPrice,
             shop: orderShopInfo,
         });
@@ -46,6 +54,7 @@ const createOrder = async (req, res) => {
         console.log("error saving product to database", err);
     }
 }
+
 
 // res.status(200).json({ product: "returning all products in a product" })
 const addProduct = async (req, res) => {
@@ -58,6 +67,22 @@ const addProduct = async (req, res) => {
     receivedProduct.image + "\n";
     receivedProduct.category;
 
+    let allProducts = await Product.find();
+    let exict = false;
+    let randomID;
+
+    for (let i = 0; i < (allProducts.length + 1); i++) {
+        randomID = Math.floor((Math.random() * 9999999999) + 1)
+        for (let i = 0; i < allProducts.length; i++) {
+            if (randomID == allProducts.productID){
+                exict = true;
+                break;
+            }    
+        }
+        if (!exict) {
+            break;
+        }
+    }
 
     console.log("name product: " + receivedProduct.productName);
 
@@ -69,6 +94,7 @@ const addProduct = async (req, res) => {
             addedAt: Date.now(),
             // productImage: req.body.productImage,
             productImage: req.file.filename,
+            productID: randomID,
             // productisAvailable: req.body.isAvailable,
 
         });
@@ -96,7 +122,11 @@ const findOne = async (req, res) => {
 
 const updateProduct = async (req, res) => {
     console.log('new name: ', req.params.id, req.body.productName, req.body.productPrice);
-    let x = Product.findOneAndUpdate({ _id: req.params.id }, { productName: req.body.productName, productPrice: req.body.productPrice, productQuantity: req.body.productQuantity, productCategory: req.body.productCategory }, function (err, data) {
+    let x = Product.findOneAndUpdate({
+        _id: req.params.id
+    }, {
+        productName: req.body.productName, productPrice: req.body.productPrice, productQuantity: req.body.productQuantity, productCategory: req.body.productCategory
+    }, function (err, data) {
         if (err) {
             console.log(err);
             console.log(x.productName);
@@ -109,6 +139,7 @@ const updateProduct = async (req, res) => {
     })
 };
 const deleteProduct = async (req, res) => {
+    console.log("kalam"+req.params.id);
     Product.findOneAndDelete({ _id: req.params.id }, (err, data) => {
         if (err) {
             console.log("couldnt delete" + err);

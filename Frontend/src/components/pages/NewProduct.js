@@ -100,8 +100,7 @@ export default function NewProduct() {
         setIsUploaded(false);
     }
 
-    const addProduct = async (event) => {
-        event.preventDefault();
+    const addProduct = async () => {
         var formData = new FormData(); 
         formData.append('productName', productName);
         formData.append('productPrice', productPrice);
@@ -110,8 +109,9 @@ export default function NewProduct() {
         formData.append('productQuantity', productQuantity);
         console.log(formData);
         console.log(productImage);
-        const { data } = await axios.post("http://localhost:4000/products/add", formData).catch(err => {
-            console.log(err);
+        const { data } = await axios.post("http://localhost:4000/products/add", formData).then(res => {
+            console.log(res);
+            window.location.href = "http://localhost:3000/manageProduct";
         }
         );
 
@@ -121,7 +121,30 @@ export default function NewProduct() {
             "   Product Category: " + productCategory +
             "   Product Image: " + productImage
         );
+
+        window.location.href = "http://localhost:3000/manageProduct";
     };
+
+    const userInfo = localStorage.getItem("userInfo");
+
+    function parseJwt(token) {
+        try{
+
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        }catch(err){
+            window.location.href = "http://localhost:3000/403";
+        }
+
+        return JSON.parse(jsonPayload).shop;
+    }
+
+    useEffect(() => {
+        const shopData = parseJwt(userInfo);
+    }, []);
 
     document.body.style.backgroundColor = '#ECECEC';
 

@@ -23,10 +23,10 @@ export default function Cart({
                 addProductToCart(product)
 
             } else if (action === "remove") {
-                removeProductFromCart(product.id)
+                removeProductFromCart(product.productID)
             }
             else if (action === "delete") {
-                deleteProductFromCart(product.id)
+                deleteProductFromCart(product.productID)
             }
 
             calcTotalPrice()
@@ -35,7 +35,7 @@ export default function Cart({
         return (
             <div>
                 <div
-                    key={product.id}
+                    key={product.productID}
                 />
                 <div className="items-info">
                     <div className="title">
@@ -75,11 +75,16 @@ export default function Cart({
     const userInfo = localStorage.getItem("userInfo");
 
     function parseJwt(token) {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
+        try{
+
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        }catch(err){
+            window.location.href = "http://localhost:3000/403";
+        }
 
         return JSON.parse(jsonPayload).shop;
     }
@@ -87,8 +92,7 @@ export default function Cart({
     const shopData = parseJwt(userInfo);
 
     const postOrder = async () => {
-        const completeOrder = JSON.stringify(order)
-        await axios.post("http://localhost:4000/products/createOrder", { order, newTotal, shopData }, config).then(res => {
+        await axios.post("http://localhost:4000/products/createOrder", { carts, newTotal, shopData }, config).then(res => {
             console.log(res.data);
         }).catch(err => {
             console.log(err);
@@ -96,13 +100,10 @@ export default function Cart({
     }
 
     function checkOut() {
-        setOrder(carts)
-        console.log(order);
-        // postOrder()
+        postOrder()
         window.location.href = "http://localhost:3000/orderDetails";
     }
 
-    const [order, setOrder] = useState([]);
 
     const clearCartAndTotalPrice = () => {
         clearCart()

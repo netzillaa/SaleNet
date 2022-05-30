@@ -104,6 +104,7 @@ function PaymentTaps({
 
     const [customerPayment, setCustomerPayment] = useState(0);
     const [restOfMoney, setRestOfMoney] = useState(0);
+    const [QRImage, setQRImage] = useState("");
 
     const handleCustomerPaymentChange = () => {
         setRestOfMoney(customerPayment - DBcartTotalPrice);
@@ -114,6 +115,14 @@ function PaymentTaps({
     const handleTapChange = (event, newtap) => {
         seTap(newtap);
     };
+
+    const getproduct = async () => {
+        await axios.get("http://localhost:4000/users/getQR").then(res => {
+            // setQRImage(res.data.productsData)
+        }).catch(err => {
+          console.log(err);
+        })
+      }
 
     return (
         <ThemeProvider theme={theme}>
@@ -159,7 +168,7 @@ function PaymentTaps({
                                 variant="outlined"
                                 value={restOfMoney}
                             />
-                            <Button style={{ marginTop: '4rem', fontSize: '2rem', padding: '1rem 6rem', color: '#fff', backgroundColor: '#349bf3', borderRadius: '0.5rem' }} onClick={() => handleCustomerPaymentChange()}>
+                            <Button style={{ marginTop: '4rem', fontSize: '2rem', padding: '1rem 6rem', backgroundColor:"rgb(0, 1, 147)", color:"white", borderRadius: '0.5rem' }} onClick={() => handleCustomerPaymentChange()}>
                                 Calc
                             </Button>
                         </Grid >
@@ -196,14 +205,14 @@ function PaymentTaps({
                                         shrink: true,
                                     }}
                                 />
-                            <Button style={{ marginTop: '4rem', fontSize: '2rem', padding: '1rem 6rem', color: '#fff', backgroundColor: '#349bf3', borderRadius: '0.5rem' }}>
+                            <Button style={{ marginTop: '4rem', fontSize: '2rem', padding: '1rem 6rem', backgroundColor:"rgb(0, 1, 147)", color:"white", borderRadius: '0.5rem' }}>
                                 Charge
                             </Button>
                         </Grid >
                     </div>
                 </TabPanel>
                 <TabPanel value={tap} index={2}>
-                    QR Code
+                    {/* <img src=''> */}
                 </TabPanel>
             </div>
         </ThemeProvider >
