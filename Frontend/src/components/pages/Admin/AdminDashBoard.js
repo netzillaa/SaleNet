@@ -17,7 +17,7 @@ import ManageUserPage from './manageUserPage';
 // import { TasksProgress } from '../components/dashboard/tasks-progress';
 // import { TotalCustomers } from '../components/dashboard/total-customers';
 import '../../../css/AdminDashboard.css';
-import Deposits from './totalUser';
+// import Deposits from './totalUser';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 // import TableCell from '@mui/material/TableCell';
