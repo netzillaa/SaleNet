@@ -9,22 +9,47 @@ import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import Header3 from '../../Header3';
 import ManageUserPage from './manageUserPage';
-import Paper from '@mui/material/Paper';
 // import { LatestOrders } from '../components/dashboard/latest-orders';
 // import { LatestProducts } from '../components/dashboard/latest-products';
 // import { Sales } from '../components/dashboard/sales';
 // import { TasksProgress } from '../components/dashboard/tasks-progress';
 // import { TotalCustomers } from '../components/dashboard/total-customers';
-import { Sales } from './Sales';
-import SideBar from './SideBar';
-import TableCell from '@mui/material/TableCell';
-import TableSortLabel from '@mui/material/TableSortLabel';
+import '../../../css/AdminDashboard.css';
+import Deposits from './totalUser';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+// import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TextareaAutosize from '@mui/base/TextareaAutosize';
 
 
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: 'white',
+        color: theme.palette.common.black,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 12,
+    },
+}));
+
+function createData(shopname, sales, xx, yy, zz) {
+    return { shopname, sales, xx, yy, zz };
+}
+
+const rows = [
+    createData('', ''),
+    createData('', ''),
+    createData('', ''),
+    createData('', ''),
+];
 
 const theme = createTheme();
 
@@ -49,7 +74,6 @@ const AdminDashboard = () => {
             <Header3 />
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
-
                 <Box
                     component="main"
                     sx={{
@@ -63,9 +87,9 @@ const AdminDashboard = () => {
                     }}
                 >
                     <Toolbar />
-                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} md={8} lg={9}>
+                    <Container maxWidth="lg" sx={{ mb: 5 }}>
+                        <Grid container spacing={2}>
+                            <Grid className="top-left" item xs={12} md={8} lg={9}>
                                 <Paper
                                     sx={{
                                         p: 2,
@@ -74,6 +98,47 @@ const AdminDashboard = () => {
                                         height: 240,
                                     }}
                                 >
+                                    <Typography
+                                        sx={{ flex: '3' }}
+                                        variant="h6"
+                                        id="tableTitle"
+                                        component="div"
+                                        fontSize="200%"
+                                        color="#000193"
+                                    >
+                                        Sales report
+                                    </Typography>
+                                    <TableContainer >
+                                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                                            <TableHead>
+                                                <TableRow>
+                                                    <StyledTableCell>Shopname</StyledTableCell>
+                                                    <StyledTableCell >Total Sale</StyledTableCell>
+                                                    <StyledTableCell >xx&nbsp;(RM)</StyledTableCell>
+                                                    <StyledTableCell >yy&nbsp;(RM)</StyledTableCell>
+                                                    <StyledTableCell >zz&nbsp;(RM)</StyledTableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {rows.map((row) => (
+                                                    <TableRow
+                                                        key={row.name}
+                                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                    >
+                                                        <TableCell component="th" scope="row">
+                                                            {row.name}
+                                                        </TableCell>
+                                                        <TableCell align="right">{row.shopname}</TableCell>
+                                                        <TableCell align="right">{row.sale}</TableCell>
+                                                        <TableCell align="right">{row.xx}</TableCell>
+                                                        <TableCell align="right">{row.yy}</TableCell>
+                                                    </TableRow>
+                                                ))}
+                                            </TableBody>
+                                        </Table>
+                                    </TableContainer>
+
+
                                 </Paper>
                             </Grid>
                             <Grid item xs={12} md={4} lg={3}>
@@ -85,29 +150,48 @@ const AdminDashboard = () => {
                                         height: 240,
                                     }}
                                 >
+                                   <Typography
+                                        sx={{ flex: '5' }}
+                                        variant="h6"
+                                        id="userTotal"
+                                        component="div"
+                                        fontSize="200%"
+                                        color="#000193"
+                                    >
+                                        Total number of users
+                                    </Typography>
+
+                                    {/* <TextareaAutosize
+                                        maxRows={4}
+                                        aria-label="maximum height"
+                                        placeholder="xx"
+                                        style={{ width: 250, height:200 }}
+                                    /> */}
+
                                 </Paper>
                             </Grid>
                             <Grid item xs={12}>
-                                <Paper
+                                {/* <Paper
                                     sx={{
                                         p: 2,
                                         display: 'flex',
                                         flexDirection: 'column',
                                         height: 520,
-                                    }}>
+                                        width: '100%',
+                                    }}> */}
 
-                                    {/* <TableCell style={{ fontSize: "180%" }}>Users</TableCell>
+                                {/* <TableCell style={{ fontSize: "180%" }}>Users</TableCell>
                                     {headCells.map((headCell) => (
                                         <TableCell
                                             key={headCell.id}
                                             padding={headCell.disablePadding ? 'none' : 'normal'}
                                             style={{ fontSize: "180%", fontWeight: "bold" }}
                                         > */}
-                                        <ManageUserPage/>
-                                        
+                                <ManageUserPage />
 
-                                        {/* </TableCell>))} */}
-                                </Paper>
+
+                                {/* </TableCell>))} */}
+                                {/* </Paper> */}
                             </Grid>
                         </Grid>
                     </Container>

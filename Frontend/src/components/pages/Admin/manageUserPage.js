@@ -198,7 +198,7 @@ const EnhancedTableToolbar = (props) => {
                     variant="h6"
                     id="tableTitle"
                     component="div"
-                    fontSize="300%"
+                    fontSize="250%"
                     color="#000193"
                 >
                     Users
@@ -369,7 +369,7 @@ export default function ManageUserPage() {
 
     return (
         <>
-        <Box sx={{ width: '90%', margin: 'auto', paddingTop: '3.5vw' }}>
+        <Box sx={{ width: '100%', margin: 'auto', paddingTop: '1.4vw' }}>
             <Paper sx={{
                 width: '100%',
                 height: '6vw',
@@ -377,7 +377,7 @@ export default function ManageUserPage() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                mb: 5
+                mb: 3
             }}
                 elevation={4}>
                 <Search>
@@ -391,7 +391,7 @@ export default function ManageUserPage() {
                 </Search>
                 <Button variant="contained" href="/"
                     sx={{
-                        marginRight: '2vw', height: '50%', width: '13vw', backgroundColor: '#01027B',
+                        marginRight: '2vw', height: '50%', width: '10vw', backgroundColor: '#01027B',
                         fontSize: '120%', color: 'white', '&:hover': {
                             backgroundColor: "#000193", color: "white"
                         }
@@ -450,7 +450,7 @@ export default function ManageUserPage() {
                                                     {row.email}
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.shop.shopName}
+                                                    {row.shopName}
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%'}}>
                                                     {row.fullName}
