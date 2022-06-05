@@ -14,43 +14,10 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { NavLink } from "react-router-dom";
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import DrawerMenu from './DrawerMenu';
 import DateTime from './DateTime';
 
-const pages = [
-    {
-        name: 'Home',
-        link: '/home'
-    },
-    {
-        name: 'Explore',
-        link: '/explore'
-    },
-    {
-        name: 'Follow Us',
-        link: '/follow'
-    }
-];
-
-const settings = [
-    {
-        name: 'Register',
-        link: '/register'
-    },
-    {
-        name: 'Login',
-        link: '/signin'
-    },
-    {
-        name: 'Dashboard',
-        link: '/dashboard'
-    },
-    {
-        name: 'NewProduct',
-        link: '/newproduct'
-    }
-];
 const Header3 = () => {
     const history = useHistory();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -72,23 +39,6 @@ const Header3 = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
-    function mouseOver(event) {
-        event.target.style.color = 'dodgerblue';
-        event.target.style.cursor = 'pointer';
-    }
-
-    function mouseOut(event) {
-        event.target.style.color = '#000193';
-    }
-
-    function pageHover(event) {
-        event.target.style.borderBottom = '4px #454eca solid';
-    }
-
-    function pageOut(event) {
-        event.target.style.borderBottom = '';
-    }
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -198,7 +148,7 @@ const Header3 = () => {
                             noWrap
                             component="div"
                             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-                            style={{ color: '#000193', fontWeight: 'bolder', justifyContent: 'center' }}
+                            style={{ color: '#000193', fontWeight: 'bolder'}}
                         >
                             SALENET
                         </Typography>

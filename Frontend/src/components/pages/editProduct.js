@@ -44,6 +44,7 @@ export default function editProduct() {
     const [productPrice, setProductPrice] = useState("");
     const [productCategory, setProductCategory] = useState("");
     const [productImage, setProductImage] = useState("");
+    const [oriImage, setOriImage] = useState("");
     const [productQuantity, setProductQuantity] = useState("");
 
     const search = useLocation().search;
@@ -61,28 +62,66 @@ export default function editProduct() {
             setProductCategory(res.data.result.productCategory)
             setProductQuantity(res.data.result.productQuantity)
             setProductImage('images/productImages/'+res.data.result.productImage)
+            setOriImage('images/productImages/'+res.data.result.productImage)
             console.log('Get product: ', res.data.result);
         }).catch(err => {
             console.log(err);
         })
     }
 
+    // const update = async () => {
+    //     console.log('updating product info');
+    //     await axios.post('http://localhost:4000/products/update/' + id, {productName, productPrice, productQuantity, productCategory}).then(res => {
+    //     }).catch(err => {
+    //         console.log(err);
+    //     })
+    // }
     const update = async () => {
-        console.log('updating product info');
-        await axios.post('http://localhost:4000/products/update/' + id, {productName, productPrice, productQuantity, productCategory}).then(res => {
-        }).catch(err => {
+        console.log('checkingggggg ', productImage)
+        // event.preventDefault();
+        var formData = new FormData(); 
+        formData.append('productName', productName);
+        formData.append('productPrice', productPrice);
+        formData.append('productCategory', productCategory);
+        formData.append('productImage', productImage);
+        formData.append('productQuantity', productQuantity);
+        console.log(formData);
+        console.log(productImage);
+        await axios.put("http://localhost:4000/products/update/" + id, formData).catch(err => {
             console.log(err);
-        })
-    }
+        }
+        );
 
+        console.log('updating product info ', productImage);
+        // await axios.post('http://localhost:4000/products/update/' + id, {productName, productPrice, productQuantity, productCategory, productImage}).then(res => {
+        // }).catch(err => {
+        //     console.log(err);
+        // })
+    }
+    
     const updateProduct = () => {
         update();
         console.log('updated product info!');
         window.location.href = "http://localhost:3000/manageProduct";
     }
 
-    const handleImage = (data) => {
-        setProductImage(data)
+
+    const changeImage = (data) => {
+        console.log("Product here 2:", data);
+        // handleImageChange(data);
+        setProductImage(data, "productImage");
+    }
+
+    function handleImageChange(e) {
+          let reader = new FileReader();
+    
+          reader.onload = function (e) {
+            setProductImage(e.target.result)
+            console.log("after setting: ", productImage)
+            console.log("Preview Result 2: ", e.target.result)
+          };
+    
+          reader.readAsDataURL(e);
     }
 
     document.body.style.backgroundColor = '#ECECEC';
@@ -96,9 +135,7 @@ export default function editProduct() {
                         <h1>Edit Product</h1>
                     </Box>
                     <Box height='2vw' minHeight='16px' />
-                    {/* <EditImageModal image={productImage} setProductImage={setProductImage}/> */}
-                    {/* <EditImageModal image={productImage} changeImage={productImage => setProductImage(productImage)}/> */}
-                    <EditImageModal image={productImage} changeImage={handleImage}/>
+                    <EditImageModal image={oriImage} changeImage={changeImage}/>
                     <Box
                         component="form"
                         noValidate

@@ -12,7 +12,6 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import TextField from "@mui/material/TextField";
-import EditImageModal from '../EditImageModal';
 import { useLocation } from "react-router-dom";
 import { Input } from "@mui/material";
 
@@ -101,6 +100,7 @@ export default function NewProduct() {
     }
 
     const addProduct = async () => {
+        // event.preventDefault();
         var formData = new FormData(); 
         formData.append('productName', productName);
         formData.append('productPrice', productPrice);
@@ -157,10 +157,9 @@ export default function NewProduct() {
             <div style={{ paddingTop: '40px' }}>
                 <Card className={classes.cardStyle}>
                     <Box className={classes.pageTitle}>
-                        <h1>Add New Product</h1>
+                        <b style={{color:'white', fontSize:'20px'}}>Add New Product</b>
                     </Box>
                     <Box height='2vw' minHeight='16px' />
-                    {/* <EditImageModal image={productImage} /> */}
 
                     <Box align='center' className={classes.holder}>
                     {!isUploaded ? (

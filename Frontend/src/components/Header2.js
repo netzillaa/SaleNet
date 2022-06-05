@@ -39,14 +39,6 @@ const settings = [
     name: 'Login',
     link: '/signin'
   },
-  {
-    name: 'Dashboard',
-    link: '/dashboard'
-  },
-  {
-    name: 'NewProduct',
-    link: '/newproduct'
-  }
 ];
 const Header2 = () => {
   const history = useHistory();

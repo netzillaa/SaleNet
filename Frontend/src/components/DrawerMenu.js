@@ -65,7 +65,7 @@ export default class DrawerMenu extends React.Component {
                     aria-label="open drawer"
                     sx={{ mr: 2 }}
                     onClick={this.toggleDrawerStatus}
-                    style={{ marginRight: '20px', marginLeft: '10px' }}
+                    style={{ marginRight: '1.5vw', marginLeft: '10px' }}
                 >
                     {!isDrawerOpened ? <MenuIcon fontSize="3rem" /> : null}
                 </IconButton>

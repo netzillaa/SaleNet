@@ -19,6 +19,7 @@ import manageUser from "./components/pages/Admin/manageUserPage";
 import editUser from "./components/pages/Admin/editUser";
 import OrderDetails from "./components/pages/dashboard/checkout/OrderDetails";
 import QRUploader from "./components/pages/dashboard/checkout/QRUploader";
+import customerSupport from "./components/pages/customerSupport";
 import Error from "./components/pages/Error"
 // import Section3 from "./components/Section3";
 
@@ -44,6 +45,7 @@ function App() {
             {/* <Route path={"/403"} component={Error}></Route> */}
             {/* <Route path={"/follow"} component={FollowUs}></Route> */}
             <Route path={"/qrUploader"} component={QRUploader}></Route>
+            <Route path={"/support"} component={customerSupport}></Route>
             <Route path={"/home"} component={LandingPage}></Route>
             <Route path={"/"} component={LandingPage}></Route>
           </Switch>
