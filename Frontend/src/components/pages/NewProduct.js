@@ -140,7 +140,7 @@ export default function NewProduct() {
             window.location.href = "http://localhost:3000/403";
         }
 
-        return JSON.parse(jsonPayload).shop;
+        return JSON.parse(jsonPayload);
     }
 
     const owner = parseJwt(userInfo);

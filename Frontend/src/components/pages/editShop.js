@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import { useState } from 'react';
 import { useEffect, useContext } from 'react';
 import axios from 'axios';
-// import Header3 from '../Header3';
+import Header3 from '../Header3';
 import TextField from "@mui/material/TextField";
 import PersonIcon from '@mui/icons-material/Person';
 import { useLocation } from "react-router-dom";
@@ -43,12 +43,12 @@ const useStyles = makeStyles(() => ({
 
 }));
 
-export default function editUser() {
+export default function editShop() {
 
     const [user, setUser] = useState([]);
     const [shopName, setShopName] = useState("");
     const [shopAddress, setShopAddress] = useState("");
-    const [userLicense, setUserLicense] = useState("");
+    const [businessLicense, setBusinessLicense] = useState("");
 
     const search = useLocation().search;
     const id = new URLSearchParams(search).get('id');
@@ -63,20 +63,20 @@ export default function editUser() {
             setUser(res.data.result)
             setShopName(res.data.result.shop.shopName)
             setShopAddress(res.data.result.shop.shopAddress)
-            setUserLicense(res.data.result.shop.businessLicense)
+            setBusinessLicense(res.data.result.shop.businessLicense)
         }).catch(err => {
-            console.log("Error in editUser: ", err);
+            console.log("Error in editShop: ", err);
         })
     }
 
     const update = async () => {
-        await axios.post('http://localhost:4000/users/updateShopName/' + id, {shopName}).then(res => {
+        await axios.post('http://localhost:4000/users/updateShop/' + id, {shopName, shopAddress, businessLicense}).then(res => {
         }).catch(err => {
             console.log(err);
         })
     }
 
-    const updateUser = () => {
+    const updateShop = () => {
         update();
         reload();
     }
@@ -89,11 +89,11 @@ export default function editUser() {
 
     return (
         <>
-            {/* <Header3 /> */}
+            <Header3 />
             <div style={{ paddingTop: '40px' }}>
                 <Card className={classes.cardStyle}>
                     <Box className={classes.pageTitle}>
-                    <b style={{color:'white', fontSize:'20px'}}>Edit User</b>
+                    <b style={{color:'white', fontSize:'20px'}}>Edit Shop Details</b>
                     </Box>
                     <Box height='2vw' minHeight='16px' />
                     <Grid align='center'>
@@ -101,7 +101,7 @@ export default function editUser() {
                             <PersonIcon style={{ fontSize: '40px' }} />
                         </Avatar>
                         <br />
-                        <h1>User Details</h1>
+                        <h1>Shop Details</h1>
                     </Grid>
                     <Box
                         component="form"
@@ -111,38 +111,8 @@ export default function editUser() {
                     >
                         <Grid container spacing={2}>
                             <Grid item xs={12}
-                                style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center' }}>
-                                <Typography style={{ alignItems: 'center', width: '22%', fontSize: '160%', fontWeight: 'bolder' }}>
-                                    Full Name:
-                                </Typography>
-                                <Typography style={{ alignItems: 'center', fontSize: '160%' }}>
-                                    {user.fullName}
-                                </Typography>
-
-                            </Grid>
-                            <Grid item xs={12}
-                                style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center' }}>
-                                <Typography style={{ alignItems: 'center', width: '22%', fontSize: '160%', fontWeight: 'bolder' }}>
-                                    Username:
-                                </Typography>
-                                <Typography style={{ alignItems: 'center', fontSize: '160%' }}>
-                                    {user.userName}
-                                </Typography>
-
-                            </Grid>
-                            <Grid item xs={12}
-                                style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center' }}>
-                                <Typography style={{ alignItems: 'center', width: '22%', fontSize: '160%', fontWeight: 'bolder' }}>
-                                    Email Address:
-                                </Typography>
-                                <Typography style={{ alignItems: 'center', fontSize: '160%' }}>
-                                    {user.email}
-                                </Typography>
-
-                            </Grid>
-                            <Grid item xs={12}
                                 style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center'}}>
-                                <Typography style={{ alignItems: 'center', width: '25%', fontSize: '160%', fontWeight: 'bolder' }}>
+                                <Typography style={{ alignItems: 'center', width: '35%', fontSize: '160%', fontWeight: 'bolder' }}>
                                     Shop Name:
                                 </Typography>
                                 <TextField
@@ -158,38 +128,48 @@ export default function editUser() {
                             </Grid>
                             <Grid item xs={12}
                                 style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center'}}>
-                                <Typography style={{ alignItems: 'center', width: '22%', fontSize: '160%', fontWeight: 'bolder' }}>
+                                <Typography style={{ alignItems: 'center', width: '35%', fontSize: '160%', fontWeight: 'bolder' }}>
                                     Shop Address:
                                 </Typography>
                                 <Typography style={{ alignItems: 'center', fontSize: '160%' }}>
-                                    {shopAddress}
+                                    
                                 </Typography>
+                                <TextField
+                                    fullWidth
+                                    value={shopAddress}
+                                    onChange={(e) => setShopAddress(e.target.value)}
+                                    InputProps={{ style: { fontSize: "160%" } }}
+                                    InputLabelProps={{ style: { fontSize: "160%" } }}
+                                    required
+                                    type="text"
+                                    label="User Shop Name"
+                                />
 
                             </Grid>
                             <Grid item xs={12}
                                 style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center'}}>
-                                <Typography style={{ alignItems: 'center', width: '30%', fontSize: '160%', fontWeight: 'bolder'  }}>
+                                <Typography style={{ alignItems: 'center', width: '35%', fontSize: '160%', fontWeight: 'bolder'  }}>
                                     Business License:
                                 </Typography>
                                 <Typography style={{ alignItems: 'center', fontSize: '160%' }}>
-                                    {userLicense}
+                                    
                                 </Typography>
-
-                            </Grid>
-                            <Grid item xs={12}
-                                style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center'}}>
-                                <Typography style={{ alignItems: 'center', width: '30%', fontSize: '160%', fontWeight: 'bolder' }}>
-                                    Account Created at:
-                                </Typography>
-                                <Typography style={{ alignItems: 'center', fontSize: '160%' }}>
-                                    {user.createdAt}
-                                </Typography>
+                                <TextField
+                                    fullWidth
+                                    value={businessLicense}
+                                    onChange={(e) => setBusinessLicense(e.target.value)}
+                                    InputProps={{ style: { fontSize: "160%" } }}
+                                    InputLabelProps={{ style: { fontSize: "160%" } }}
+                                    required
+                                    type="text"
+                                    label="User Shop Name"
+                                />
 
                             </Grid>
                             <Grid item xs={12}
                                 style={{ marginBottom: "1em", marginTop:'3em', display: 'flex', gap: '1em', alignItems: 'center' }}>
                                 <Button
-                                    onClick={updateUser}
+                                    onClick={updateShop}
                                     fullWidth
                                     variant="contained"
                                     sx={{
@@ -199,7 +179,7 @@ export default function editUser() {
                                         }
                                     }}
                                 >
-                                    Update User
+                                    Update Shop
                                 </Button>
                                 <Button
                                     fullWidth
