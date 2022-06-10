@@ -21,6 +21,7 @@ import OrderDetails from "./components/pages/dashboard/checkout/OrderDetails";
 import QRUploader from "./components/pages/dashboard/checkout/QRUploader";
 import customerSupport from "./components/pages/customerSupport";
 import Error from "./components/pages/Error"
+import AdminLogin from "./components/pages/Admin/AdminLogin";
 // import Section3 from "./components/Section3";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path={"/manageProduct"} component={manageProduct}></Route>
             <Route path={"/editProduct"} component={editProduct}></Route>
             <Route path={"/admin"} component={AdminDashBoard}></Route>
+            <Route path={"/adminLogin"} component={AdminLogin}></Route>
             <Route path={"/manageUser"} component={manageUser}></Route>
             <Route path={"/checkOut"} component={CheckOut}></Route>
             <Route path={"/orderDetails"} component={OrderDetails}></Route>
