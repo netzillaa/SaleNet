@@ -33,34 +33,34 @@ export default function SignUp() {
     event.preventDefault();
     var emailFormat = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$/;
 
-    // if (fullName === null || fullName === "") {
-    //   alert("Please enter your fullname")
-    //   return false;
-    // }
-    // if (userName === null || userName.length < 6) {
-    //   alert("Please enter your username longer than 6 characters")
-    //   return false;
-    // }
-    // if (password === null || password.length < 8) {
-    //   alert("Please enter password longer than 8 characters")
-    //   return false;
-    // }
-    // if (!email.match(emailFormat)) {
-    //   alert("Please enter the correct email address")
-    //   return false;
-    // }
-    // if (shopName === null || shopName === "") {
-    //   alert("Please enter your shop name")
-    //   return false;
-    // }
-    // if (shopAddress === null || shopAddress === "") {
-    //   alert("Please enter your shop address")
-    //   return false;
-    // }
-    // if (businessLicense === null || businessLicense.length < 6) {
-    //   alert("Please enter the correct business lisence")
-    //   return false
-    // }
+    if (fullName === null || fullName === "") {
+      alert("Please enter your fullname")
+      return false;
+    }
+    if (userName === null || userName.length < 6) {
+      alert("Please enter your username longer than 6 characters")
+      return false;
+    }
+    if (password === null || password.length < 8) {
+      alert("Please enter password longer than 8 characters")
+      return false;
+    }
+    if (!email.match(emailFormat)) {
+      alert("Please enter the correct email address")
+      return false;
+    }
+    if (shopName === null || shopName === "") {
+      alert("Please enter your shop name")
+      return false;
+    }
+    if (shopAddress === null || shopAddress === "") {
+      alert("Please enter your shop address")
+      return false;
+    }
+    if (businessLicense === null || businessLicense.length < 6) {
+      alert("Please enter the correct business lisence")
+      return false
+    }
 
       
     localStorage.setItem("fullName",fullName)
