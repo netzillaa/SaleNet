@@ -135,11 +135,11 @@ EnhancedTableHead.propTypes = {
 }
 
 const deleteProcess = (id) => {
-    // for(var i = 0; i<id.length; i++){
-    //    deleteProduct(id[i]); 
-    // }
-    deleteProduct(id); 
-    reload()
+    if(window.confirm("Are you sure you want to delete this product?")){
+
+        deleteProduct(id); 
+        reload()
+    }
 };
 
 const deleteProduct = async (id) => {

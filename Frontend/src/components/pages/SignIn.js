@@ -44,43 +44,40 @@ export default function SignIn({ history }) {
       "Content-Type": "application/json"
     }
   }
+  function getId(token) {
+    try {
+
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+    } catch (err) {
+    }
+
+    var id = JSON.parse(jsonPayload).id;
+    var cleanId = id.trim();
+    console.log('json parse: ', cleanId)
+    return cleanId;
+  }
+
   async function signIn(event) {
     event.preventDefault();
-    function getId(token) {
-      try{
-
-          var base64Url = token.split('.')[1];
-          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-          var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-              return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-          }).join(''));
-      }catch(err){
-      }
-
-      var id = JSON.parse(jsonPayload).id;
-      var cleanId = id.trim();
-      console.log('json parse: ', cleanId)
-      return cleanId;
-  }
     try {
       const { data } = await axios.post("http://localhost:4000/auth/login", { email, password }, config)
       localStorage.setItem('userInfo', JSON.stringify(data));
       var token = localStorage.getItem('userInfo');
       localStorage.setItem('userId', getId(token));
-      // const serverResponse = await response.json();
-      // console.log(serverResponse);
-      setSuccess(true);
-    }
-    catch (err) {
-      setError(err.response.data.message);
-      setSuccess(false);
-      window.location.reload(false);
-    }
-    const userInfo = localStorage.getItem("userInfo");
-    if (userInfo) {
+
       history.push({
         pathname: `/dashboard`, search: `${email}`
-      });
+      })
+
+    }
+    catch (err) {
+      localStorage.removeItem('userInfo')
+      alert("Invalid email or password!")
+      console.log(err);
     }
   }
   return (

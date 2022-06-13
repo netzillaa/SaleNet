@@ -72,7 +72,6 @@ const loginUser = async (req, res) => {
         console.log("sent:::" + user_email + " and " + user_password);
         //searching database if a user exist with the passed username and password
         const user = await User.findOne({ email: req.body.email, password: req.body.password });
-        console.log("shop document info " + user.shop);
         // console.log("user document info " + user.shop[0].businessLicense);
 
         console.log("db works");
