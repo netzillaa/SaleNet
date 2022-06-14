@@ -450,7 +450,7 @@ export default function ManageUserPage() {
                                                     {row.email}
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.shopName}
+                                                    {row.shop.shopName}
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%'}}>
                                                     {row.fullName}
