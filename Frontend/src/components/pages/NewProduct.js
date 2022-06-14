@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Paper, Box, Card, Typography} from '@material-ui/core';
+import { Grid, Paper, Box, Card, Typography } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import Button from "@mui/material/Button";
@@ -12,7 +12,6 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import TextField from "@mui/material/TextField";
-import EditImageModal from '../EditImageModal';
 import { useLocation } from "react-router-dom";
 import { Input } from "@mui/material";
 
@@ -44,9 +43,9 @@ const useStyles = makeStyles(() => ({
         minWidth: '80px',
         margin: 'auto',
         position: 'relative',
-      },
-    
-      imgStyle: {
+    },
+
+    imgStyle: {
         outline: '0.15vw black solid',
         borderRadius: '0.3vw',
         height: '12vw',
@@ -55,8 +54,8 @@ const useStyles = makeStyles(() => ({
         minWidth: '80px',
         objectFit: 'cover',
         boxShadow: '0.2vw 0.3vw 0.5vw 0.2vw #dadadc',
-      },
-    
+    },
+
 }));
 
 export default function NewProduct() {
@@ -75,18 +74,18 @@ export default function NewProduct() {
     const classes = useStyles();
 
     function handleImage(e) {
-      if (e.target.files && e.target.files[0]) {
-        let reader = new FileReader();
+        if (e.target.files && e.target.files[0]) {
+            let reader = new FileReader();
 
-        reader.onload = function (e) {
-        //   setProductImage(e.target.result);
-          setIsUploaded(true);
-          const preview = document.querySelector('img')
-          preview.src = e.target.result;
-        };
-  
-        reader.readAsDataURL(e.target.files[0]);
-      }
+            reader.onload = function (e) {
+                //   setProductImage(e.target.result);
+                setIsUploaded(true);
+                const preview = document.querySelector('img')
+                preview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(e.target.files[0]);
+        }
     }
 
     function changeImage(e) {
@@ -94,14 +93,37 @@ export default function NewProduct() {
         setProductImage(e.target.files[0], "productImage")
     }
 
-    function resetImage(e){
+    function resetImage(e) {
         e.target.value = null;
         setProductImage("");
         setIsUploaded(false);
     }
 
     const addProduct = async () => {
-        var formData = new FormData(); 
+        if (productName === null || productName === "") {
+            alert("Please enter your product name")
+            return false;
+        }
+        if (productPrice === null || productPrice === "") {
+            alert("Please enter your product price")
+            return false;
+        }
+        if (productCategory === null || productCategory === "") {
+            alert("Please enter your product category")
+            return false;
+        }
+        if (productQuantity === null || productQuantity === "") {
+            alert("Please enter your product quantity")
+            return false;
+        }
+
+        if (productImage === null || productImage === "") {
+            alert("Please enter your product image")
+            return false;
+        }
+
+
+        var formData = new FormData();
         formData.append('productName', productName);
         formData.append('productPrice', productPrice);
         formData.append('productCategory', productCategory);
@@ -113,6 +135,7 @@ export default function NewProduct() {
         const { data } = await axios.post("http://localhost:4000/products/add", formData).then(res => {
             console.log(res);
             window.location.href = "http://localhost:3000/manageProduct";
+            return false
         }
         );
 
@@ -129,14 +152,14 @@ export default function NewProduct() {
     const userInfo = localStorage.getItem("userInfo");
 
     function parseJwt(token) {
-        try{
+        try {
 
             var base64Url = token.split('.')[1];
             var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
             var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
-        }catch(err){
+        } catch (err) {
             window.location.href = "http://localhost:3000/403";
         }
 
@@ -157,19 +180,18 @@ export default function NewProduct() {
             <div style={{ paddingTop: '40px' }}>
                 <Card className={classes.cardStyle}>
                     <Box className={classes.pageTitle}>
-                        <h1>Add New Product</h1>
+                        <b style={{ color: 'white', fontSize: '20px' }}>Add New Product</b>
                     </Box>
                     <Box height='2vw' minHeight='16px' />
-                    {/* <EditImageModal image={productImage} /> */}
 
                     <Box align='center' className={classes.holder}>
-                    {!isUploaded ? (
-                        <img src='images/productImages/default_image.png'
-                             className={classes.imgStyle} />
-                    ):(
-                        <img src = { productImage }
-                             className = {classes.imgStyle} />
-                    )}
+                        {!isUploaded ? (
+                            <img src='images/productImages/default_image.png'
+                                className={classes.imgStyle} />
+                        ) : (
+                            <img src={productImage}
+                                className={classes.imgStyle} />
+                        )}
                     </Box>
 
                     <Box
@@ -225,7 +247,7 @@ export default function NewProduct() {
                                         id="productCategory"
                                         name="productCategory"
                                         label="productCategory"
-                                        style={{fontSize:'150%'}}
+                                        style={{ fontSize: '150%' }}
                                         onChange={(e) => setProductCategory(e.target.value)}
                                     >
                                         <MenuItem value={"FOOD"} style={{ fontSize: '150%' }}>FOOD</MenuItem>
@@ -249,17 +271,17 @@ export default function NewProduct() {
                                     label="Quantity"
                                 />
                             </Grid>
-                            <Grid item xs={12} style={{ marginBottom: "2em", display: 'flex', gap: '1em', alignItems: 'center'}}>
+                            <Grid item xs={12} style={{ marginBottom: "2em", display: 'flex', gap: '1em', alignItems: 'center' }}>
                                 {/* {isUploaded ? ( */}
-                                    <Input
-                                        fullWidth
-                                        // onChange={(e) => setProductImage(e.target.files[0], "productImage")}
-                                        onChange={changeImage}
-                                        type="file"
-                                        accept="image/*"
-                                        style={{ fontSize: '160%' }} />
+                                <Input
+                                    fullWidth
+                                    // onChange={(e) => setProductImage(e.target.files[0], "productImage")}
+                                    onChange={changeImage}
+                                    type="file"
+                                    accept="image/*"
+                                    style={{ fontSize: '160%' }} />
                                 {/* ):( */}
-                                    {/* <Input
+                                {/* <Input
                                         fullWidth
                                         onChange={()=>console.log('not working')}
                                         required
@@ -291,7 +313,6 @@ export default function NewProduct() {
                                             backgroundColor: "#000193", color: "white"
                                         }
                                     }}
-                                    component={Link} to='/manageProduct'
                                 >
                                     Add Product
                                 </Button>
@@ -302,7 +323,7 @@ export default function NewProduct() {
                                         fontSize: '130%',
                                         backgroundColor: '#bbbbbb',
                                         color: 'black',
-                                        '&:hover': { backgroundColor: '#9b9b9b', color:'black' }
+                                        '&:hover': { backgroundColor: '#9b9b9b', color: 'black' }
                                     }}
                                     component={Link} to='/manageProduct'
                                 >

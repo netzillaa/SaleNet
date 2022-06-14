@@ -77,7 +77,7 @@ export default function QRUploader() {
             <div style={{ paddingTop: '40px' }}>
                 <Card className={classes.cardStyle}>
                     <Box className={classes.pageTitle}>
-                        <h1>Add QR Code</h1>
+                        <b style={{color:'white', fontSize:'20px'}}>Add QR Code</b>
                     </Box>
                     <Box height='2vw' minHeight='16px' />
                     <EditImageModal image={productImage} />

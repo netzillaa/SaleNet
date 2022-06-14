@@ -13,50 +13,19 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { NavLink } from "react-router-dom";
-import { useHistory, Link } from 'react-router-dom';
+import { NavLink, Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import DrawerMenu from './DrawerMenu';
 import DateTime from './DateTime';
 
-const pages = [
-    {
-        name: 'Home',
-        link: '/home'
-    },
-    {
-        name: 'Explore',
-        link: '/explore'
-    },
-    {
-        name: 'Follow Us',
-        link: '/follow'
-    }
-];
-
-const settings = [
-    {
-        name: 'Register',
-        link: '/register'
-    },
-    {
-        name: 'Login',
-        link: '/signin'
-    },
-    {
-        name: 'Dashboard',
-        link: '/dashboard'
-    },
-    {
-        name: 'NewProduct',
-        link: '/newproduct'
-    }
-];
 const Header3 = () => {
     const history = useHistory();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    var id = localStorage.getItem('userId');
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -72,23 +41,6 @@ const Header3 = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
-    function mouseOver(event) {
-        event.target.style.color = 'dodgerblue';
-        event.target.style.cursor = 'pointer';
-    }
-
-    function mouseOut(event) {
-        event.target.style.color = '#000193';
-    }
-
-    function pageHover(event) {
-        event.target.style.borderBottom = '4px #454eca solid';
-    }
-
-    function pageOut(event) {
-        event.target.style.borderBottom = '';
-    }
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -198,7 +150,7 @@ const Header3 = () => {
                             noWrap
                             component="div"
                             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-                            style={{ color: '#000193', fontWeight: 'bolder', justifyContent: 'center' }}
+                            style={{ color: '#000193', fontWeight: 'bolder'}}
                         >
                             SALENET
                         </Typography>
@@ -227,6 +179,7 @@ const Header3 = () => {
                                 aria-controls={menuId}
                                 onClick={handleProfileMenuOpen}
                                 color="inherit"
+                                component={Link} to={'/editProfile?id=' + id} 
                             >
                                 <AccountCircle sx={{ fontSize: '3rem', color: '#000193','&:hover': {
                             color: "dodgerblue"} }} />
@@ -235,6 +188,7 @@ const Header3 = () => {
                             <Tooltip title={<span style={{ fontSize: "1rem" }}>Logout</span>}>
                                 <IconButton size="large" color="inherit" onClick={() => {
                             localStorage.removeItem("userInfo");
+                            localStorage.removeItem("userId");
                             history.push('/');}}>
                                     <LogoutIcon style={{ fontSize: '3rem' }} />
                                 </IconButton>

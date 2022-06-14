@@ -72,7 +72,6 @@ const loginUser = async (req, res) => {
         console.log("sent:::" + user_email + " and " + user_password);
         //searching database if a user exist with the passed username and password
         const user = await User.findOne({ email: req.body.email, password: req.body.password });
-        console.log("shop document info " + user.shop);
         // console.log("user document info " + user.shop[0].businessLicense);
 
         console.log("db works");
@@ -83,7 +82,7 @@ const loginUser = async (req, res) => {
             const token = jwt.sign({ id: user._id, username: user.userName, shop: user.shop }, process.env.TOKEN);
             res.header('authentication-token', token).send(token);
             // var ownedshopUrl = Shop.find({ businessLicense: user.businessLicense })
-            res.json({ status: "User is found and authentication token sent" + user });
+            res.json({ status: "User is found and authentication token sent" + user._id });
         }
         else {
             res.json({ status: "works but no user is found" });

@@ -11,6 +11,7 @@ import { Alert } from '@mui/material';
 import Alerto from "./Alerto";
 import Stack from '@mui/material/Stack';
 import AlertoError from "./AlertoError";
+import Header2 from '../Header2';
 
 const useStyles = makeStyles(() => ({
 
@@ -26,10 +27,10 @@ const useStyles = makeStyles(() => ({
     avatarStyle: {
         backgroundColor: '#b8d0d5',
         color: 'black',
-        width: '5vw',
-        height: '5vw',
-        minHeight: '50px',
-        minWidth: '50px',
+        width: '6.2vw',
+        height: '6.2vw',
+        minHeight: '60px',
+        minWidth: '60px',
     },
 
     btnstyle: {
@@ -110,24 +111,27 @@ export default function Verification({ history }) {
     document.body.style.backgroundColor = '#ECECEC';
 
     return (
-        <div style={{ paddingTop: '100px' }}>
+        <>
+        <Header2/>
+        <div style={{ paddingTop: '50px' }}>
             <Paper elevation={8} className={classes.paperStyle}>
                 <Grid align='center'>
+                    <Box style={{minHeight:'20px'}}/>
                     <Avatar className={classes.avatarStyle}>
-                        <EmailIcon style={{ fontSize: '25px' }} />
+                        <EmailIcon style={{ fontSize: '320%' }} />
                     </Avatar>
-                    <br />
-                    <h1>Verify Your Email Address</h1> <br />
-                    <h3>
+                    <h2>Verify Your Email Address</h2><br/><br/>
+                    <h4>
                         We've sent you an email to <b>example@example.com</b> to verify your
                         email address and activate your account.
-                    </h3> <br />
+                    </h4> <br />
                 </Grid>
 
                 <ValidatorForm
                     onSubmit={handleSubmit}>
                     <TextValidator
                         label="Enter Verification Code"
+                        InputLabelProps={{ style: { fontSize: "150%" } }}
                         onChange={(e) => setUserCode(e.target.value)}
                         variant="outlined"
                         name="code"
@@ -151,5 +155,6 @@ export default function Verification({ history }) {
 
             </Paper>
         </div>
+        </>
     )
 }

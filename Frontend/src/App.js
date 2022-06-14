@@ -19,7 +19,11 @@ import manageUser from "./components/pages/Admin/manageUserPage";
 import editUser from "./components/pages/Admin/editUser";
 import OrderDetails from "./components/pages/dashboard/checkout/OrderDetails";
 import QRUploader from "./components/pages/dashboard/checkout/QRUploader";
+import customerSupport from "./components/pages/customerSupport";
 import Error from "./components/pages/Error"
+import AdminLogin from "./components/pages/Admin/AdminLogin";
+import editProfile from "./components/pages/editUserProfile";
+import editShop from "./components/pages/editShop";
 // import Section3 from "./components/Section3";
 
 function App() {
@@ -37,13 +41,17 @@ function App() {
             <Route path={"/manageProduct"} component={manageProduct}></Route>
             <Route path={"/editProduct"} component={editProduct}></Route>
             <Route path={"/admin"} component={AdminDashBoard}></Route>
+            <Route path={"/adminLogin"} component={AdminLogin}></Route>
             <Route path={"/manageUser"} component={manageUser}></Route>
             <Route path={"/checkOut"} component={CheckOut}></Route>
             <Route path={"/orderDetails"} component={OrderDetails}></Route>
             <Route path={"/editUser"} component={editUser}></Route>
+            <Route path={"/editProfile"} component={editProfile}></Route>
+            <Route path={"/editShop"} component={editShop}></Route>
             {/* <Route path={"/403"} component={Error}></Route> */}
             {/* <Route path={"/follow"} component={FollowUs}></Route> */}
             <Route path={"/qrUploader"} component={QRUploader}></Route>
+            <Route path={"/support"} component={customerSupport}></Route>
             <Route path={"/home"} component={LandingPage}></Route>
             <Route path={"/"} component={LandingPage}></Route>
           </Switch>

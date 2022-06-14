@@ -11,6 +11,7 @@ const jwt = require("jsonwebtoken");
 const productRouter = require("./routes/productRoute");
 const userRouter = require("./routes/userRouter");
 const authRouter = require("./routes/AuthRoute");
+const adminRouter = require("./routes/adminRoute");
 
 // import authRouter from './routes/AuthRoute'; // a better wway to import
 const { default: mongoose } = require("mongoose");
@@ -72,6 +73,8 @@ app.get("/", (req, res) => {
 });
 //registration route
 app.use("/auth", authRouter);
+
+app.use("/admin", adminRouter);
 
 app.get("/test", authentication_jwt, (req, res) => {
     console.log("welcome user");

@@ -135,11 +135,11 @@ EnhancedTableHead.propTypes = {
 }
 
 const deleteProcess = (id) => {
-    // for(var i = 0; i<id.length; i++){
-    //    deleteProduct(id[i]); 
-    // }
-    deleteProduct(id); 
-    reload()
+    if(window.confirm("Are you sure you want to delete this product?")){
+
+        deleteProduct(id); 
+        reload()
+    }
 };
 
 const deleteProduct = async (id) => {
@@ -196,7 +196,7 @@ const EnhancedTableToolbar = (props) => {
             <Button variant="contained" href="/newproduct"
                 sx={{
                     marginRight: '1.5vw', height:'2.5vw', minHeight:'30px', width: '12vw', minWidth: '120px',
-                    backgroundColor: '#FF8000', color: "white", fontSize: '110%',
+                    backgroundColor: '#FF8000', color: "white", fontSize: '110%', padding:'2px',
                     '&:hover': {
                         backgroundColor: "#FFB000", color: "white"
                     }
@@ -256,7 +256,9 @@ export default function manageProductPage() {
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const classes = useStyles();
     const [products, setProduct] = useState([]);
-    const [row, setRow] = useState(products);
+    const [rows, setRows] = useState([]);
+    const [oriRows, setOriRows] = useState([]);
+    const [searched, setSearched] = useState("");
 
     function parseJwt(token) {
         try {
@@ -279,13 +281,26 @@ export default function manageProductPage() {
         getproduct();
     }, []);
 
+    useEffect(() => {
+        getOriRows();
+    }, [searched]);
+
+    useEffect(() => {
+        const val = document.getElementById('searchInput').value;
+        const filtered = rows.filter((row) => {
+          return row.productName.toLowerCase().includes(val.toLowerCase());
+        });
+        setRows(filtered);
+    }, [oriRows])
+
     const getproduct = async () => {
         await axios.get("http://localhost:4000/products/allProducts/" + shopData).then(res => {
-          setProduct(res.data.productsData)
+            setProduct(res.data.productsData)
+            setRows(res.data.productsData)
         }).catch(err => {
-          console.log(err);
+            console.log(err);
         })
-      }
+    }
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -299,26 +314,29 @@ export default function manageProductPage() {
         marginLeft: '2vw',
         height: '48%',
         width: '100%',
+        color: 'black'
     }));
 
     const SearchIconWrapper = styled('div')(({ theme }) => ({
         padding: theme.spacing(0, 2),
         height: '100%',
         position: 'absolute',
-        pointerEvents: 'none',
+        // pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        color: 'black',
     }));
 
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
-        color: 'inherit',
+        color: 'black',
         height: '100%',
         width: '100%',
         '& .MuiInputBase-input': {
             paddingLeft: `calc(1em + ${theme.spacing(4)})`,
             width: '100%',
-            height: '100%'
+            height: '100%',
+            color: 'black',
         },
     }));
 
@@ -366,12 +384,22 @@ export default function manageProductPage() {
         setPage(0);
     };
 
-    // const requestSearch = (val) => {
-    //     const filtered = products.filter((row) => {
-    //       return row.productName.toLowerCase().includes(val.toLowerCase());
-    //     });
-    //     setRow(filtered);
-    //   };
+    function getOriRows() {
+        const oriRows = products.filter((row) => {
+          return row;
+        });
+        setRows(oriRows)
+        setOriRows(oriRows)
+    }
+
+    const requestSearch = (val) => {
+        setSearched(val)
+    };
+
+    const cancelSearch = () => {
+        setSearched("")
+        setRows(products)
+    };
 
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
@@ -398,9 +426,13 @@ export default function manageProductPage() {
                         <SearchIcon style={{ height: '20px', width: 'auto' }} />
                     </SearchIconWrapper>
                     <StyledInputBase
-                        placeholder="Search for product…"
+                        id='searchInput'
+                        type='text'
+                        autoFocus="autoFocus"
+                        placeholder="Search for product name…"
                         inputProps={{ 'aria-label': 'Search', style: { fontSize: '150%' } }}
-                        // onChange={(val) => requestSearch(val)}
+                        value={searched}
+                        onChange={(e) => requestSearch(e.target.value)}
                     />
                 </Search>
                 <Button variant="contained" href="/"
@@ -428,7 +460,7 @@ export default function manageProductPage() {
                                 rowCount={products.length}
                             />
                             <TableBody>
-                                {stableSort(products, getComparator(order, orderBy))
+                                {stableSort(rows, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
                                         const isItemSelected = isSelected(row._id);
@@ -465,7 +497,7 @@ export default function manageProductPage() {
                                                     id={labelId}
                                                     scope="row"
                                                     padding="none"
-                                                    style={{fontSize: '150%'}}
+                                                    style={{fontSize: '150%', paddingLeft:'1.1vw'}}
                                                 >
                                                     <img src={row.productImage != null ? 'images/productImages/'+ row.productImage : 'images/productImages/default_image.png'} 
                                                          className={classes.prodImg}/>

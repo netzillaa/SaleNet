@@ -67,63 +67,57 @@ const style = {
   p: 4,
 };
 
-// export default function EditImageModal({ image }, {setProductImage}){
-// export default function EditImageModal({ image }, {handleImage}){
-export default function EditImageModal({ image }, props){
+export default function EditImageModal({ image, changeImage }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [productImage, setImage] = useState("");
+  const [productImage, setProductImage] = useState("");
+  const [sendImage, setSendImage] = useState("");
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const [previewImage, setPreviewImage] = useState("");
+  function handleClose() {
+    setIsUploaded(false)
+    setProductImage("")
+    setOpen(false)
+  };
   const [isUploaded, setIsUploaded] = useState(false);
-  const [typeFile, setTypeFile] = useState("");
 
   function handleImageChange(e) {
     if (e.target.files && e.target.files[0]) {
-      // setTypeFile(e.target.files[0].type);
       let reader = new FileReader();
 
       reader.onload = function (e) {
-        // setImage(e.target.result);
         setIsUploaded(true);
-        const preview = document.querySelector('#modal img')
-        preview.src = e.target.result;
+        setProductImage(e.target.result);
         console.log("Preview Result: ", e.target.result)
       };
-
+      console.log("read as 0: ", e.target)
       reader.readAsDataURL(e.target.files[0]);
-      // setImage(e.target.files[0])
+      console.log("BLOB: ", e.target.files[0])
     }
   }
 
   function handleImage(e) {
-      handleImageChange(e)
-      setImage(e.target.files[0], "productImage")
+    handleImageChange(e)
+    setSendImage(e.target.files[0])
+    console.log("sending image: ", e.target.files[0])
   }
 
-  const updateImage = (e) => {
-    e.preventDefault();
-    // setImage(e.target.files[0]);
-    console.log("set product image: ", productImage)
-    // setImage(URL.createObjectURL(e.target.files[0]))
-    props.changeImage(productImage);
+  function updateImage() {
+    { changeImage(sendImage) };
+    setOpen(false)
   }
 
   const resetImage = (e) => {
-    e.target.value = null;
-    setImage("");
+    setProductImage("");
     setIsUploaded(false);
-}
- 
+  }
+
   return (
     <>
       <Box align='center' className={classes.holder}>
-        {!isUploaded ? (
+        {isUploaded == false ? (
           <img src={image}
             className={classes.imgStyle} />
-        ):(
+        ) : (
           <img src={productImage}
             className={classes.imgStyle} />
         )}
@@ -148,22 +142,24 @@ export default function EditImageModal({ image }, props){
           <Box height='2vw' minHeight='16px' />
 
           <Box style={{ display: 'flex', justifyContent: 'center' }} id='modal'>
-            {!isUploaded ? (
+            {isUploaded == false ? (
               <img src={image}
-              className={classes.inModalImg}
-              style={{ outline: '0.15vw #9b9b9b solid' }} />
-            ):(
+                className={classes.inModalImg}
+                style={{ outline: '0.15vw #9b9b9b solid' }} />
+            ) : (
               <img src={productImage}
-              className={classes.inModalImg}
-              style={{ outline: '0.15vw #9b9b9b solid' }} />
+                className={classes.inModalImg}
+                style={{ outline: '0.15vw #9b9b9b solid' }} />
             )
-          }
+            }
           </Box>
           <Box height='2vw' minHeight='16px' />
 
-          <Grid item xs={12} 
-                style={{ marginBottom: "2em", display: 'flex', 
-                         gap: '1em', alignItems: 'center',  padding: '3vw'}}>
+          <Grid item xs={12}
+            style={{
+              marginBottom: "2em", display: 'flex',
+              gap: '1em', alignItems: 'center', padding: '3vw'
+            }}>
             <Input
               fullWidth
               onChange={handleImage}
@@ -186,12 +182,9 @@ export default function EditImageModal({ image }, props){
           </Grid>
 
           <Grid item xs={12}
-            style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center', padding:'1vw 3vw' }}>
+            style={{ marginBottom: "1em", display: 'flex', gap: '1em', alignItems: 'center', padding: '1vw 3vw' }}>
             <Button
-              // onClick={() => setProductImage(productImage)}
-              onClick={() => props.changeImage(productImage)}
-              // onClick={updateImage}
-              // onClick={() => handleImage(productImage)}
+              onClick={updateImage}
               fullWidth
               variant="contained"
               sx={{
@@ -201,7 +194,7 @@ export default function EditImageModal({ image }, props){
                 }
               }}
             >
-              Update Image
+              Confirm Image
             </Button>
             <Button
               fullWidth

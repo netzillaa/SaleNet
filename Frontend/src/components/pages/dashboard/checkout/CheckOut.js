@@ -46,7 +46,7 @@ function CheckOut() {
                             </Typography>
                             <ColoredLine color="black" />
                             <div className="receipt">
-                                
+
                                 {/* RECEIPT HERE */}
 
                                 <Box
@@ -63,7 +63,7 @@ function CheckOut() {
                                 />
 
                                 <div className="box-x">
-                                    
+
                                     <section className="order-details">
                                         <p>
                                             Checkout successful!<br></br>
@@ -71,10 +71,9 @@ function CheckOut() {
                                             Please choose the options on getting your receipt.
                                         </p>
 
-                                        {/* <button href="/Dashboard">Okay</button> */}
                                         <button >Email Receipt</button>
-                                        
-                                         <a href={MyPDF} download="output.pdf"> Download Here </a>
+
+                                        <button onClick={() => window.open(MyPDF, '_blank')}> Download Here </button>
                                     </section>
                                 </div>
                             </div>
