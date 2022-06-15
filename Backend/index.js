@@ -19,14 +19,13 @@ const { default: mongoose } = require("mongoose");
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("../../Frontend/public"));
 
 //setting port
 const port = process.env.PORT || 4000;
 //DB URI
 const URI = process.env.MONGO_URI;
 
-const beginApp = async() => {
+const beginApp = async () => {
     try {
         //commenting since the URI in env file will be different for you guys
         // await dataBase(URI);
@@ -68,7 +67,7 @@ authentication_jwt = (req, res, next) => {
 }
 
 
-app.get("/", (req, res) => {    
+app.get("/", (req, res) => {
     res.send("home page and the users will be shown here");
 });
 //registration route
