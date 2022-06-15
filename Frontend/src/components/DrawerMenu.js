@@ -37,6 +37,7 @@ const settings = [
     { name: 'Manage Product', link: '/manageProduct', icon: <InventoryIcon/> },
     { name: 'Edit Profile', link: '/editProfile?id='+ id, icon: <InventoryIcon/> },
     { name: 'Edit Shop Details', link: '/editShop?id='+ id, icon: <InventoryIcon/> },
+    { name: 'Manage Invoice', link: '/manageInvoice?id='+ id, icon: <InventoryIcon/> },
 ]
 
 export default class DrawerMenu extends React.Component {

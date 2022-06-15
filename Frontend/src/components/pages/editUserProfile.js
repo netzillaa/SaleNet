@@ -73,7 +73,7 @@ export default function editUserProfile() {
 
     useEffect(() => {
         getUser();
-        getId(userInfo)
+        // getId(userInfo)
     }, []);
 
     const getUser = async () => {

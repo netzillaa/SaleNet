@@ -86,5 +86,7 @@ app.get("/test", authentication_jwt, (req, res) => {
 app.use("/products", productRouter);
 //user route
 app.use("/users", userRouter);
+//manage invoice route
+app.use("/order", productRouter);
 
 beginApp();

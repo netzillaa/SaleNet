@@ -24,6 +24,7 @@ import Error from "./components/pages/Error"
 import AdminLogin from "./components/pages/Admin/AdminLogin";
 import editProfile from "./components/pages/editUserProfile";
 import editShop from "./components/pages/editShop";
+import manageInvoice from "./components/pages/ManageInvoice";
 // import Section3 from "./components/Section3";
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
             {/* <Route path={"/follow"} component={FollowUs}></Route> */}
             <Route path={"/qrUploader"} component={QRUploader}></Route>
             <Route path={"/support"} component={customerSupport}></Route>
+            <Route path={"/manageInvoice"} component={manageInvoice}></Route>
             <Route path={"/home"} component={LandingPage}></Route>
             <Route path={"/"} component={LandingPage}></Route>
           </Switch>

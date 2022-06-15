@@ -2,7 +2,7 @@ const express = require("express");
 var multer = require('multer')
 let router = express.Router();
 const path = require("path");
-const { getAllProducts, findOne, updateProduct, deleteProduct, addProduct, createOrder, getOrder } = require("../controllers/products")
+const { getAllProducts, findOne, updateProduct, deleteProduct, addProduct, createOrder, getOrder, getAllOrders, deleteOrder } = require("../controllers/products")
 //a middleware to log every request we handle including url and date
 router.use((req, res, next) => {
     console.log(req.url, "@", Date.now());
@@ -22,9 +22,11 @@ router.route("/:shopId/:productType/:productId").get((req, res) => {
 router.route("/editProduct/:id").get(findOne);
 router.route("/update/:id").post(updateProduct);
 router.route("/delete/:id").delete(deleteProduct);
+router.route("/removeOrder/:id").delete(deleteOrder);
 router.route("/createOrder").post(createOrder);
 
-
+//get all order
+router.route("/allOrders/:id").get(getAllOrders);
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
