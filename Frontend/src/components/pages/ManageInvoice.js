@@ -26,12 +26,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import EditIcon from '@mui/icons-material/Edit';
 import {useState, useEffect} from "react";
 import axios from 'axios';
-
-function createData(image, name, price, stock) {
-  return {
-    image, name, price, stock
-  };
-}
+import Header3 from '../Header3';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -63,34 +58,22 @@ function stableSort(array, comparator) {
 
 const headCells = [
     {
-        id: 'email',
-        numeric: false,
+        id: 'id',
+        numeric: true,
         disablePadding: false,
-        label: 'Email Address',
+        label: 'Total Price',
     },
     {
-        id: 'shopname',
-        numeric: false,
+        id: 'totalprice',
+        numeric: true,
         disablePadding: false,
-        label: 'Shop Name',
+        label: 'Product',
     },
     {
-        id: 'fullname',
-        numeric: false,
+        id: 'something',
+        numeric: true,
         disablePadding: false,
-        label: 'Owner Name',
-    },
-    {
-        id: 'phonenum',
-        numeric: false,
-        disablePadding: false,
-        label: 'Phone Number',
-    },
-    {
-        id: 'username',
-        numeric: false,
-        disablePadding: false,
-        label: 'Username',
+        label: 'Item quantity',
     },
 ];
 
@@ -116,6 +99,7 @@ function EnhancedTableHead(props) {
                     />
                 </TableCell>
                 <TableCell/>
+                <TableCell style={{fontSize: "180%"}}>Order id</TableCell>
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
@@ -151,15 +135,19 @@ EnhancedTableHead.propTypes = {
 }
 
 const deleteProcess = (id) => {
-    deleteUser(id);
-    reload()
+    if(window.confirm("Are you sure you want to refund this order?")){
+
+        deleteOrder(id); 
+        reload()
+    }
 };
 
-const deleteUser = async (id) => {
-    await axios.delete("http://localhost:4000/users/delete/" + id).then(res => {
+const deleteOrder = async (id) => {
+    
+    await axios.delete("http://localhost:4000/order/removeOrder/" + id.selectedId).then(res => {
         
     }).catch(err => {
-        console.log(err);
+        
     })
     
 };
@@ -198,32 +186,22 @@ const EnhancedTableToolbar = (props) => {
                     variant="h6"
                     id="tableTitle"
                     component="div"
-                    fontSize="250%"
+                    fontSize="300%"
                     color="#000193"
                 >
-                    Users
+                    Orders
                 </Typography>
             )}
 
-            {/* <Button variant="contained" href="/newproduct"
-                sx={{
-                    marginRight: '1.5vw', height:'2.5vw', minHeight:'30px', width: '12vw', minWidth: '120px',
-                    backgroundColor: '#FF8000', color: "white", fontSize: '110%',
-                    '&:hover': {
-                        backgroundColor: "#FFB000", color: "white"
-                    }
-                }}>
-                Add New Product
-            </Button> */}
-
             {numSelected > 0 ? (
                 <Tooltip title={<span style={{ fontSize: "200%" }}>Delete</span>}>
-                    <IconButton onClick={() => deleteProcess(selectedId)}>
+                    {/* <IconButton onClick={() => deleteProcess(selectedId)}> */}
+                    <IconButton onClick={() => deleteProcess({selectedId})}>
                         <DeleteIcon style={{ fontSize: '200%' }} />
                     </IconButton>
                 </Tooltip>
             ) : (
-                <Tooltip title={<span style={{ fontSize: "200%" }}>Filter by year</span>}>
+                <Tooltip title={<span style={{ fontSize: "200%" }}>Filter Category</span>}>
                     <IconButton>
                         <FilterListIcon sx={{ fontSize: '200%'}} />
                     </IconButton>
@@ -246,39 +224,90 @@ const useStyles = makeStyles({
       }
     },
 
-    prodImg: {
-        width: "5vw",
-        height: "5vw",
-        minWidth:"60px",
-        minHeight:"60px",
-        border: "1px #cfcfcf solid", 
-    }
+    // prodImg: {
+    //     width: "5vw",
+    //     height: "5vw",
+    //     minWidth:"60px",
+    //     minHeight:"60px",
+    //     border: "1px #cfcfcf solid", 
+    // }
   });
 
 EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-export default function ManageUserPage() {
+export default function manageInvoice() {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('name');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const classes = useStyles();
-    const [users, setUsers] = useState([]);
+    const [products, setProduct] = useState([]);
+    const [rows, setRows] = useState([]);
+    const [oriRows, setOriRows] = useState([]);
+    const [searched, setSearched] = useState("");
+
+    function parseJwt(token) {
+        try {
+          var base64Url = token.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join(''));
+        } catch (err) {
+          window.location.href = "http://localhost:3000/403";
+        }
+    
+        return JSON.parse(jsonPayload).shop;
+      }
+      
+      function getId(token) {
+        try {
+          var base64Url = token.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join(''));
+        } catch (err) {
+          window.location.href = "http://localhost:3000/403";
+        }
+    
+        return JSON.parse(jsonPayload).id;
+      }
+
+      const userInfo = localStorage.getItem("userInfo");
+      
+    //   const shopId = JSON.parse(userInfo)
+      const shopData = parseJwt(userInfo);
+      
+
 
     useEffect(() => {
-        getUsers();
+        getorder();
     }, []);
 
-    const getUsers = async () => {
-        await axios.get("http://localhost:4000/users/allUsers").then(res => {
-            setUsers(res.data.usersData)
+    useEffect(() => {
+        getOriRows();
+    }, [searched]);
 
-            console.log("Get user: ", users)
+    useEffect(() => {
+        const val = document.getElementById('searchInput').value;
+        const filtered = rows.filter((row) => {
+          return row.productName.toLowerCase().includes(val.toLowerCase());
+        });
+        setRows(filtered);
+    }, [oriRows])
+
+    const getorder = async () => {
+        await axios.get("http://localhost:4000/order/allOrders/" + shopData).then(res => {
+            setProduct(res.data.orderData)
+            
+            
+            setRows(res.data.orderData)
         }).catch(err => {
-            console.log("Error: ", err);
+            
         })
     }
 
@@ -294,26 +323,29 @@ export default function ManageUserPage() {
         marginLeft: '2vw',
         height: '48%',
         width: '100%',
+        color: 'black'
     }));
 
     const SearchIconWrapper = styled('div')(({ theme }) => ({
         padding: theme.spacing(0, 2),
         height: '100%',
         position: 'absolute',
-        pointerEvents: 'none',
+        // pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        color: 'black',
     }));
 
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
-        color: 'inherit',
+        color: 'black',
         height: '100%',
         width: '100%',
         '& .MuiInputBase-input': {
             paddingLeft: `calc(1em + ${theme.spacing(4)})`,
             width: '100%',
-            height: '100%'
+            height: '100%',
+            color: 'black',
         },
     }));
 
@@ -325,7 +357,7 @@ export default function ManageUserPage() {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = users.map((n) => n._id);
+            const newSelecteds = products.map((n) => n._id);
             setSelected(newSelecteds);
             return;
         }
@@ -361,15 +393,33 @@ export default function ManageUserPage() {
         setPage(0);
     };
 
+    function getOriRows() {
+        const oriRows = products.filter((row) => {
+          return row;
+        });
+        setRows(oriRows)
+        setOriRows(oriRows)
+    }
+
+    const requestSearch = (val) => {
+        setSearched(val)
+    };
+
+    const cancelSearch = () => {
+        setSearched("")
+        setRows(products)
+    };
+
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
 
     return (
         <>
-        <Box sx={{ width: '100%', margin: 'auto', paddingTop: '1.4vw' }}>
+        <Header3/>
+        <Box sx={{ width: '90%', margin: 'auto', paddingTop: '3.5vw' }}>
             <Paper sx={{
                 width: '100%',
                 height: '6vw',
@@ -377,7 +427,7 @@ export default function ManageUserPage() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                mb: 3
+                mb: 5
             }}
                 elevation={4}>
                 <Search>
@@ -385,13 +435,18 @@ export default function ManageUserPage() {
                         <SearchIcon style={{ height: '20px', width: 'auto' }} />
                     </SearchIconWrapper>
                     <StyledInputBase
-                        placeholder="Search for user…"
+                        id='searchInput'
+                        type='text'
+                        autoFocus="autoFocus"
+                        placeholder="Search for product name…"
                         inputProps={{ 'aria-label': 'Search', style: { fontSize: '150%' } }}
+                        value={searched}
+                        onChange={(e) => requestSearch(e.target.value)}
                     />
                 </Search>
                 <Button variant="contained" href="/"
                     sx={{
-                        marginRight: '2vw', height: '50%', width: '10vw', backgroundColor: '#01027B',
+                        marginRight: '2vw', height: '50%', width: '13vw', backgroundColor: '#01027B',
                         fontSize: '120%', color: 'white', '&:hover': {
                             backgroundColor: "#000193", color: "white"
                         }
@@ -411,10 +466,10 @@ export default function ManageUserPage() {
                                 orderBy={orderBy}
                                 onSelectAllClick={handleSelectAllClick}
                                 onRequestSort={handleRequestSort}
-                                rowCount={users.length}
+                                rowCount={products.length}
                             />
                             <TableBody>
-                                {stableSort(users, getComparator(order, orderBy))
+                                {stableSort(rows, getComparator(order, orderBy))
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
                                         const isItemSelected = isSelected(row._id);
@@ -441,25 +496,30 @@ export default function ManageUserPage() {
                                                 </TableCell>
                                                 <TableCell style={{width:'2%'}}>
                                                     <Tooltip title={<span style={{ fontSize: "200%" }}>Edit</span>}>
-                                                        <IconButton href={'/edituser?id=' + row._id}>
+                                                        <IconButton href={'/editProduct?id='+ row._id} >
                                                             <EditIcon style={{fontSize:'150%', color:'black'}}/>
                                                         </IconButton>                                                     
                                                     </Tooltip>                                                   
                                                 </TableCell>
-                                                <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.email}
+                                                <TableCell
+                                                    component="th"
+                                                    id={labelId}
+                                                    scope="row"
+                                                    padding="none"
+                                                    style={{fontSize: '150%', paddingLeft:'1.1vw'}}
+                                                >
+                                                     <TableCell align="left" style={{fontSize: '150%', width:'30%'}}>
+                                                    {row._id}
+                                                </TableCell>
+                                                </TableCell>
+                                                <TableCell align="left" style={{fontSize: '150%', width:'30%'}}>
+                                                    {row.totalPrice}
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.shop.shopName}
+                                                    {row.items}
                                                 </TableCell>
                                                 <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.fullName}
-                                                </TableCell>
-                                                <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.phoneNumber}
-                                                </TableCell>
-                                                <TableCell align="left" style={{fontSize: '150%'}}>
-                                                    {row.userName}
+                                                    {row.itemQuantity}
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -475,7 +535,7 @@ export default function ManageUserPage() {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 25]}
                         component="div"
-                        count={users.length}
+                        count={products.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onPageChange={handleChangePage}
