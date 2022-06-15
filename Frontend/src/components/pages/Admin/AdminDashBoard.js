@@ -182,12 +182,12 @@ const AdminDashboard = () => {
                                         Total number of users
                                     </Typography>
 
-                                    {/* <TextareaAutosize
+                                    <TextareaAutosize
                                         maxRows={4}
                                         aria-label="maximum height"
                                         placeholder="xx"
                                         style={{ width: 250, height:200 }}
-                                    /> */}
+                                    />
 
                                 </Paper>
                             </Grid>

@@ -18,6 +18,24 @@ const getAllProducts = async (req, res) => {
 
 };
 
+const getAllOrders = async (req, res) => {
+    console.log("what we got: ", req.param("id"));
+    // const order = await Order.find(req.params.id);
+    // console.log("user", user)
+    // let shop = await shop.find({_id: req.params.id});
+    // const shopId = user.Shop;
+    let orderData = await order.find({shop: req.params.id});
+    // console.log ("orders", user.Shop)
+    if (orderData.length == 0) {
+        console.log("there are no items in the database")
+    }
+    else {
+        console.log("got data");
+    }
+    res.status(200).json({ orderData });
+
+};
+
 const getOrder = async (req, res) => {
     const orderCart = await order.find().sort({ _id: -1 }).limit(1).populate('shop');
     await pdfGenerator(orderCart);
@@ -154,5 +172,17 @@ const deleteProduct = async (req, res) => {
     })
 }
 
+const deleteOrder = async (req, res) => {
+    console.log("kalam"+req.params.id);
+    order.findOneAndDelete({ _id: req.params.id }, (err, data) => {
+        if (err) {
+            console.log("couldnt delete" + err);
+        }
+        else {
+            console.log("success, order deleted");
+        }
+    })
+}
 
-module.exports = { getAllProducts, addProduct, findOne, updateProduct, deleteProduct, createOrder, getOrder }
+
+module.exports = { getAllProducts, addProduct, findOne, updateProduct, deleteProduct, createOrder, getOrder, getAllOrders, deleteOrder }
