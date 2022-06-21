@@ -144,7 +144,7 @@ const deleteProcess = (id) => {
 
 const deleteOrder = async (id) => {
     
-    await axios.delete("http://localhost:4000/order/removeOrder/" + id.selectedId).then(res => {
+    await axios.delete("https://stingray-app-w2y85.ondigitalocean.app/order/removeOrder/" + id.selectedId).then(res => {
         
     }).catch(err => {
         
@@ -237,7 +237,7 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-export default function manageInvoice() {
+export default function manageInvoice({history}) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('name');
     const [selected, setSelected] = React.useState([]);
@@ -257,7 +257,9 @@ export default function manageInvoice() {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
           }).join(''));
         } catch (err) {
-          window.location.href = "http://localhost:3000/403";
+          history.push({
+            pathname: `/403`
+          })
         }
     
         return JSON.parse(jsonPayload).shop;
@@ -271,7 +273,9 @@ export default function manageInvoice() {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
           }).join(''));
         } catch (err) {
-          window.location.href = "http://localhost:3000/403";
+          history.push({
+            pathname: `/403`
+          })
         }
     
         return JSON.parse(jsonPayload).id;
@@ -301,7 +305,7 @@ export default function manageInvoice() {
     }, [oriRows])
 
     const getorder = async () => {
-        await axios.get("http://localhost:4000/order/allOrders/" + shopData).then(res => {
+        await axios.get("https://stingray-app-w2y85.ondigitalocean.app/order/allOrders/" + shopData).then(res => {
             setProduct(res.data.orderData)
             
             

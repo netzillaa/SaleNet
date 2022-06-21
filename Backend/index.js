@@ -16,9 +16,10 @@ const adminRouter = require("./routes/adminRoute");
 // import authRouter from './routes/AuthRoute'; // a better wway to import
 const { default: mongoose } = require("mongoose");
 
-app.use(cors());
+app.use(cors('*'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static('public'));
 
 //setting port
 const port = process.env.PORT || 4000;
@@ -78,6 +79,10 @@ app.use("/admin", adminRouter);
 app.get("/test", authentication_jwt, (req, res) => {
     console.log("welcome user");
 })
+
+app.get("/aaaaaaaaa", (req, res) => {
+    res.send("home page and the users will be shown here");
+});
 
 
 

@@ -10,7 +10,7 @@ const Products = () => {
     const [product, setProduct] = useState();
     const getproduct = async () => {
         try {
-            const res = await axios.get("http://localhost:4000/products/allProducts");
+            const res = await axios.get("https://stingray-app-w2y85.ondigitalocean.app/products/allProducts");
             setProduct(res.data);
         }
         catch (err) {

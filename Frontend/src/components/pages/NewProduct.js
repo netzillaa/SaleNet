@@ -58,7 +58,7 @@ const useStyles = makeStyles(() => ({
 
 }));
 
-export default function NewProduct() {
+export default function NewProduct({history}) {
 
     const [product, setProduct] = useState([]);
     const [productName, setProductName] = useState("");
@@ -132,9 +132,11 @@ export default function NewProduct() {
         formData.append('owner', owner);
         console.log(formData);
         console.log(productImage);
-        const { data } = await axios.post("http://localhost:4000/products/add", formData).then(res => {
+        const { data } = await axios.post("https://stingray-app-w2y85.ondigitalocean.app/products/add", formData).then(res => {
             console.log(res);
-            window.location.href = "http://localhost:3000/manageProduct";
+            history.push({
+                pathname: `/manageProduct`
+              })
             return false
         }
         );
@@ -146,7 +148,9 @@ export default function NewProduct() {
             "   Product Image: " + productImage
         );
 
-        window.location.href = "http://localhost:3000/manageProduct";
+        history.push({
+            pathname: `/manageProduct`
+          })
     };
 
     const userInfo = localStorage.getItem("userInfo");
@@ -160,7 +164,9 @@ export default function NewProduct() {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
         } catch (err) {
-            window.location.href = "http://localhost:3000/403";
+            history.push({
+                pathname: `/403`
+              })
         }
 
         return JSON.parse(jsonPayload).shop;

@@ -40,7 +40,7 @@ const ColoredLine = ({ color }) => (
 
 
 
-function OrderDetails() {
+function OrderDetails({history}) {
     const [DBcartTotalPrice, setCartTotalPrice] = useState(0);
     const [DBcartId, setCartId] = useState(0);
     const [DBItems, setDBItems] = useState([]);
@@ -52,7 +52,7 @@ function OrderDetails() {
     }, []);
 
     const getCart = async () => {
-        await axios.get("http://localhost:4000/products/getOrder").then(res => {
+        await axios.get("https://stingray-app-w2y85.ondigitalocean.app/products/getOrder").then(res => {
 
             let itemNameQuantity = [];
 
@@ -79,7 +79,9 @@ function OrderDetails() {
     })  
 
     const moveToCheckOut = () => {
-        window.location.href = "http://localhost:3000/checkOut";
+        history.push({
+            pathname: `/checkOut`
+          })
     };
 
     return (

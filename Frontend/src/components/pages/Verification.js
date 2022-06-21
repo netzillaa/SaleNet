@@ -55,7 +55,7 @@ const addUser = async () => {
     let shopAddress = localStorage.getItem("shopAddress")
     let businessLicense = localStorage.getItem("businessLicense")
 
-    const response = await fetch("http://localhost:4000/auth/register", {
+    const response = await fetch("https://stingray-app-w2y85.ondigitalocean.app/auth/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -84,7 +84,9 @@ export default function Verification({ history }) {
     const handleSubmit = () => {
         if (authCode == userCode) {
             addUser();
-            window.location.href = "http://localhost:3000/signin";
+            history.push({
+                pathname: `/signin`
+              })
         } else {
             alert("Wrong Code")
             return false;
@@ -96,7 +98,7 @@ export default function Verification({ history }) {
 
     const getAuthCode = async () => {
         let email = localStorage.getItem("email")
-        await axios.post("http://localhost:4000/auth/emailVerify", {email}).then(res => {
+        await axios.post("/auth/emailVerify", {email}).then(res => {
             setAuthCode(res.data.verifyCode)
             console.log(res.data.verifyCode);
         }).catch(err => {

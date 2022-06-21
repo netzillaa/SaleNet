@@ -59,7 +59,7 @@ export default function editUser() {
     }, []);
 
     const getUser = async () => {
-        await axios.get('http://localhost:4000/users/editUser/' + id ).then(res => {
+        await axios.get('https://stingray-app-w2y85.ondigitalocean.app/users/editUser/' + id ).then(res => {
             setUser(res.data.result)
             setShopName(res.data.result.shop.shopName)
             setShopAddress(res.data.result.shop.shopAddress)
@@ -70,7 +70,7 @@ export default function editUser() {
     }
 
     const update = async () => {
-        await axios.post('http://localhost:4000/users/updateShopName/' + id, {shopName}).then(res => {
+        await axios.post('https://stingray-app-w2y85.ondigitalocean.app/users/updateShopName/' + id, {shopName}).then(res => {
         }).catch(err => {
             console.log(err);
         })

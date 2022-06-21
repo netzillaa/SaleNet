@@ -63,7 +63,7 @@ export default function QRUploader() {
         var formData = new FormData(); 
         formData.append('productImage', productImage);
 
-        const { data } = await axios.post("http://localhost:4000/users/addQR/" + userID, formData).catch(err => {
+        const { data } = await axios.post("https://stingray-app-w2y85.ondigitalocean.app/users/addQR/" + userID, formData).catch(err => {
             console.log(err);
         }
         );

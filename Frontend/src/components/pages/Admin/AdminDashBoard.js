@@ -68,7 +68,7 @@ const theme = createTheme();
 //     },
 // ];
 
-const AdminDashboard = () => {
+const AdminDashboard = ({history}) => {
 
     const userInfo = localStorage.getItem("userInfo");
 
@@ -81,7 +81,9 @@ const AdminDashboard = () => {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
         }catch(err){
-            window.location.href = "http://localhost:3000/403";
+            history.push({
+                pathname: `/403`
+              })
         }
 
         return JSON.parse(jsonPayload).shop;

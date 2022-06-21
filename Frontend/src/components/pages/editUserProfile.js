@@ -43,7 +43,7 @@ const useStyles = makeStyles(() => ({
 
 }));
 
-export default function editUserProfile() {
+export default function editUserProfile({history}) {
 
     const [user, setUser] = useState([]);
     const [fullName, setFullName] = useState("");
@@ -65,7 +65,9 @@ export default function editUserProfile() {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
         }catch(err){
-            window.location.href = "http://localhost:3000/403";
+            history.push({
+                pathname: `/403`
+              })
         }
 
         return JSON.parse(jsonPayload);
@@ -77,7 +79,7 @@ export default function editUserProfile() {
     }, []);
 
     const getUser = async () => {
-        await axios.get('http://localhost:4000/users/editUser/' + id).then(res => {
+        await axios.get('https://stingray-app-w2y85.ondigitalocean.app/users/editUser/' + id).then(res => {
             setUser(res.data.result)
             setFullName(res.data.result.fullName)
             setUserName(res.data.result.userName)
@@ -90,7 +92,7 @@ export default function editUserProfile() {
     }
 
     const update = async () => {
-        await axios.post('http://localhost:4000/users/update/' + id, {fullName, userName, email, password, phoneNumber}).then(res => {
+        await axios.post('https://stingray-app-w2y85.ondigitalocean.app/users/update/' + id, {fullName, userName, email, password, phoneNumber}).then(res => {
         }).catch(err => {
             console.log(err);
         })

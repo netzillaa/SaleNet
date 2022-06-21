@@ -37,7 +37,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function editProduct() {
+export default function editProduct({history}) {
 
     const [product, setProduct] = useState([]);
     const [productName, setProductName] = useState("");
@@ -56,7 +56,7 @@ export default function editProduct() {
     }, []);
 
     const getproduct = async () => {
-        await axios.get('http://localhost:4000/products/editProduct/' + id ).then(res => {
+        await axios.get('https://stingray-app-w2y85.ondigitalocean.app/products/editProduct/' + id ).then(res => {
             setProductName(res.data.result.productName)
             setProductPrice(res.data.result.productPrice)
             setProductCategory(res.data.result.productCategory)
@@ -71,7 +71,7 @@ export default function editProduct() {
 
     // const update = async () => {
     //     console.log('updating product info');
-    //     await axios.post('http://localhost:4000/products/update/' + id, {productName, productPrice, productQuantity, productCategory}).then(res => {
+    //     await axios.post('https://stingray-app-w2y85.ondigitalocean.app/products/update/' + id, {productName, productPrice, productQuantity, productCategory}).then(res => {
     //     }).catch(err => {
     //         console.log(err);
     //     })
@@ -87,13 +87,13 @@ export default function editProduct() {
         formData.append('productQuantity', productQuantity);
         console.log(formData);
         console.log(productImage);
-        await axios.put("http://localhost:4000/products/update/" + id, formData).catch(err => {
+        await axios.put("https://stingray-app-w2y85.ondigitalocean.app/products/update/" + id, formData).catch(err => {
             console.log(err);
         }
         );
 
         console.log('updating product info ', productImage);
-        // await axios.post('http://localhost:4000/products/update/' + id, {productName, productPrice, productQuantity, productCategory, productImage}).then(res => {
+        // await axios.post('https://stingray-app-w2y85.ondigitalocean.app/products/update/' + id, {productName, productPrice, productQuantity, productCategory, productImage}).then(res => {
         // }).catch(err => {
         //     console.log(err);
         // })
@@ -102,7 +102,9 @@ export default function editProduct() {
     const updateProduct = () => {
         update();
         console.log('updated product info!');
-        window.location.href = "http://localhost:3000/manageProduct";
+        history.push({
+            pathname: `/manageProduct`
+          })
     }
 
 

@@ -64,7 +64,7 @@ export default function SignIn({ history }) {
   async function signIn(event) {
     event.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:4000/auth/login", { email, password }, config)
+      const { data } = await axios.post("https://stingray-app-w2y85.ondigitalocean.app/auth/login", { email, password }, config)
       localStorage.setItem('userInfo', JSON.stringify(data));
       var token = localStorage.getItem('userInfo');
       localStorage.setItem('userId', getId(token));

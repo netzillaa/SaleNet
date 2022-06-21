@@ -144,7 +144,7 @@ const deleteProcess = (id) => {
 
 const deleteProduct = async (id) => {
     console.log(id);
-    await axios.delete("http://localhost:4000/products/delete/" + id.selectedId).then(res => {
+    await axios.delete("https://stingray-app-w2y85.ondigitalocean.app/products/delete/" + id.selectedId).then(res => {
         console.log("kalam"+res.params.id);
     }).catch(err => {
         console.log(err);
@@ -248,7 +248,7 @@ EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-export default function manageProductPage() {
+export default function manageProductPage({history}) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('name');
     const [selected, setSelected] = React.useState([]);
@@ -268,7 +268,9 @@ export default function manageProductPage() {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
           }).join(''));
         } catch (err) {
-          window.location.href = "http://localhost:3000/403";
+          history.push({
+            pathname: `/403`
+          })
         }
     
         return JSON.parse(jsonPayload).shop;
@@ -294,7 +296,7 @@ export default function manageProductPage() {
     }, [oriRows])
 
     const getproduct = async () => {
-        await axios.get("http://localhost:4000/products/allProducts/" + shopData).then(res => {
+        await axios.get("https://stingray-app-w2y85.ondigitalocean.app/products/allProducts/" + shopData).then(res => {
             setProduct(res.data.productsData)
             setRows(res.data.productsData)
         }).catch(err => {

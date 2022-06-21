@@ -56,9 +56,11 @@ export default function AdminLogin({ history }) {
     async function logIn(event) {
         event.preventDefault();
         try {
-          const { data } = await axios.post("http://localhost:4000/admin/loginAdmin", { email, password })
+          const { data } = await axios.post("https://stingray-app-w2y85.ondigitalocean.app/admin/loginAdmin", { email, password })
           localStorage.setItem('userInfo', JSON.stringify(data));
-          window.location.href = "http://localhost:3000/admin";
+          history.push({
+            pathname: `/admin`
+          })
         }
         catch (err) {
           console.log(err);

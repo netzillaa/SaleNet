@@ -8,6 +8,7 @@ import '../../../css/Cart.css';
 import useOnClickOutside from "./reducer/useOnClickOutside";
 
 export default function Cart({
+    history,
     carts,
     newTotal,
     removeProductFromCart,
@@ -83,7 +84,9 @@ export default function Cart({
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
         }catch(err){
-            window.location.href = "http://localhost:3000/403";
+            history.push({
+                pathname: `/403`
+              })
         }
 
         return JSON.parse(jsonPayload).shop;
@@ -92,7 +95,7 @@ export default function Cart({
     const shopData = parseJwt(userInfo);
 
     const postOrder = async () => {
-        await axios.post("http://localhost:4000/products/createOrder", { carts, newTotal, shopData }, config).then(res => {
+        await axios.post("https://stingray-app-w2y85.ondigitalocean.app/products/createOrder", { carts, newTotal, shopData }, config).then(res => {
             console.log(res.data);
         }).catch(err => {
             console.log(err);
@@ -101,7 +104,9 @@ export default function Cart({
 
     function checkOut() {
         postOrder()
-        window.location.href = "http://localhost:3000/orderDetails";
+        history.push({
+            pathname: `/orderDetails`
+          })
     }
 
 
