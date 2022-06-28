@@ -5,8 +5,8 @@ const sendMail = (email, code) => {
     let transporter = nodeMailer.createTransport({
         service: "Hotmail",
         auth: {
-            user: 'netzillatest@hotmail.com',
-            pass: 'Qe&dQy@qAfEz0Q71F'
+            user: process.env.EMAIL,
+            pass: process.env.PASS
         },
         tls: {
             rejectUnauthorized: false,

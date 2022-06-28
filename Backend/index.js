@@ -24,7 +24,7 @@ app.use(express.static('public'));
 //setting port
 const port = process.env.PORT || 4000;
 //DB URI
-const URI = 'mongodb+srv://doadmin:d6y13N8cBH59n24R@salenet-mongodb-backup-ef9041c0.mongo.ondigitalocean.com/admin?authSource=admin&tls=true';
+const URI = process.env.MONGO_URI;
 
 const beginApp = async () => {
     try {
@@ -56,7 +56,7 @@ authentication_jwt = (req, res, next) => {
         return res.sendStatus(401);
     }
     //verification requires the token and the secret we used
-    jwt.verify(token, 'netzillaTeam', (err, user) => {
+    jwt.verify(token, process.env.TOKEN, (err, user) => {
         if (err) {
             console.log("bad token");
             return res.sendStatus(403);
