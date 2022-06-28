@@ -24,7 +24,7 @@ app.use(express.static('public'));
 //setting port
 const port = process.env.PORT || 4000;
 //DB URI
-const URI = process.env.MONGO_URI;
+const URI = 'mongodb+srv://doadmin:d6y13N8cBH59n24R@salenet-mongodb-65ebbb11.mongo.ondigitalocean.com/admin?authSource=admin&tls=true';
 
 const beginApp = async () => {
     try {
