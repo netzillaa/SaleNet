@@ -166,7 +166,7 @@ export default function SignIn({ history }) {
                 <Grid container>
                   <Grid item xs>
                     <Link href="/support" variant="body2">
-                      Forgot password?
+                      Forgot password??
                     </Link>
                   </Grid>
                   <Grid item>
