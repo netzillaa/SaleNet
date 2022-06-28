@@ -45,7 +45,7 @@ function Payment(){
                             <div className="order-success">
 
                                 <Typography component="h4" variant="h4">
-                                    Thank you for your order!
+                                    Thank you for your order!!
                                 </Typography>
                                 <section className="order-details">
                                     <p>
