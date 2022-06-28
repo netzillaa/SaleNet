@@ -56,7 +56,7 @@ export default function AdminLogin({ history }) {
     async function logIn(event) {
         event.preventDefault();
         try {
-          const { data } = await axios.post("https://stingray-app-w2y85.ondigitalocean.app/admin/loginAdmin", { email, password })
+          const { data } = await axios.post("https://stingray-app-4l8lu.ondigitalocean.app/admin/loginAdmin", { email, password })
           localStorage.setItem('userInfo', JSON.stringify(data));
           history.push({
             pathname: `/admin`

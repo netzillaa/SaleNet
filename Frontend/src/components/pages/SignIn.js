@@ -14,12 +14,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import { Alert } from '@mui/material';
-import Stack from '@mui/material/Stack';
-import ErrorMessage from "../ErrorMessage";
 import Header2 from "../Header2";
-import Alerto from "./Alerto";
-import AlertoError from "./AlertoError";
 
 const theme = createTheme();
 export default function SignIn({ history }) {
@@ -64,7 +59,7 @@ export default function SignIn({ history }) {
   async function signIn(event) {
     event.preventDefault();
     try {
-      const { data } = await axios.post("https://stingray-app-w2y85.ondigitalocean.app/auth/login", { email, password }, config)
+      const { data } = await axios.post("https://stingray-app-4l8lu.ondigitalocean.app/auth/login", { email, password }, config)
       localStorage.setItem('userInfo', JSON.stringify(data));
       var token = localStorage.getItem('userInfo');
       localStorage.setItem('userId', getId(token));
@@ -80,13 +75,21 @@ export default function SignIn({ history }) {
       console.log(err);
     }
   }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  };
+
   return (
     <>
-      {/* {!success}(
-      <AlertoError /> */}
       <ThemeProvider theme={theme}>
         <Header2 />
-        <Grid container component="main" sx={{ height: "50rem" }}>
+        <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />
           <Grid
             item
@@ -94,16 +97,12 @@ export default function SignIn({ history }) {
             sm={4}
             md={7}
             sx={{
-              // backgroundImage: "url(./)",
-              //we can get images from a website if we specify url like below
-              backgroundImage: "url(https://images.unsplash.com/photo-1648838775124-c69cda0203bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY0OTUyMTM4Mw&ixlib=rb-1.2.1&q=80&w=1080)",
-              backgroundRepeat: "no-repeat",
-              backgroundColor: (t) =>
-                t.palette.mode === "light"
-                  ? t.palette.grey[50]
-                  : t.palette.grey[900],
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              backgroundImage: 'url(images/pos.png)',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: '90%',
+            backgroundPosition: 'center',
             }}
           />
           <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -116,7 +115,7 @@ export default function SignIn({ history }) {
                 alignItems: "center",
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <Avatar sx={{ m: 1, bgcolor: "000193" }}>
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
@@ -166,7 +165,7 @@ export default function SignIn({ history }) {
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                    <Link href="#" variant="body2">
+                    <Link href="/support" variant="body2">
                       Forgot password?
                     </Link>
                   </Grid>

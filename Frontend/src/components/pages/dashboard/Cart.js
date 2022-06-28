@@ -95,7 +95,7 @@ export default function Cart({
     const shopData = parseJwt(userInfo);
 
     const postOrder = async () => {
-        await axios.post("https://stingray-app-w2y85.ondigitalocean.app/products/createOrder", { carts, newTotal, shopData }, config).then(res => {
+        await axios.post("https://stingray-app-4l8lu.ondigitalocean.app/products/createOrder", { carts, newTotal, shopData }, config).then(res => {
             console.log(res.data);
         }).catch(err => {
             console.log(err);

@@ -3,11 +3,10 @@ require("dotenv").config();
 
 const sendMail = (email, code) => {
     let transporter = nodeMailer.createTransport({
-        service: "Gmail",
-        secure: false,
+        service: "Hotmail",
         auth: {
             user: process.env.EMAIL,
-            pass: process.env.PASS,
+            pass: process.env.PASS
         },
         tls: {
             rejectUnauthorized: false,
@@ -16,9 +15,9 @@ const sendMail = (email, code) => {
     });
 
     let mailOpt = {
-        from: "netzilla178@gmail.com",
+        from: "netzillatest@hotmail.com",
         to: email,
-        subject: "SaleNet verification code",
+        subject: "SaleNet verification code: ",
         text: code
     }
 
@@ -31,5 +30,4 @@ const sendMail = (email, code) => {
         }
     })
 }
-
 module.exports = { sendMail }

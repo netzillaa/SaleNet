@@ -52,7 +52,7 @@ function OrderDetails({history}) {
     }, []);
 
     const getCart = async () => {
-        await axios.get("https://stingray-app-w2y85.ondigitalocean.app/products/getOrder").then(res => {
+        await axios.get("https://stingray-app-4l8lu.ondigitalocean.app/products/getOrder").then(res => {
 
             let itemNameQuantity = [];
 

@@ -79,7 +79,7 @@ export default function editUserProfile({history}) {
     }, []);
 
     const getUser = async () => {
-        await axios.get('https://stingray-app-w2y85.ondigitalocean.app/users/editUser/' + id).then(res => {
+        await axios.get('https://stingray-app-4l8lu.ondigitalocean.app/users/editUser/' + id).then(res => {
             setUser(res.data.result)
             setFullName(res.data.result.fullName)
             setUserName(res.data.result.userName)
@@ -92,7 +92,7 @@ export default function editUserProfile({history}) {
     }
 
     const update = async () => {
-        await axios.post('https://stingray-app-w2y85.ondigitalocean.app/users/update/' + id, {fullName, userName, email, password, phoneNumber}).then(res => {
+        await axios.post('https://stingray-app-4l8lu.ondigitalocean.app/users/update/' + id, {fullName, userName, email, password, phoneNumber}).then(res => {
         }).catch(err => {
             console.log(err);
         })

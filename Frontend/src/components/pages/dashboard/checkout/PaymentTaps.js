@@ -117,7 +117,7 @@ function PaymentTaps({
     };
 
     const getproduct = async () => {
-        await axios.get("https://stingray-app-w2y85.ondigitalocean.app/users/getQR").then(res => {
+        await axios.get("https://stingray-app-4l8lu.ondigitalocean.app/users/getQR").then(res => {
             // setQRImage(res.data.productsData)
         }).catch(err => {
           console.log(err);

@@ -55,7 +55,7 @@ const addUser = async () => {
     let shopAddress = localStorage.getItem("shopAddress")
     let businessLicense = localStorage.getItem("businessLicense")
 
-    const response = await fetch("https://stingray-app-w2y85.ondigitalocean.app/auth/register", {
+    const response = await fetch("https://stingray-app-4l8lu.ondigitalocean.app/auth/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -80,6 +80,7 @@ export default function Verification({ history }) {
 
     const [authCode, setAuthCode] = useState();
     const [userCode, setUserCode] = useState();
+    let email = localStorage.getItem("email")
 
     const handleSubmit = () => {
         if (authCode == userCode) {
@@ -93,12 +94,9 @@ export default function Verification({ history }) {
         }
     }
 
-
-    const [counter, setCounter] = useState(15);
-
     const getAuthCode = async () => {
         let email = localStorage.getItem("email")
-        await axios.post("/auth/emailVerify", {email}).then(res => {
+        await axios.post("https://stingray-app-4l8lu.ondigitalocean.app/auth/emailVerify", {email}).then(res => {
             setAuthCode(res.data.verifyCode)
             console.log(res.data.verifyCode);
         }).catch(err => {
@@ -124,7 +122,7 @@ export default function Verification({ history }) {
                     </Avatar>
                     <h2>Verify Your Email Address</h2><br/><br/>
                     <h4>
-                        We've sent you an email to <b>example@example.com</b> to verify your
+                        We've sent you an email to <b>{email}</b> to verify your
                         email address and activate your account.
                     </h4> <br />
                 </Grid>
@@ -144,17 +142,6 @@ export default function Verification({ history }) {
 
                     <button type='submit' className={classes.btnstyle}>VERIFY</button>
                 </ValidatorForm>
-                <Box mt={3} >
-                    <h4 style={{ textAlign: 'center' }}>
-                        Resend code in
-                        <span style={{ fontWeight: "bold" }}> 00:{counter}</span>
-                    </h4>
-                </Box>
-
-                <h4 style={{ textAlign: 'center' }}>
-                    <Link to="verify"> Resend Code </Link>
-                </h4>
-
             </Paper>
         </div>
         </>

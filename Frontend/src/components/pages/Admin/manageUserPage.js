@@ -156,7 +156,7 @@ const deleteProcess = (id) => {
 };
 
 const deleteUser = async (id) => {
-    await axios.delete("https://stingray-app-w2y85.ondigitalocean.app/users/delete/" + id).then(res => {
+    await axios.delete("https://stingray-app-4l8lu.ondigitalocean.app/users/delete/" + id).then(res => {
         
     }).catch(err => {
         console.log(err);
@@ -273,7 +273,7 @@ export default function ManageUserPage() {
     }, []);
 
     const getUsers = async () => {
-        await axios.get("https://stingray-app-w2y85.ondigitalocean.app/users/allUsers").then(res => {
+        await axios.get("https://stingray-app-4l8lu.ondigitalocean.app/users/allUsers").then(res => {
             setUsers(res.data.usersData)
 
             console.log("Get user: ", users)

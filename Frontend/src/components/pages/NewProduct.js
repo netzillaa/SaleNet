@@ -132,7 +132,7 @@ export default function NewProduct({history}) {
         formData.append('owner', owner);
         console.log(formData);
         console.log(productImage);
-        const { data } = await axios.post("https://stingray-app-w2y85.ondigitalocean.app/products/add", formData).then(res => {
+        const { data } = await axios.post("https://stingray-app-4l8lu.ondigitalocean.app/products/add", formData).then(res => {
             console.log(res);
             history.push({
                 pathname: `/manageProduct`

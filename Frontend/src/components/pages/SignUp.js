@@ -17,6 +17,19 @@ import Header2 from "../Header2";
 
 const theme = createTheme();
 
+const useStyles = makeStyles(() => ({
+
+  cardStyle: {
+      height: '50%',
+      width: '50%',
+      minWidth: '380px',
+      minHeight: '300px',
+      margin: 'auto',
+      padding: '3em 8em'
+  },
+}));
+
+
 export default function SignUp({history}) {
   const [fullName, setFullName] = useState("");
   const [userName, setUserName] = useState("");
@@ -27,40 +40,41 @@ export default function SignUp({history}) {
   const [shopAddress, setShopAddress] = useState("");
   const [businessLicense, setBusinessLicense] = useState("");
   const [phoneKey, setPhoneKey] = useState("");
+  const classes = useStyles();
 
 
   async function registerUser(event) {
     event.preventDefault();
     var emailFormat = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$/;
 
-    // if (fullName === null || fullName === "") {
-    //   alert("Please enter your fullname")
-    //   return false;
-    // }
-    // if (userName === null || userName.length < 6) {
-    //   alert("Please enter your username longer than 6 characters")
-    //   return false;
-    // }
-    // if (password === null || password.length < 8) {
-    //   alert("Please enter password longer than 8 characters")
-    //   return false;
-    // }
-    // if (!email.match(emailFormat)) {
-    //   alert("Please enter the correct email address")
-    //   return false;
-    // }
-    // if (shopName === null || shopName === "") {
-    //   alert("Please enter your shop name")
-    //   return false;
-    // }
-    // if (shopAddress === null || shopAddress === "") {
-    //   alert("Please enter your shop address")
-    //   return false;
-    // }
-    // if (businessLicense === null || businessLicense.length < 6) {
-    //   alert("Please enter the correct business lisence")
-    //   return false
-    // }
+    if (fullName === null || fullName === "") {
+      alert("Please enter your fullname")
+      return false;
+    }
+    if (userName === null || userName.length < 6) {
+      alert("Please enter your username longer than 6 characters")
+      return false;
+    }
+    if (password === null || password.length < 8) {
+      alert("Please enter password longer than 8 characters")
+      return false;
+    }
+    if (!email.match(emailFormat)) {
+      alert("Please enter the correct email address")
+      return false;
+    }
+    if (shopName === null || shopName === "") {
+      alert("Please enter your shop name")
+      return false;
+    }
+    if (shopAddress === null || shopAddress === "") {
+      alert("Please enter your shop address")
+      return false;
+    }
+    if (businessLicense === null || businessLicense.length < 6) {
+      alert("Please enter the correct business lisence")
+      return false
+    }
 
       
     localStorage.setItem("fullName",fullName)
@@ -77,22 +91,21 @@ export default function SignUp({history}) {
     })
   }
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}> 
       <Header2 />
-      <Container component="main" maxWidth="xs">
+      <Container component="main">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            margin: 'auto',
+            marginTop: 8
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Card className={classes.cardStyle}>
+          <Avatar sx={{ m: 'auto', bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" align="center">
             Sign up
           </Typography>
           <Box
@@ -198,6 +211,7 @@ export default function SignUp({history}) {
               </Grid>
             </Grid>
           </Box>
+          </Card>
         </Box>
       </Container>
     </ThemeProvider>

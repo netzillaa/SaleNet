@@ -144,7 +144,7 @@ const deleteProcess = (id) => {
 
 const deleteProduct = async (id) => {
     console.log(id);
-    await axios.delete("https://stingray-app-w2y85.ondigitalocean.app/products/delete/" + id.selectedId).then(res => {
+    await axios.delete("https://stingray-app-4l8lu.ondigitalocean.app/products/delete/" + id.selectedId).then(res => {
         console.log("kalam"+res.params.id);
     }).catch(err => {
         console.log(err);
@@ -296,7 +296,7 @@ export default function manageProductPage({history}) {
     }, [oriRows])
 
     const getproduct = async () => {
-        await axios.get("https://stingray-app-w2y85.ondigitalocean.app/products/allProducts/" + shopData).then(res => {
+        await axios.get("https://stingray-app-4l8lu.ondigitalocean.app/products/allProducts/" + shopData).then(res => {
             setProduct(res.data.productsData)
             setRows(res.data.productsData)
         }).catch(err => {

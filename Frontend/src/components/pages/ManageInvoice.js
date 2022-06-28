@@ -144,7 +144,7 @@ const deleteProcess = (id) => {
 
 const deleteOrder = async (id) => {
     
-    await axios.delete("https://stingray-app-w2y85.ondigitalocean.app/order/removeOrder/" + id.selectedId).then(res => {
+    await axios.delete("https://stingray-app-4l8lu.ondigitalocean.app/order/removeOrder/" + id.selectedId).then(res => {
         
     }).catch(err => {
         
@@ -305,7 +305,7 @@ export default function manageInvoice({history}) {
     }, [oriRows])
 
     const getorder = async () => {
-        await axios.get("https://stingray-app-w2y85.ondigitalocean.app/order/allOrders/" + shopData).then(res => {
+        await axios.get("https://stingray-app-4l8lu.ondigitalocean.app/order/allOrders/" + shopData).then(res => {
             setProduct(res.data.orderData)
             
             

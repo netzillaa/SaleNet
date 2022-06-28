@@ -34,7 +34,7 @@ export default function GlobalState(props) {
   const [DBProducts, setProduct] = useState([]);
 
   const getproduct = async () => {
-    await axios.get("https://stingray-app-w2y85.ondigitalocean.app/products/allProducts/" + shopData).then(res => {
+    await axios.get("https://stingray-app-4l8lu.ondigitalocean.app/products/allProducts/" + shopData).then(res => {
       setProduct(res.data.productsData)
     }).catch(err => {
       console.log(err);

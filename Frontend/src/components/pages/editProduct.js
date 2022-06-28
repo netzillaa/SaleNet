@@ -56,7 +56,7 @@ export default function editProduct({history}) {
     }, []);
 
     const getproduct = async () => {
-        await axios.get('https://stingray-app-w2y85.ondigitalocean.app/products/editProduct/' + id ).then(res => {
+        await axios.get('https://stingray-app-4l8lu.ondigitalocean.app/products/editProduct/' + id ).then(res => {
             setProductName(res.data.result.productName)
             setProductPrice(res.data.result.productPrice)
             setProductCategory(res.data.result.productCategory)
@@ -71,7 +71,7 @@ export default function editProduct({history}) {
 
     // const update = async () => {
     //     console.log('updating product info');
-    //     await axios.post('https://stingray-app-w2y85.ondigitalocean.app/products/update/' + id, {productName, productPrice, productQuantity, productCategory}).then(res => {
+    //     await axios.post('https://stingray-app-4l8lu.ondigitalocean.app/products/update/' + id, {productName, productPrice, productQuantity, productCategory}).then(res => {
     //     }).catch(err => {
     //         console.log(err);
     //     })
@@ -87,13 +87,13 @@ export default function editProduct({history}) {
         formData.append('productQuantity', productQuantity);
         console.log(formData);
         console.log(productImage);
-        await axios.put("https://stingray-app-w2y85.ondigitalocean.app/products/update/" + id, formData).catch(err => {
+        await axios.put("https://stingray-app-4l8lu.ondigitalocean.app/products/update/" + id, formData).catch(err => {
             console.log(err);
         }
         );
 
         console.log('updating product info ', productImage);
-        // await axios.post('https://stingray-app-w2y85.ondigitalocean.app/products/update/' + id, {productName, productPrice, productQuantity, productCategory, productImage}).then(res => {
+        // await axios.post('https://stingray-app-4l8lu.ondigitalocean.app/products/update/' + id, {productName, productPrice, productQuantity, productCategory, productImage}).then(res => {
         // }).catch(err => {
         //     console.log(err);
         // })
