@@ -56,7 +56,7 @@ authentication_jwt = (req, res, next) => {
         return res.sendStatus(401);
     }
     //verification requires the token and the secret we used
-    jwt.verify(token, process.env.TOKEN, (err, user) => {
+    jwt.verify(token, 'netzillaTeam', (err, user) => {
         if (err) {
             console.log("bad token");
             return res.sendStatus(403);
